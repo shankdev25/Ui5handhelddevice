@@ -1,0 +1,29 @@
+<mvc:View controllerName="com.merkavim.ewm.manageprodorder.controller.IssueItems"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="issueItemsPage" title="Summary of selected items" showNavButton="true" navButtonPress="onNavBack">
+        <headerContent>
+            <Button id="btnIssueSave" text="Save" type="Emphasized" press="onSave"/>
+        </headerContent>
+        <Table id="issueItemsTable" items="{issueItems>/items}">
+            <columns>
+                <Column id="colIssLoc"><Text id="txtIssLoc" text="Location"/></Column>
+                <Column id="colIssStock"><Text id="txtIssStock" text="Stock"/></Column>
+                <Column id="colIssMat"><Text id="txtIssMat" text="Material"/></Column>
+                <Column id="colIssMatDesc"><Text id="txtIssMatDesc" text="Material Description"/></Column>
+                <Column id="colIssUom"><Text id="txtIssUom" text="UOM"/></Column>
+            </columns>
+            <items>
+                <ColumnListItem id="cliIssueItem">
+                    <cells>
+                        <Text id="cellIssLoc" text="{issueItems>Location}"/>
+                        <Text id="cellIssStock" text="{issueItems>Stock}"/>
+                        <Text id="cellIssMat" text="{issueItems>Material}"/>
+                        <Text id="cellIssMatDesc" text="{issueItems>MaterialDescription}"/>
+                        <Text id="cellIssUom" text="{issueItems>UOM}"/>
+                    </cells>
+                </ColumnListItem>
+            </items>
+        </Table>
+    </Page>
+</mvc:View>

@@ -1,0 +1,32 @@
+<mvc:View controllerName="com.merkavim.ewm.manageprodorder.controller.DocumentCreated"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="docCreatedPage" title="Document Created!" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <VBox id="docCreatedVBox" class="sapUiSmallMargin" renderType="Bare">
+                <ObjectStatus id="docCreatedStatus" text="The document was created successfully." state="Success"/>
+                <Text id="docCreatedCount" text="{= 'Items Created: ' + (${created>/items}.length || 0)}"/>
+                <Table id="docCreatedTable" items="{created>/items}">
+                    <columns>
+                        <Column id="colCreatedLoc"><Text id="txtCreatedLoc" text="Location"/></Column>
+                        <Column id="colCreatedStock"><Text id="txtCreatedStock" text="Stock"/></Column>
+                        <Column id="colCreatedMat"><Text id="txtCreatedMat" text="Material"/></Column>
+                        <Column id="colCreatedMatDesc"><Text id="txtCreatedMatDesc" text="Material Description"/></Column>
+                        <Column id="colCreatedUom"><Text id="txtCreatedUom" text="UOM"/></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem id="cliCreatedItem">
+                            <cells>
+                                <Text id="cellCreatedLoc" text="{created>Location}"/>
+                                <Text id="cellCreatedStock" text="{created>Stock}"/>
+                                <Text id="cellCreatedMat" text="{created>Material}"/>
+                                <Text id="cellCreatedMatDesc" text="{created>MaterialDescription}"/>
+                                <Text id="cellCreatedUom" text="{created>UOM}"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,32 @@
+<mvc:View controllerName="com.merkavim.ewm.manageprodorder.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <Page id="page" showHeader="true" enableScrolling="true">
+        <customHeader>
+            <OverflowToolbar id="homeHeaderToolbar">
+                <ToolbarSpacer id="hdrSpacerStart" width="0px"/>
+                <core:Icon id="homeLogo" src="sap-icon://home" size="2.5rem" decorative="false" ariaLabelledBy="homeTitle"/>
+                <ToolbarSeparator id="hdrSeparator"/>
+                <Title id="homeTitle" text="{i18n>title}" level="H2"/>
+                <ToolbarSpacer id="hdrSpacerEnd"/>
+            </OverflowToolbar>
+        </customHeader>
+        <content>
+            <VBox id="homeVBox" class="sapUiMediumMargin" width="100%" renderType="Bare">
+                <Text id="introText" text="Select a process tile below to begin." wrapping="true"/>
+                <HBox id="tilesRow" renderType="Bare">
+                    <GenericTile id="prodOrderTile"
+                        header="Picking By WBS Item"
+                        headerImage="sap-icon://factory"
+                        press="onProductionOrderPress"
+                        class="sapUiTinyMargin">
+                        <TileContent id="prodOrderTileContent">
+                            <Text id="prodOrderTileText" text="Application"/>
+                        </TileContent>
+                    </GenericTile>
+                </HBox>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

@@ -1,0 +1,28 @@
+<mvc:View controllerName="com.merkavim.ewm.manageprodorder.controller.ProductionOrder"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:core="sap.ui.core">
+    <Page id="prodOrderPage" title="Picking by WBS Item" showNavButton="true" navButtonPress="onNavBack">
+        <Panel id="prodOrderPanel" headerText="Production Orders" expandable="false" class="sapUiResponsiveMargin" width="auto">
+            <VBox id="inlineCreateBox" class="sapUiSmallMarginBottom">
+                <Label id="lblInlineMaterial" text="Material" labelFor="inpInlineMaterial"/>
+                <Input id="inpInlineMaterial" value="{view>/newEntry/Material}" width="200px"/>
+                <Label id="lblInlineProdOrder" text="Production Order" labelFor="inpInlineProdOrder"/>
+                <Input id="inpInlineProdOrder" value="{view>/newEntry/ProductionOrder}" width="200px"/>
+                <Label id="lblInlineOperation" text="Operation" labelFor="inpInlineOperation"/>
+                <Input id="inpInlineOperation" value="{view>/newEntry/Operation}" width="200px"/>
+                <Label id="lblInlineResStorLoc" text="Reservation Storage Location" labelFor="inpInlineResStorLoc"/>
+                <Input id="inpInlineResStorLoc" value="{view>/newEntry/ReservationStorageLocation}" width="200px"/>
+                <Label id="lblInlineLogGroup" text="Logistics Group" labelFor="inpInlineLogGroup"/>
+                <Input id="inpInlineLogGroup" value="{view>/newEntry/LogisticsGroup}" width="200px"/>
+                <Label id="lblInlineRemark" text="Remark" labelFor="inpInlineRemark"/>
+                <Input id="inpInlineRemark" value="{view>/newEntry/Remark}" width="200px"/>
+                <HBox id="inlineButtonsBar" class="sapUiSmallMarginTop">
+                    <Button id="btnInlineContinue" text="Continue" type="Emphasized" press="onContinue"/>
+                    <Button id="btnInlineClear" text="Clear" class="sapUiSmallMarginBegin" press="onInlineClear"/>
+                </HBox>
+            </VBox>
+        </Panel>
+    </Page>
+</mvc:View>
