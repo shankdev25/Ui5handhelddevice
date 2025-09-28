@@ -53,31 +53,59 @@ sap.ui.define([
             var oViewModel = this.getView().getModel("view");
             var oSelectionData = Object.assign({}, oViewModel.getProperty("/newEntry"));
             var oComponent = this.getOwnerComponent();
-            // mock inventory list
-            var aInventory = [
-                { Location:"LOC-01", Stock: 120, Material:"MAT-001", MaterialDescription:"Widget A", UOM:"PC", ProductionOrder:"PO-1001" },
-                { Location:"LOC-02", Stock: 45, Material:"MAT-001", MaterialDescription:"Widget A", UOM:"PC", ProductionOrder:"PO-1001" },
-                { Location:"LOC-03", Stock: 10, Material:"MAT-002", MaterialDescription:"Widget B", UOM:"PC", ProductionOrder:"PO-1002" },
-                { Location:"LOC-01", Stock: 77, Material:"MAT-002", MaterialDescription:"Widget B", UOM:"PC", ProductionOrder:"PO-1002" },
-                { Location:"LOC-05", Stock: 200, Material:"MAT-003", MaterialDescription:"Widget C", UOM:"PC", ProductionOrder:"PO-1003" }
-            ];
-            // filter based on entered fields if provided
-            var aFiltered = aInventory.filter(function(it){
-                var bMatch = true;
-                if (oSelectionData.Material) { bMatch = bMatch && it.Material === oSelectionData.Material; }
-                if (oSelectionData.ProductionOrder) { bMatch = bMatch && it.ProductionOrder === oSelectionData.ProductionOrder; }
-                return bMatch;
-            });
-            if (!oComponent.getModel("continue")) {
-                oComponent.setModel(new sap.ui.model.json.JSONModel({ items: aFiltered }), "continue");
-            } else {
-                oComponent.getModel("continue").setData({ items: aFiltered });
-            }
-            if (!oComponent.getModel("selection")) {
-                oComponent.setModel(new sap.ui.model.json.JSONModel(oSelectionData), "selection");
-            } else {
-                oComponent.getModel("selection").setData(oSelectionData);
-            }
+                // mock picking list for ProductionOrderContinue
+                var aPicking = [
+                    {
+                        selected: false,
+                        Item: "1001",
+                        ItemDescription: "Widget A",
+                        Date: "2025-09-21",
+                        Location: "LOC-01",
+                        Inventory: "INV-001",
+                        QtyInReservation: 10,
+                        QtyToPick: 10
+                    },
+                    {
+                        selected: false,
+                        Item: "1002",
+                        ItemDescription: "Widget B",
+                        Date: "2025-09-21",
+                        Location: "LOC-02",
+                        Inventory: "INV-002",
+                        QtyInReservation: 5,
+                        QtyToPick: 5
+                    },
+                    {
+                        selected: false,
+                        Item: "1003",
+                        ItemDescription: "Widget C",
+                        Date: "2025-09-21",
+                        Location: "LOC-03",
+                        Inventory: "INV-003",
+                        QtyInReservation: 8,
+                        QtyToPick: 8
+                    }
+                ];
+                // Component initializes pickItems and selection models — just update their data
+                var oPickModel = oComponent.getModel("pickItems");
+                if (oPickModel) {
+                    oPickModel.setData({ items: aPicking });
+                } else {
+                    // defensive fallback: create if unexpectedly missing
+                    oComponent.setModel(new sap.ui.model.json.JSONModel({ items: aPicking }), "pickItems");
+                }
+
+                var oSelectionModel = oComponent.getModel("selection");
+                if (oSelectionModel) {
+                    oSelectionModel.setData(oSelectionData);
+                } else {
+                    oComponent.setModel(new sap.ui.model.json.JSONModel(oSelectionData), "selection");
+                }
+                // diagnostic log to ensure component models contain the updated data
+                try {
+                    console.log("[ProductionOrder] pickItems on component:", oComponent.getModel("pickItems") && oComponent.getModel("pickItems").getData());
+                    console.log("[ProductionOrder] selection on component:", oComponent.getModel("selection") && oComponent.getModel("selection").getData());
+                } catch (e) {}
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("ProductionOrderContinue");
         },

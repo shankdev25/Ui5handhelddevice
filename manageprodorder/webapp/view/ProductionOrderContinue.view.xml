@@ -1,3 +1,4 @@
+
 <mvc:View controllerName="com.merkavim.ewm.manageprodorder.controller.ProductionOrderContinue"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
@@ -7,26 +8,62 @@
                 <Button id="btnDisplayIssue" text="Display Items for Issue" type="Emphasized" press="onDisplayIssueItems"/>
                 <Button id="btnClearSelection" text="Clear Selection" class="sapUiSmallMarginBegin" press="onClearSelection"/>
             </HBox>
-            <Table id="continueTable" mode="MultiSelect" items="{continue>/items}">
-                <columns>
-                    <Column id="colLoc"><Text id="txtLoc" text="Location"/></Column>
-                    <Column id="colStock"><Text id="txtStock" text="Stock"/></Column>
-                    <Column id="colMat"><Text id="txtMat" text="Material"/></Column>
-                    <Column id="colMatDesc"><Text id="txtMatDesc" text="Material Description"/></Column>
-                    <Column id="colUom"><Text id="txtUom" text="UOM"/></Column>
-                </columns>
-                <items>
-                    <ColumnListItem id="cliContItem">
-                        <cells>
-                            <Text id="cellLoc" text="{continue>Location}"/>
-                            <Text id="cellStock" text="{continue>Stock}"/>
-                            <Text id="cellMat" text="{continue>Material}"/>
-                            <Text id="cellMatDesc" text="{continue>MaterialDescription}"/>
-                            <Text id="cellUom" text="{continue>UOM}"/>
-                        </cells>
-                    </ColumnListItem>
-                </items>
-            </Table>
+                <!-- Input fields for table columns, aligned vertically -->
+                <VBox id="inputFieldsVBox" class="sapUiSmallMarginBottom">
+                    <HBox id="hboxInputLocation" class="sapUiTinyMarginBottom" alignItems="Center">
+                        <Text id="lblInputLocation" text="{i18n>location}" width="10em" textAlign="End" class="sapUiTinyMarginEnd"/>
+                        <Input id="inputLocation" value="{inputFields>/Location}" placeholder="{i18n>location}" width="16em" enabled="false"/>
+                    </HBox>
+                    <HBox id="hboxInputStock" class="sapUiTinyMarginBottom" alignItems="Center">
+                        <Text id="lblInputStock" text="{i18n>stock}" width="10em" textAlign="End" class="sapUiTinyMarginEnd"/>
+                        <Input id="inputStock" value="{inputFields>/Stock}" placeholder="{i18n>stock}" width="16em" enabled="false"/>
+                    </HBox>
+                    <HBox id="hboxInputMaterial" class="sapUiTinyMarginBottom" alignItems="Center">
+                        <Text id="lblInputMaterial" text="{i18n>material}" width="10em" textAlign="End" class="sapUiTinyMarginEnd"/>
+                        <Input id="inputMaterial" value="{inputFields>/Material}" placeholder="{i18n>material}" width="16em" enabled="false"/>
+                    </HBox>
+                    <HBox id="hboxInputMaterialDescription" class="sapUiTinyMarginBottom" alignItems="Center">
+                        <Text id="lblInputMaterialDescription" text="{i18n>materialDescription}" width="10em" textAlign="End" class="sapUiTinyMarginEnd"/>
+                        <Input id="inputMaterialDescription" value="{inputFields>/MaterialDescription}" placeholder="{i18n>materialDescription}" width="16em" enabled="false"/>
+                    </HBox>
+                    <HBox id="hboxInputUOM" class="sapUiTinyMarginBottom" alignItems="Center">
+                        <Text id="lblInputUOM" text="{i18n>uom}" width="10em" textAlign="End" class="sapUiTinyMarginEnd"/>
+                        <Input id="inputUOM" value="{inputFields>/UOM}" placeholder="{i18n>uom}" width="16em" enabled="false"/>
+                    </HBox>
+                </VBox>
+
+                <!-- Table for picking items -->
+                <Table id="pickTable" items="{pickItems>items}" mode="None" class="sapUiSmallMarginTop">
+                    <columns>
+                        <Column id="colAction" width="3em">
+                            <header>
+                                <CheckBox id="selectAllCheckBox" select="onSelectAll"/>
+                            </header>
+                        </Column>
+                        <Column id="colItem"><header><Text id="txtColItem" text="{i18n>item}"/></header></Column>
+                        <Column id="colItemDesc"><header><Text id="txtColItemDesc" text="{i18n>itemDescription}"/></header></Column>
+                        <Column id="colDate"><header><Text id="txtColDate" text="{i18n>date}"/></header></Column>
+                        <Column id="colLocation"><header><Text id="txtColLocation" text="{i18n>location}"/></header></Column>
+                        <Column id="colInventory"><header><Text id="txtColInventory" text="{i18n>inventory}"/></header></Column>
+                        <Column id="colQtyInReservation"><header><Text id="txtColQtyInReservation" text="{i18n>qtyInReservation}"/></header></Column>
+                        <Column id="colQtyToPick"><header><Text id="txtColQtyToPick" text="{i18n>qtyToPick}"/></header></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem id="pickTableRowTemplate">
+                            <cells>
+                                <CheckBox id="rowSelectCheckBox" selected="{pickItems>selected}" select="onSelectRow"/>
+                                <Text id="rowItem" text="{pickItems>Item}"/>
+                                <Text id="rowItemDesc" text="{pickItems>ItemDescription}"/>
+                                <Text id="rowDate" text="{pickItems>Date}"/>
+                                <Text id="rowLocation" text="{pickItems>Location}"/>
+                                <Text id="rowInventory" text="{pickItems>Inventory}"/>
+                                <Text id="rowQtyInReservation" text="{pickItems>QtyInReservation}"/>
+                                <Input id="rowQtyToPick" value="{pickItems>QtyToPick}" valueLiveUpdate="true" type="Number" width="6em"/>
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+
         </VBox>
     </Page>
 </mvc:View>

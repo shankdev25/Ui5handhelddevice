@@ -14,15 +14,15 @@
         </customHeader>
         <content>
             <VBox id="homeVBox" class="sapUiMediumMargin" width="100%" renderType="Bare">
-                <Text id="introText" text="Select a process tile below to begin." wrapping="true"/>
+                <Text id="introText" text="{i18n>introText}" wrapping="true"/>
                 <HBox id="tilesRow" renderType="Bare">
                     <GenericTile id="prodOrderTile"
-                        header="Picking By WBS Item"
+                        header="{i18n>prodOrderTileHeader}"
                         headerImage="sap-icon://factory"
                         press="onProductionOrderPress"
                         class="sapUiTinyMargin">
                         <TileContent id="prodOrderTileContent">
-                            <Text id="prodOrderTileText" text="Application"/>
+                            <Text id="prodOrderTileText" text="{i18n>prodOrderTileText}"/>
                         </TileContent>
                     </GenericTile>
                 </HBox>

@@ -1,29 +1,50 @@
 <mvc:View controllerName="com.merkavim.ewm.manageprodorder.controller.IssueItems"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page id="issueItemsPage" title="Summary of selected items" showNavButton="true" navButtonPress="onNavBack">
-        <headerContent>
-            <Button id="btnIssueSave" text="Save" type="Emphasized" press="onSave"/>
-        </headerContent>
-        <Table id="issueItemsTable" items="{issueItems>/items}">
+    <Page id="issueItemsPage" title="{i18n>issueItemsPageTitle}" showNavButton="true" navButtonPress="onNavBack">
+        <VBox id="issueItemsVBox" class="sapUiSmallMargin">
+            <HBox id="issueItemsButtonsBar" class="sapUiSmallMarginBottom">
+                <Button id="btnIssueSave" text="{i18n>save}" type="Emphasized" press="onSave"/>
+            </HBox>
+            <!-- Mirror input fields from ProductionOrderContinue (display-only) -->
+            <VBox id="issueInputFieldsVBox" class="sapUiSmallMarginBottom">
+                <HBox id="issueInputHBoxMat" class="sapUiTinyMarginBottom" alignItems="Center">
+                    <Text id="issueInputLblMat" text="{i18n>material}" width="10em" textAlign="End" class="sapUiTinyMarginEnd"/>
+                    <Input id="issueInputMat" value="{inputFields>/Material}" width="16em" enabled="false"/>
+                </HBox>
+                <HBox id="issueInputHBoxMatDesc" class="sapUiTinyMarginBottom" alignItems="Center">
+                    <Text id="issueInputLblMatDesc" text="{i18n>materialDescription}" width="10em" textAlign="End" class="sapUiTinyMarginEnd"/>
+                    <Input id="issueInputMatDesc" value="{inputFields>/MaterialDescription}" width="16em" enabled="false"/>
+                </HBox>
+                <HBox id="issueInputHBoxUOM" class="sapUiTinyMarginBottom" alignItems="Center">
+                    <Text id="issueInputLblUOM" text="{i18n>uom}" width="10em" textAlign="End" class="sapUiTinyMarginEnd"/>
+                    <Input id="issueInputUOM" value="{inputFields>/UOM}" width="16em" enabled="false"/>
+                </HBox>
+            </VBox>
+            <Table id="issueItemsTable" items="{issueItems>/items}" class="sapUiSmallMarginTop">
             <columns>
-                <Column id="colIssLoc"><Text id="txtIssLoc" text="Location"/></Column>
-                <Column id="colIssStock"><Text id="txtIssStock" text="Stock"/></Column>
-                <Column id="colIssMat"><Text id="txtIssMat" text="Material"/></Column>
-                <Column id="colIssMatDesc"><Text id="txtIssMatDesc" text="Material Description"/></Column>
-                <Column id="colIssUom"><Text id="txtIssUom" text="UOM"/></Column>
+                <Column id="colIssItem"><header><Text id="txtIssItem" text="{i18n>item}"/></header></Column>
+                <Column id="colIssItemDesc"><header><Text id="txtIssItemDesc" text="{i18n>itemDescription}"/></header></Column>
+                <Column id="colIssDate"><header><Text id="txtIssDate" text="{i18n>date}"/></header></Column>
+                <Column id="colIssLocation"><header><Text id="txtIssLocation" text="{i18n>location}"/></header></Column>
+                <Column id="colIssInventory"><header><Text id="txtIssInventory" text="{i18n>inventory}"/></header></Column>
+                <Column id="colIssQtyInReservation"><header><Text id="txtIssQtyInReservation" text="{i18n>qtyInReservation}"/></header></Column>
+                <Column id="colIssQtyToPick"><header><Text id="txtIssQtyToPick" text="{i18n>qtyToPick}"/></header></Column>
             </columns>
             <items>
                 <ColumnListItem id="cliIssueItem">
                     <cells>
-                        <Text id="cellIssLoc" text="{issueItems>Location}"/>
-                        <Text id="cellIssStock" text="{issueItems>Stock}"/>
-                        <Text id="cellIssMat" text="{issueItems>Material}"/>
-                        <Text id="cellIssMatDesc" text="{issueItems>MaterialDescription}"/>
-                        <Text id="cellIssUom" text="{issueItems>UOM}"/>
+                        <Text id="cellIssItem" text="{issueItems>Item}"/>
+                        <Text id="cellIssItemDesc" text="{issueItems>ItemDescription}"/>
+                        <Text id="cellIssDate" text="{issueItems>Date}"/>
+                        <Text id="cellIssLocation" text="{issueItems>Location}"/>
+                        <Text id="cellIssInventory" text="{issueItems>Inventory}"/>
+                        <Text id="cellIssQtyInReservation" text="{issueItems>QtyInReservation}"/>
+                        <Text id="cellIssQtyToPick" text="{issueItems>QtyToPick}"/>
                     </cells>
                 </ColumnListItem>
             </items>
         </Table>
+        </VBox>
     </Page>
 </mvc:View>
