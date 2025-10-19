@@ -1,8 +1,9 @@
 
        
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-], function(Controller) {
+    "sap/ui/core/mvc/Controller",
+    "sap/m/MessageBox" 
+], function(Controller, MessageBox) {
     "use strict";
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.ProductionOrder", {
         onInit: function() {
@@ -131,11 +132,11 @@ sap.ui.define([
                         var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
                         oRouter.navTo("ProductionOrderContinue");
                     } else {
-                        sap.m.MessageBox.error(oResponse.MSG || "Unknown error");
+                        MessageBox.error(oResponse.MSG || "Unknown error");
                     }
                 },
                 error: function(xhr, status, error) {
-                    sap.m.MessageBox.error("Backend call failed: " + (xhr.responseText || status));
+                    MessageBox.error("Backend call failed: " + (xhr.responseText || status));
                 }
             });
         },
