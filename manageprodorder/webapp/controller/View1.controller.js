@@ -28,36 +28,27 @@ sap.ui.define([
                 success: function(data, textStatus, jqXHR) {
                     console.log("POST /app_list success:", data);
                     console.log("Status:", textStatus);
+                    // Dynamically set tile text for all app_id_X tiles
+                    // if (data && data.APPS && Array.isArray(data.APPS)) {
+                    //     data.APPS.forEach(function(app) {
+                    //         var tileId = "app_id_" + app.APP_ID;
+                    //         var oTile = sap.ui.getCore().byId(tileId);
+                    //         if (oTile && app.APP_DESC) {
+                    //             var oTileContent = oTile.getTileContent()[0];
+                    //             var oText = oTileContent.getContent();
+                    //             if (oText && oText.setText) {
+                    //                 oText.setText(app.APP_DESC);
+                    //             }
+                    //         }
+                    //     });
+                    // }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.error("POST /app_list failed:", textStatus, errorThrown);
                     console.error("Status code:", jqXHR.status);
                     console.error("Response text:", jqXHR.responseText);
 
-                    // Attempt CSRF token fetch & retry if permission/CSRF issue detected
-                    var needCsrf = jqXHR.status === 403 || (jqXHR.responseText && jqXHR.responseText.indexOf("CSRF") !== -1);
-                    if (needCsrf) {
-                        console.log("Attempting to fetch CSRF token and retry...");
-                        jQuery.ajax({
-                            url: url,
-                            method: "GET",
-                            headers: { "X-CSRF-Token": "Fetch" },
-                            success: function(dummyData, status2, jq2) {
-                                var token = jq2.getResponseHeader("X-CSRF-Token");
-                                console.log("Fetched CSRF token:", token);
-                                jQuery.ajax({
-                                    url: url,
-                                    method: "POST",
-                                    contentType: "application/json; charset=utf-8",
-                                    data: JSON.stringify(payload),
-                                    headers: token ? { "X-CSRF-Token": token } : {},
-                                    success: function(data3) { console.log("POST retry success:", data3); },
-                                    error: function(jq3, ts3, err3) { console.error("POST retry failed:", ts3, err3, jq3.responseText); }
-                                });
-                            },
-                            error: function(jq, ts, err) { console.error("Failed to fetch CSRF token:", ts, err); }
-                        });
-                    }
+                  
                 }
             });
         },
