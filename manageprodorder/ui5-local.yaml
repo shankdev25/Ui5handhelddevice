@@ -28,4 +28,7 @@ server:
     - name: fiori-tools-proxy
       afterMiddleware: compression
       configuration:
-        ignoreCertErrors: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+        backend:
+          - path: /yoito_ui5/yms/
+            url: http://merkdev.mrk.local:8000
+            client: '400'

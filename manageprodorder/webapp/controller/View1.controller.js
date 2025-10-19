@@ -14,11 +14,12 @@ sap.ui.define([
          * If the server requires a CSRF token, it will try to fetch one and retry once.
          */
         _testConnection: function() {
+            var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.uri;
             var url = "/app_list";
             var payload = {};
 
             jQuery.ajax({
-                url: url,
+                url: baseUrl + url,
                 method: "POST",
                 contentType: "application/json; charset=utf-8",
                 data: payload,
