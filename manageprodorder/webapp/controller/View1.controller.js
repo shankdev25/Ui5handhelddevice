@@ -14,7 +14,7 @@ sap.ui.define([
          * If the server requires a CSRF token, it will try to fetch one and retry once.
          */
         _testConnection: function() {
-            var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.uri;
+            var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
             var url = "app_list";
             var payload = {};
 
