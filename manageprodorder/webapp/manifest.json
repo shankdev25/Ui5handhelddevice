@@ -16,8 +16,10 @@
       "toolsId": "75394418-6db5-4b5a-8f47-f8fd5cb99220"
     },
     "dataSources": {
-      "uri" :  "/yoito_ui5/yms/",
-      "type" : "REST"
+      "mainService": {
+        "uri": "/yoito_ui5/yms/",
+        "type": "REST"
+      }
     }
   },
   "sap.ui": {
@@ -88,22 +90,30 @@
         {
           "name": "ProductionOrder",
           "pattern": "ProductionOrder",
-          "target": ["TargetProductionOrder"]
+          "target": [
+            "TargetProductionOrder"
+          ]
         },
         {
           "name": "ProductionOrderContinue",
           "pattern": "ProductionOrderContinue",
-          "target": ["TargetProductionOrderContinue"]
+          "target": [
+            "TargetProductionOrderContinue"
+          ]
         },
         {
           "name": "IssueItems",
           "pattern": "IssueItems",
-          "target": ["TargetIssueItems"]
+          "target": [
+            "TargetIssueItems"
+          ]
         },
         {
           "name": "DocumentCreated",
           "pattern": "DocumentCreated",
-          "target": ["TargetDocumentCreated"]
+          "target": [
+            "TargetDocumentCreated"
+          ]
         }
       ],
       "targets": {
@@ -125,7 +135,7 @@
         },
         "TargetDocumentCreated": {
           "id": "DocumentCreated",
-            "name": "DocumentCreated"
+          "name": "DocumentCreated"
         }
       }
     },

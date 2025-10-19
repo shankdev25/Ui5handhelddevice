@@ -15,7 +15,7 @@ sap.ui.define([
          */
         _testConnection: function() {
             var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.uri;
-            var url = "/app_list";
+            var url = "app_list";
             var payload = {};
 
             jQuery.ajax({
