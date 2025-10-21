@@ -11,15 +11,15 @@ sap.ui.define([
             var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
             var url = "ISSUE_PR_INIT";
 
-            let payload =  {
-                            Material:  "",
-                            ProductionOrder:  "",
-                            Operation:  "",
-                            ReservationStorageLocation: "",
-                            LogisticsGroup: "",
-                            Remark:  "",
-                            IssuesingStorageLocation:  ""
-                        };
+            let payload = {
+                Material: "",
+                ProductionOrder: "",
+                Operation: "",
+                ReservationStorageLocation: "",
+                LogisticsGroup: "",
+                Remark: "",
+                IssuesingStorageLocation: ""
+            };
 
             var that = this;
 
@@ -74,8 +74,8 @@ sap.ui.define([
                     LGORT_F: oSelectionData.ReservationStorageLocation || "",
                     LGORT_T: oSelectionData.IssuesingStorageLocation || "",
                     LOGGR: oSelectionData.LogisticsGroup || "",
-                    BKTXT: oSelectionData.Remark || "" ,
-                    SPRAS: sap.ui.getCore().getConfiguration().getLanguage()   || "EN" 
+                    BKTXT: oSelectionData.Remark || "",
+                    SPRAS: sap.ui.getCore().getConfiguration().getLanguage() || "EN"
                 }
             };
             // Call backend endpoint
@@ -88,6 +88,9 @@ sap.ui.define([
                 data: JSON.stringify(oPayload),
                 success: function (oResponse) {
                     if (oResponse.MSG.MSGTY === "S") {
+
+                        var oValidDataModel = new sap.ui.model.json.JSONModel(oResponse.DATA);
+                        that.getView().setModel(oValidDataModel, "validData");
 
                         //Get the data for selection
                         let baseUrl = that.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;

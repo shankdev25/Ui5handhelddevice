@@ -5,14 +5,6 @@ sap.ui.define([
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.DocumentCreated", {
         onInit: function() {
             var oComponent = this.getOwnerComponent();
-            if (!oComponent.getModel("created")) {
-                var aMock = [
-                    { Material: "MAT-001", SerialNumber: "SN-1001" },
-                    { Material: "MAT-002", SerialNumber: "SN-1002" },
-                    { Material: "MAT-003", SerialNumber: "SN-1003" }
-                ];
-                oComponent.setModel(new sap.ui.model.json.JSONModel({ items: aMock }), "created");
-            }
 
             // attach route matched to ensure binding (handles timing issues)
             try {
@@ -115,8 +107,7 @@ sap.ui.define([
                                                 if (!ColumnListItem) { console.warn("[DocumentCreated] sap.m.ColumnListItem not available"); }
                                                 var oProgTemplate = new ColumnListItem({
                                                     cells: [
-                                                        new sap.m.Text({ text: "{created>Material}" }),
-                                                        new sap.m.Text({ text: "{created>SerialNumber}" })
+                                                        new sap.m.Text({ text: "{created>DocumentNumber}" })
                                                     ]
                                                 });
                                                 oTable.unbindItems();
@@ -131,8 +122,7 @@ sap.ui.define([
                                             if (!ColumnListItem2) { console.warn("[DocumentCreated] sap.m.ColumnListItem not available"); }
                                             var oProgTemplate2 = new ColumnListItem2({
                                                 cells: [
-                                                    new sap.m.Text({ text: "{created>Material}" }),
-                                                    new sap.m.Text({ text: "{created>SerialNumber}" })
+                                                    new sap.m.Text({ text: "{created>DocumentNumber}" })
                                                 ]
                                             });
                                             oTable.unbindItems();
