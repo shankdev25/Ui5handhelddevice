@@ -3,7 +3,9 @@
   "sap.app": {
     "id": "com.merkavim.ewm.manageprodorder",
     "type": "application",
-    "i18n": "i18n/i18n.properties",
+  "i18n": "i18n/i18n.properties",
+  "supportedLocales": ["en", "he"],
+  "fallbackLocale": "en",
     "applicationVersion": {
       "version": "0.0.1"
     },
