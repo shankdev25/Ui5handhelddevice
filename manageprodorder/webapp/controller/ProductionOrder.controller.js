@@ -92,10 +92,12 @@ sap.ui.define([
                             success: function (oResponse) {
 
                                 let items = oResponse.ITEM;
-                                let header = oResponse.HEADER;
+                                let header = oResponse.HEAD;
 
                                 // --- mock data logic preserved, only runs on success ---
                                 var oComponent = that.getOwnerComponent();
+
+                                let aPicking = [];
 
                                 for (let i = 0; i < items.length; i++) {
 
@@ -104,7 +106,7 @@ sap.ui.define([
                                             selected: false,
                                             Item: items[i].CY_SEQNR,
                                             ItemDescription: items[i].MODEL_DESC,
-                                            Date: items[i].LGPBE,
+                                            Date: items[i].BDTER,
                                             Location: items[i].RSPOS,
                                             Inventory: items[i].RSNUM,
                                             QtyInReservation: items[i].RESERVED_QTY,
@@ -127,11 +129,11 @@ sap.ui.define([
                                 } else {
                                     oComponent.setModel(new sap.ui.model.json.JSONModel({ items: aPicking }), "pickItems");
                                 }
-                                var oSelectionModel = oComponent.getModel("selection");
+                                var oSelectionModel = oComponent.getModel("inputFields");
                                 if (oSelectionModel) {
                                     oSelectionModel.setData(aHeader);
                                 } else {
-                                    oComponent.setModel(new sap.ui.model.json.JSONModel(oSelectionData), "selection");
+                                    oComponent.setModel(new sap.ui.model.json.JSONModel(oSelectionData), "inputFields");
                                 }
                                 try {
                                     console.log("[ProductionOrder] pickItems on component:", oComponent.getModel("pickItems") && oComponent.getModel("pickItems").getData());
