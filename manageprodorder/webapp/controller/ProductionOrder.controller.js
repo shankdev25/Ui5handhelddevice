@@ -33,13 +33,13 @@ sap.ui.define([
                     // view state model for inline create fields
                     var oViewModel = new sap.ui.model.json.JSONModel({
                         newEntry: {
-                            Material: oResponse.MATNR || "",
-                            ProductionOrder: oResponse.AUFNR || "",
-                            Operation: oResponse.VORNR_F || "",
-                            ReservationStorageLocation: oResponse.LGORT_F || "",
-                            LogisticsGroup: oResponse.LOGGR || "",
-                            Remark: oResponse.BKTXT || "",
-                            IssuesingStorageLocation: oResponse.LGORT_T || ""
+                            Material: oResponse.DATA.MATNR || "",
+                            ProductionOrder: oResponse.DATA.AUFNR || "",
+                            Operation: oResponse.DATA.VORNR_F || "",
+                            ReservationStorageLocation: oResponse.DATA.LGORT_F || "",
+                            LogisticsGroup: oResponse.DATA.LOGGR || "",
+                            Remark: oResponse.DATA.BKTXT || "",
+                            IssuesingStorageLocation: oResponse.DATA.LGORT_T || ""
                         }
                     });
                     that.getView().setModel(oViewModel, "view");
