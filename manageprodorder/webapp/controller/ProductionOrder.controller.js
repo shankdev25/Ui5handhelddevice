@@ -78,7 +78,7 @@ sap.ui.define([
                 contentType: "application/json",
                 data: JSON.stringify(oPayload),
                 success: function(oResponse) {
-                    if (oResponse.MSGTY === "S") {
+                    if (oResponse.MSG.MSGTY === "S") {
                         // --- mock data logic preserved, only runs on success ---
                         var oComponent = that.getOwnerComponent();
                         var aPicking = [
@@ -132,7 +132,7 @@ sap.ui.define([
                         var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
                         oRouter.navTo("ProductionOrderContinue");
                     } else {
-                        MessageBox.error(oResponse.MSG || "Unknown error");
+                        MessageBox.error(oResponse.MSG.MSGTX || "Unknown error");
                     }
                 },
                 error: function(xhr, status, error) {
