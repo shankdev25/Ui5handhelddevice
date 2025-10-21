@@ -11,11 +11,21 @@ sap.ui.define([
             var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
             var url = "ISSUE_PR_INIT";
 
+            let payload =  {
+                            Material:  "",
+                            ProductionOrder:  "",
+                            Operation:  "",
+                            ReservationStorageLocation: "",
+                            LogisticsGroup: "",
+                            Remark:  "",
+                            IssuesingStorageLocation:  ""
+                        }
+
             $.ajax({
                 url: baseUrl + url,
                 method: "POST",
                 contentType: "application/json",
-                data: JSON.stringify(oPayload),
+                data: payload,
                 success: function (oResponse) {
 
                     // view state model for inline create fields
