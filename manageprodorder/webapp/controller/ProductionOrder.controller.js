@@ -108,7 +108,7 @@ sap.ui.define([
                                             ItemDescription: items[i].MODEL_DESC,
                                             Date: items[i].BDTER,
                                             Location: items[i].RSPOS,
-                                            Inventory: items[i].RSNUM,
+                                            Inventory: items[i].LABST,
                                             QtyInReservation: items[i].RESERVED_QTY,
                                             QtyToPick: items[i].PICKING_QTY
                                         });
@@ -139,6 +139,17 @@ sap.ui.define([
                                     console.log("[ProductionOrder] pickItems on component:", oComponent.getModel("pickItems") && oComponent.getModel("pickItems").getData());
                                     console.log("[ProductionOrder] selection on component:", oComponent.getModel("selection") && oComponent.getModel("selection").getData());
                                 } catch (e) { }
+                                // Clear newEntry model before routing
+                                var oViewModel = that.getView().getModel("view");
+                                oViewModel.setProperty("/newEntry", {
+                                    Material: "",
+                                    ProductionOrder: "",
+                                    Operation: "",
+                                    ReservationStorageLocation: "",
+                                    LogisticsGroup: "",
+                                    Remark: "",
+                                    IssuesingStorageLocation: ""
+                                });
                                 var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
                                 oRouter.navTo("ProductionOrderContinue");
                             },
