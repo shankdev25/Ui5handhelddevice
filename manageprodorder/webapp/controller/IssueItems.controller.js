@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel"
-], function (Controller, JSONModel) {
+    "sap/ui/model/json/JSONModel",
+    "sap/m/MessageBox"
+], function (Controller, JSONModel,MessageBox) {
     "use strict";
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.IssueItems", {
         onNavBack: function () {
