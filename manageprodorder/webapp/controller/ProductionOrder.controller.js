@@ -1,12 +1,12 @@
 
-       
+
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/m/MessageBox" 
-], function(Controller, MessageBox) {
+    "sap/m/MessageBox"
+], function (Controller, MessageBox) {
     "use strict";
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.ProductionOrder", {
-        onInit: function() {
+        onInit: function () {
             var oMockData = {
                 items: [
                     {
@@ -45,12 +45,12 @@ sap.ui.define([
             this.getView().setModel(oViewModel, "view");
         },
 
-        onNavBack: function() {
+        onNavBack: function () {
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("RouteView1", {}, true);
         },
 
-        onContinue: function() {
+        onContinue: function () {
             var oViewModel = this.getView().getModel("view");
             var oSelectionData = Object.assign({}, oViewModel.getProperty("/newEntry"));
             var that = this;
@@ -77,71 +77,86 @@ sap.ui.define([
                 method: "POST",
                 contentType: "application/json",
                 data: JSON.stringify(oPayload),
-                success: function(oResponse) {
+                success: function (oResponse) {
                     if (oResponse.MSG.MSGTY === "S") {
-                        // --- mock data logic preserved, only runs on success ---
-                        var oComponent = that.getOwnerComponent();
-                        var aPicking = [
-                            {
-                                selected: false,
-                                Item: "1001",
-                                ItemDescription: "Widget A",
-                                Date: "2025-09-21",
-                                Location: "LOC-01",
-                                Inventory: "INV-001",
-                                QtyInReservation: 10,
-                                QtyToPick: 10
+
+                        //Get the data for selection
+                        let baseUrl = that.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
+                        var url = "ISSUE_PR_1_DATA";
+
+                        $.ajax({
+                            url: baseUrl + url,
+                            method: "POST",
+                            contentType: "application/json",
+                            data: JSON.stringify(oPayload),
+                            success: function (oResponse) {
+
+                                let items = oResponse.ITEM;
+                                let header = oResponse.HEADER;
+
+                                // --- mock data logic preserved, only runs on success ---
+                                var oComponent = that.getOwnerComponent();
+
+                                for (let i = 0; i < items.length; i++) {
+
+                                    aPicking.push(
+                                        {
+                                            selected: false,
+                                            Item: items[i].CY_SEQNR,
+                                            ItemDescription: items[i].MODEL_DESC,
+                                            Date: items[i].LGPBE,
+                                            Location: items[i].RSPOS,
+                                            Inventory: items[i].RSNUM,
+                                            QtyInReservation: items[i].RESERVED_QTY,
+                                            QtyToPick: items[i].PICKING_QTY
+                                        });
+
+                                }
+
+                                let aHeader = {
+                                    Location: header.LGPBE,
+                                    Stock: header.LABST,
+                                    Material: header.MATNR,
+                                    MaterialDescription: header.MAKTX,
+                                    UOM: header.MEINS
+                                }
+
+                                var oPickModel = oComponent.getModel("pickItems");
+                                if (oPickModel) {
+                                    oPickModel.setData({ items: aPicking });
+                                } else {
+                                    oComponent.setModel(new sap.ui.model.json.JSONModel({ items: aPicking }), "pickItems");
+                                }
+                                var oSelectionModel = oComponent.getModel("selection");
+                                if (oSelectionModel) {
+                                    oSelectionModel.setData(aHeader);
+                                } else {
+                                    oComponent.setModel(new sap.ui.model.json.JSONModel(oSelectionData), "selection");
+                                }
+                                try {
+                                    console.log("[ProductionOrder] pickItems on component:", oComponent.getModel("pickItems") && oComponent.getModel("pickItems").getData());
+                                    console.log("[ProductionOrder] selection on component:", oComponent.getModel("selection") && oComponent.getModel("selection").getData());
+                                } catch (e) { }
+                                var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
+                                oRouter.navTo("ProductionOrderContinue");
                             },
-                            {
-                                selected: false,
-                                Item: "1002",
-                                ItemDescription: "Widget B",
-                                Date: "2025-09-21",
-                                Location: "LOC-02",
-                                Inventory: "INV-002",
-                                QtyInReservation: 5,
-                                QtyToPick: 5
-                            },
-                            {
-                                selected: false,
-                                Item: "1003",
-                                ItemDescription: "Widget C",
-                                Date: "2025-09-21",
-                                Location: "LOC-03",
-                                Inventory: "INV-003",
-                                QtyInReservation: 8,
-                                QtyToPick: 8
+                            error: function (xhr, status, error) {
+                                MessageBox.error("Backend call failed: " + (xhr.responseText || status));
                             }
-                        ];
-                        var oPickModel = oComponent.getModel("pickItems");
-                        if (oPickModel) {
-                            oPickModel.setData({ items: aPicking });
-                        } else {
-                            oComponent.setModel(new sap.ui.model.json.JSONModel({ items: aPicking }), "pickItems");
-                        }
-                        var oSelectionModel = oComponent.getModel("selection");
-                        if (oSelectionModel) {
-                            oSelectionModel.setData(oSelectionData);
-                        } else {
-                            oComponent.setModel(new sap.ui.model.json.JSONModel(oSelectionData), "selection");
-                        }
-                        try {
-                            console.log("[ProductionOrder] pickItems on component:", oComponent.getModel("pickItems") && oComponent.getModel("pickItems").getData());
-                            console.log("[ProductionOrder] selection on component:", oComponent.getModel("selection") && oComponent.getModel("selection").getData());
-                        } catch (e) {}
-                        var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
-                        oRouter.navTo("ProductionOrderContinue");
+                        })
+
+
                     } else {
                         MessageBox.error(oResponse.MSG.MSGTX || "Unknown error");
                     }
                 },
-                error: function(xhr, status, error) {
+                error: function (xhr, status, error) {
                     MessageBox.error("Backend call failed: " + (xhr.responseText || status));
                 }
             });
         },
 
-        onInlineAdd: function() {
+        onInlineAdd: function () {
             var oViewModel = this.getView().getModel("view");
             var oMockModel = this.getView().getModel("mock");
             var oEntry = Object.assign({}, oViewModel.getProperty("/newEntry"));
@@ -152,13 +167,13 @@ sap.ui.define([
             aItems.push(oEntry);
             oMockModel.setProperty("/items", aItems);
             // clear after add
-            oViewModel.setProperty("/newEntry", {Material:"",ProductionOrder:"",Operation:"",ReservationStorageLocation:"",LogisticsGroup:"",Remark:""});
+            oViewModel.setProperty("/newEntry", { Material: "", ProductionOrder: "", Operation: "", ReservationStorageLocation: "", LogisticsGroup: "", Remark: "" });
         },
 
-        onInlineClear: function() {
+        onInlineClear: function () {
             var oViewModel = this.getView().getModel("view");
-            oViewModel.setProperty("/newEntry", {Material:"",ProductionOrder:"",Operation:"",ReservationStorageLocation:"",LogisticsGroup:"",Remark:""});
+            oViewModel.setProperty("/newEntry", { Material: "", ProductionOrder: "", Operation: "", ReservationStorageLocation: "", LogisticsGroup: "", Remark: "" });
         }
-        
+
     });
 });
