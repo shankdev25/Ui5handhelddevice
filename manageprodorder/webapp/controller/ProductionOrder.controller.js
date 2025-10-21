@@ -7,42 +7,38 @@ sap.ui.define([
     "use strict";
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.ProductionOrder", {
         onInit: function () {
-            var oMockData = {
-                items: [
-                    {
-                        Material: "MAT-001",
-                        ProductionOrder: "PO-1001",
-                        Operation: "Op-01",
-                        ReservationStorageLocation: "RS-01",
-                        IssuesingStorageLocation: "IS-01",
-                        LogisticsGroup: "LG-01",
-                        Remark: "First order"
-                    },
-                    {
-                        Material: "MAT-002",
-                        ProductionOrder: "PO-1002",
-                        Operation: "Op-02",
-                        ReservationStorageLocation: "RS-02",
-                        IssuesingStorageLocation: "IS-02",
-                        LogisticsGroup: "LG-02",
-                        Remark: "Second order"
-                    }
-                ]
-            };
-            var oModel = new sap.ui.model.json.JSONModel(oMockData);
-            this.getView().setModel(oModel, "mock");
-            // view state model for inline create fields
-            var oViewModel = new sap.ui.model.json.JSONModel({
-                newEntry: {
-                    Material: "",
-                    ProductionOrder: "",
-                    Operation: "",
-                    ReservationStorageLocation: "",
-                    LogisticsGroup: "",
-                    Remark: ""
+
+            var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
+            var url = "ISSUE_PR_INIT";
+
+            $.ajax({
+                url: baseUrl + url,
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(oPayload),
+                success: function (oResponse) {
+
+                    // view state model for inline create fields
+                    var oViewModel = new sap.ui.model.json.JSONModel({
+                        newEntry: {
+                            Material: oResponse.MATNR || "",
+                            ProductionOrder: oResponse.AUFNR || "",
+                            Operation: oResponse.VORNR_F || "",
+                            ReservationStorageLocation: oResponse.LGORT_F || "",
+                            LogisticsGroup: oResponse.LOGGR || "",
+                            Remark: oResponse.BKTXT || "",
+                            IssuesingStorageLocation: oResponse.LGORT_T || ""
+                        }
+                    });
+                    this.getView().setModel(oViewModel, "view");
+
+                },
+                error: function (xhr, status, error) {
+                    MessageBox.error("Backend call failed: " + (xhr.responseText || status));
                 }
             });
-            this.getView().setModel(oViewModel, "view");
+
+
         },
 
         onNavBack: function () {
