@@ -64,7 +64,7 @@ sap.ui.define([
                     VORNR_F: oSelectionData.Operation || "",
                     VORNR_T: "",
                     LGORT_F: oSelectionData.ReservationStorageLocation || "",
-                    LGORT_T: "",
+                    LGORT_T: oSelectionData.IssuesingStorageLocation || "",
                     LOGGR: oSelectionData.LogisticsGroup || "",
                     BKTXT: oSelectionData.Remark || ""
                 }
