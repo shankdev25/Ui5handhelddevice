@@ -127,13 +127,26 @@ sap.ui.define([
                                                 var oProgTemplate = new ColumnListItem({
                                                     cells: [
                                                         new sap.m.CheckBox({ selected: "{pickItems>selected}" }),
-                                                        new sap.m.Text({ text: "{pickItems>Item}" }),
-                                                        new sap.m.Text({ text: "{pickItems>ItemDescription}" }),
-                                                        new sap.m.Text({ text: "{pickItems>Date}" }),
-                                                        new sap.m.Text({ text: "{pickItems>Location}" }),
-                                                        new sap.m.Text({ text: "{pickItems>Inventory}" }),
-                                                        new sap.m.Text({ text: "{pickItems>QtyInReservation}" }),
-                                                        new sap.m.Input({ value: "{pickItems>QtyToPick}", valueLiveUpdate: true, type: "Number", width: "6em" })
+                                                        new sap.m.Text({ text: "{pickItems>VORNR}" }),
+                                                        new sap.m.Text({ text: "{pickItems>MATNR}" }),
+                                                        new sap.m.Text({ text: "{pickItems>MAKTX}" }),
+                                                        new sap.m.Text({ text: "{pickItems>CY_SEQNR}" }),
+                                                        new sap.m.Text({ text: "{pickItems>MODEL}" }),
+                                                        new sap.m.Text({ text: "{pickItems>MODEL_DESC}" }),
+                                                        new sap.m.Text({ text: "{pickItems>MEINS}" }),
+                                                        new sap.m.Text({ text: "{pickItems>RESERVED_QTY}" }),
+                                                        new sap.m.Text({ text: "{pickItems>PICKING_QTY}" }),
+                                                        new sap.m.Text({ text: "{pickItems>CHARG}" }),
+                                                        new sap.m.Text({ text: "{pickItems>SERNR}" }),
+                                                        new sap.m.Text({ text: "{pickItems>AUFNR}" }),
+                                                        new sap.m.Text({ text: "{pickItems>AFPOS}" }),
+                                                        new sap.m.Text({ text: "{pickItems>RSNUM}" }),
+                                                        new sap.m.Text({ text: "{pickItems>RSPOS}" }),
+                                                        new sap.m.Text({ text: "{pickItems>RSART}" }),
+                                                        new sap.m.Text({ text: "{pickItems>LGPBE}" }),
+                                                        new sap.m.Text({ text: "{pickItems>LABST}" }),
+                                                        new sap.m.Text({ text: "{pickItems>WERKS}" }),
+                                                        new sap.m.Text({ text: "{pickItems>BDTER}" })
                                                     ]
                                                 });
                                                 oTable.unbindItems();
@@ -152,13 +165,26 @@ sap.ui.define([
                                             var oProgTemplate2 = new ColumnListItem2({
                                                 cells: [
                                                     new sap.m.CheckBox({ selected: "{pickItems>selected}" }),
-                                                    new sap.m.Text({ text: "{pickItems>Item}" }),
-                                                    new sap.m.Text({ text: "{pickItems>ItemDescription}" }),
-                                                    new sap.m.Text({ text: "{pickItems>Date}" }),
-                                                    new sap.m.Text({ text: "{pickItems>Location}" }),
-                                                    new sap.m.Text({ text: "{pickItems>Inventory}" }),
-                                                    new sap.m.Text({ text: "{pickItems>QtyInReservation}" }),
-                                                    new sap.m.Input({ value: "{pickItems>QtyToPick}", valueLiveUpdate: true, type: "Number", width: "6em" })
+                                                    new sap.m.Text({ text: "{pickItems>VORNR}" }),
+                                                    new sap.m.Text({ text: "{pickItems>MATNR}" }),
+                                                    new sap.m.Text({ text: "{pickItems>MAKTX}" }),
+                                                    new sap.m.Text({ text: "{pickItems>CY_SEQNR}" }),
+                                                    new sap.m.Text({ text: "{pickItems>MODEL}" }),
+                                                    new sap.m.Text({ text: "{pickItems>MODEL_DESC}" }),
+                                                    new sap.m.Text({ text: "{pickItems>MEINS}" }),
+                                                    new sap.m.Text({ text: "{pickItems>RESERVED_QTY}" }),
+                                                    new sap.m.Text({ text: "{pickItems>PICKING_QTY}" }),
+                                                    new sap.m.Text({ text: "{pickItems>CHARG}" }),
+                                                    new sap.m.Text({ text: "{pickItems>SERNR}" }),
+                                                    new sap.m.Text({ text: "{pickItems>AUFNR}" }),
+                                                    new sap.m.Text({ text: "{pickItems>AFPOS}" }),
+                                                    new sap.m.Text({ text: "{pickItems>RSNUM}" }),
+                                                    new sap.m.Text({ text: "{pickItems>RSPOS}" }),
+                                                    new sap.m.Text({ text: "{pickItems>RSART}" }),
+                                                    new sap.m.Text({ text: "{pickItems>LGPBE}" }),
+                                                    new sap.m.Text({ text: "{pickItems>LABST}" }),
+                                                    new sap.m.Text({ text: "{pickItems>WERKS}" }),
+                                                    new sap.m.Text({ text: "{pickItems>BDTER}" })
                                                 ]
                                             });
                                             oTable.unbindItems();

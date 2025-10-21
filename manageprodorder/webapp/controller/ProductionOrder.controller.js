@@ -109,19 +109,30 @@ sap.ui.define([
                                 let aPicking = [];
 
                                 for (let i = 0; i < items.length; i++) {
-
-                                    aPicking.push(
-                                        {
-                                            selected: false,
-                                            Item: items[i].CY_SEQNR,
-                                            ItemDescription: items[i].MODEL_DESC,
-                                            Date: items[i].BDTER,
-                                            Location: items[i].RSPOS,
-                                            Inventory: items[i].LABST,
-                                            QtyInReservation: items[i].RESERVED_QTY,
-                                            QtyToPick: items[i].PICKING_QTY
-                                        });
-
+                                    // Map all backend fields for each item
+                                    aPicking.push({
+                                        selected: false,
+                                        VORNR: items[i].VORNR,
+                                        MATNR: items[i].MATNR,
+                                        MAKTX: items[i].MAKTX,
+                                        CY_SEQNR: items[i].CY_SEQNR,
+                                        MODEL: items[i].MODEL,
+                                        MODEL_DESC: items[i].MODEL_DESC,
+                                        MEINS: items[i].MEINS,
+                                        RESERVED_QTY: items[i].RESERVED_QTY,
+                                        PICKING_QTY: items[i].PICKING_QTY,
+                                        CHARG: items[i].CHARG,
+                                        SERNR: items[i].SERNR,
+                                        AUFNR: items[i].AUFNR,
+                                        AFPOS: items[i].AFPOS,
+                                        RSNUM: items[i].RSNUM,
+                                        RSPOS: items[i].RSPOS,
+                                        RSART: items[i].RSART,
+                                        LGPBE: items[i].LGPBE,
+                                        LABST: items[i].LABST,
+                                        WERKS: items[i].WERKS,
+                                        BDTER: items[i].BDTER
+                                    });
                                 }
 
                                 let aHeader = {

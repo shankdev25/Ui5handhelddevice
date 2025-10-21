@@ -52,13 +52,13 @@
                         <ColumnListItem id="pickTableRowTemplate">
                             <cells>
                                 <CheckBox id="rowSelectCheckBox" selected="{pickItems>selected}" select="onSelectRow"/>
-                                <Text id="rowItem" text="{pickItems>Item}"/>
-                                <Text id="rowItemDesc" text="{pickItems>ItemDescription}"/>
-                                <Text id="rowDate" text="{pickItems>Date}"/>
-                                <Text id="rowLocation" text="{pickItems>Location}"/>
-                                <Text id="rowInventory" text="{pickItems>Inventory}"/>
-                                <Text id="rowQtyInReservation" text="{pickItems>QtyInReservation}"/>
-                                <Input id="rowQtyToPick" value="{pickItems>QtyToPick}" valueLiveUpdate="true" type="Number" width="6em"/>
+                                <Text id="rowItem" text="{pickItems>CY_SEQNR}"/>
+                                <Text id="rowItemDesc" text="{pickItems>MODEL_DESC}"/>
+                                <Text id="rowDate" text="{pickItems>BDTER}"/>
+                                <Text id="rowLocation" text="{pickItems>LGPBE}"/>
+                                <Text id="rowInventory" text="{pickItems>LABST}"/>
+                                <Text id="rowQtyInReservation" text="{pickItems>RESERVED_QTY}"/>
+                                <Input id="rowQtyToPick" value="{pickItems>PICKING_QTY}" valueLiveUpdate="true" type="Number" width="6em"/>
                             </cells>
                         </ColumnListItem>
                     </items>

@@ -34,13 +34,13 @@
             <items>
                 <ColumnListItem id="cliIssueItem">
                     <cells>
-                        <Text id="cellIssItem" text="{issueItems>Item}"/>
-                        <Text id="cellIssItemDesc" text="{issueItems>ItemDescription}"/>
-                        <Text id="cellIssDate" text="{issueItems>Date}"/>
-                        <Text id="cellIssLocation" text="{issueItems>Location}"/>
-                        <Text id="cellIssInventory" text="{issueItems>Inventory}"/>
-                        <Text id="cellIssQtyInReservation" text="{issueItems>QtyInReservation}"/>
-                        <Text id="cellIssQtyToPick" text="{issueItems>QtyToPick}"/>
+                        <Text id="cellIssItem" text="{issueItems>CY_SEQNR}"/>
+                        <Text id="cellIssItemDesc" text="{issueItems>MODEL_DESC}"/>
+                        <Text id="cellIssDate" text="{issueItems>BDTER}"/>
+                        <Text id="cellIssLocation" text="{issueItems>LGPBE}"/>
+                        <Text id="cellIssInventory" text="{issueItems>LABST}"/>
+                        <Text id="cellIssQtyInReservation" text="{issueItems>RESERVED_QTY}"/>
+                        <Text id="cellIssQtyToPick" text="{issueItems>PICKING_QTY}"/>
                     </cells>
                 </ColumnListItem>
             </items>
