@@ -75,7 +75,7 @@ sap.ui.define([
                     LGORT_T: oSelectionData.IssuesingStorageLocation || "",
                     LOGGR: oSelectionData.LogisticsGroup || "",
                     BKTXT: oSelectionData.Remark || "" ,
-                    SPRAS: navigator.language || "EN" 
+                    SPRAS: sap.ui.getCore().getConfiguration().getLanguage()   || "EN" 
                 }
             };
             // Call backend endpoint
