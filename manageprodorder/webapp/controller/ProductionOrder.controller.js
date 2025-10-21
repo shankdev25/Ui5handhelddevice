@@ -19,7 +19,9 @@ sap.ui.define([
                             LogisticsGroup: "",
                             Remark:  "",
                             IssuesingStorageLocation:  ""
-                        }
+                        };
+
+            var that = this;
 
             $.ajax({
                 url: baseUrl + url,
@@ -40,7 +42,7 @@ sap.ui.define([
                             IssuesingStorageLocation: oResponse.LGORT_T || ""
                         }
                     });
-                    this.getView().setModel(oViewModel, "view");
+                    that.getView().setModel(oViewModel, "view");
 
                 },
                 error: function (xhr, status, error) {
