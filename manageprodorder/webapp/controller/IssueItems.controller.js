@@ -14,9 +14,9 @@ sap.ui.define([
 
         onSave: function () {
             // Retrieve selected issue items model
-            var oIssueItemsModel = this.getView().getModel("issueItems");
+            var oIssueItemsModel = this.getOwnerComponent().getModel("issueItems");
             var aItems = (oIssueItemsModel && oIssueItemsModel.getProperty("/items")) || [];
-            var header = this.getView().getModel("inputFields");
+            var header = this.getOwnerComponent().getModel("inputFields").getData();
             let aHeader = {
                 LGPBE: header.Location,
                 LABST: header.Stock,
@@ -51,7 +51,7 @@ sap.ui.define([
                 url: baseUrl + url,
                 method: "POST",
                 contentType: "application/json",
-                data: finalPayload,
+                data: JSON.stringify(finalPayload),
                 success: function (oResponse) {
                     if (oResponse.MSG.MSGTY === "S") {
 
