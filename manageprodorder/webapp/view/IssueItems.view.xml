@@ -31,7 +31,7 @@
                 <Column id="colIssQtyInReservation"><header><Text id="txtIssQtyInReservation" text="{i18n>serialNumber}"/></header></Column>
             </columns>
             <items>
-                <ColumnListItem id="cliIssueItem">`
+                <ColumnListItem id="cliIssueItem">
                     <cells>
                         <Text id="cellIssItem" text="{issueItems>AUFNR}"/>
                         <Text id="cellIssItemDesc" text="{issueItems>MAKTX}"/>
