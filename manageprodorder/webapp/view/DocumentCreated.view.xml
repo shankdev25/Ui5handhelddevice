@@ -1,7 +1,7 @@
 <mvc:View controllerName="com.merkavim.ewm.manageprodorder.controller.DocumentCreated"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page id="docCreatedPage" title="{i18n>docCreatedPageTitle}" showNavButton="true" navButtonPress="onNavBack">
+    <Page id="docCreatedPage" title="{i18n>prodOrderTileHeader}" showNavButton="true" navButtonPress="onNavBack">
         <content>
             <VBox id="docCreatedVBox" class="sapUiSmallMargin" renderType="Bare">
                 <Table id="createdItemsTable" items="{created>/items}" class="sapUiSmallMarginTop">

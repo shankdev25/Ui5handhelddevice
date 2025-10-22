@@ -3,7 +3,7 @@
     xmlns="sap.m"
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:core="sap.ui.core">
-    <Page id="prodOrderPage" title="{i18n>prodOrderPageTitle}" showNavButton="true" navButtonPress="onNavBack">
+    <Page id="prodOrderPage" title="{i18n>prodOrderTileHeader}" showNavButton="true" navButtonPress="onNavBack">
         <VBox id="prodOrderVBox" class="sapUiSmallMargin">
             <HBox id="prodOrderButtonsBar" class="sapUiSmallMarginBottom">
                 <Button id="btnInlineContinue" text="{i18n>continue}" type="Emphasized" press="onContinue"/>

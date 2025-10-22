@@ -1,7 +1,7 @@
 <mvc:View controllerName="com.merkavim.ewm.manageprodorder.controller.IssueItems"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page id="issueItemsPage" title="{i18n>issueItemsPageTitle}" showNavButton="true" navButtonPress="onNavBack">
+    <Page id="issueItemsPage" title="{i18n>prodOrderTileHeader}" showNavButton="true" navButtonPress="onNavBack">
         <VBox id="issueItemsVBox" class="sapUiSmallMargin">
             <HBox id="issueItemsButtonsBar" class="sapUiSmallMarginBottom">
                 <Button id="btnIssueSave" text="{i18n>save}" type="Emphasized" press="onSave"/>

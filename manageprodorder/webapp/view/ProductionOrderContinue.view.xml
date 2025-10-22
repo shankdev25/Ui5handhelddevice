@@ -2,7 +2,7 @@
 <mvc:View controllerName="com.merkavim.ewm.manageprodorder.controller.ProductionOrderContinue"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page id="prodOrderContinuePage" title="Confirm Production Order" showNavButton="true" navButtonPress="onNavBack">
+    <Page id="prodOrderContinuePage" title="{i18n>prodOrderTileHeader}" showNavButton="true" navButtonPress="onNavBack">
         <VBox id="continueVBox" class="sapUiSmallMargin">
             <HBox id="continueButtons" class="sapUiSmallMarginBottom">
                 <Button id="btnDisplayIssue" text="Display Items for Issue" type="Emphasized" press="onDisplayIssueItems"/>
