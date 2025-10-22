@@ -19,9 +19,9 @@
                             <Label id="lblInlineOperation" text="{i18n>operation}"/>
                             <HBox id="operationRangeBox" class="sapUiSmallMarginBottom">
                                 <Label id="lblInlineOperationFrom" text="{i18n>operationFrom}" labelFor="inpInlineOperationFrom"/>
-                                <Input id="inpInlineOperationFrom" value="{view>/newEntry/OperationFrom}" width="90px"/>
+                                <Input id="inpInlineOperationFrom" value="{view>/newEntry/OperationFrom}" width="70px"/>
                                 <Label id="lblInlineOperationTo" text="{i18n>operationTo}" labelFor="inpInlineOperationTo" class="sapUiSmallMarginBegin"/>
-                                <Input id="inpInlineOperationTo" value="{view>/newEntry/OperationTo}" width="90px"/>
+                                <Input id="inpInlineOperationTo" value="{view>/newEntry/OperationTo}" width="70px"/>
                             </HBox>
                         </VBox>
                     <Label id="lblInlineResStorLoc" text="{i18n>reservationStorageLocation}" labelFor="inpInlineResStorLoc"/>
