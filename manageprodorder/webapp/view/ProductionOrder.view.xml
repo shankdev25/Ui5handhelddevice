@@ -15,8 +15,12 @@
                     <Input id="inpInlineMaterial" value="{view>/newEntry/Material}" width="200px"/>
                     <Label id="lblInlineProdOrder" text="{i18n>productionOrder}" labelFor="inpInlineProdOrder"/>
                     <Input id="inpInlineProdOrder" value="{view>/newEntry/ProductionOrder}" width="200px"/>
-                    <Label id="lblInlineOperation" text="{i18n>operation}" labelFor="inpInlineOperation"/>
-                    <Input id="inpInlineOperation" value="{view>/newEntry/Operation}" width="200px"/>
+                        <HBox id="operationRangeBox" class="sapUiSmallMarginBottom">
+                            <Label id="lblInlineOperationFrom" text="{i18n>operationFrom}" labelFor="inpInlineOperationFrom"/>
+                            <Input id="inpInlineOperationFrom" value="{view>/newEntry/OperationFrom}" width="90px"/>
+                            <Label id="lblInlineOperationTo" text="{i18n>operationTo}" labelFor="inpInlineOperationTo" class="sapUiSmallMarginBegin"/>
+                            <Input id="inpInlineOperationTo" value="{view>/newEntry/OperationTo}" width="90px"/>
+                        </HBox>
                     <Label id="lblInlineResStorLoc" text="{i18n>reservationStorageLocation}" labelFor="inpInlineResStorLoc"/>
                     <Input id="inpInlineResStorLoc" value="{view>/newEntry/ReservationStorageLocation}" width="200px"/>
                     <Label id="lblInlineLogGroup" text="{i18n>logisticsGroup}" labelFor="inpInlineLogGroup"/>
