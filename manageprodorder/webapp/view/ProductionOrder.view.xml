@@ -28,10 +28,10 @@
                     <Input id="inpInlineResStorLoc" value="{view>/newEntry/ReservationStorageLocation}" width="200px"/>
                     <Label id="lblInlineLogGroup" text="{i18n>logisticsGroup}" labelFor="inpInlineLogGroup"/>
                     <Input id="inpInlineLogGroup" value="{view>/newEntry/LogisticsGroup}" width="200px"/>
-                    <Label id="lblInlineRemark" text="{i18n>remark}" labelFor="inpInlineRemark"/>
-                    <Input id="inpInlineRemark" value="{view>/newEntry/Remark}" width="200px"/>
                     <Label id="lblInlineIssueStr" text="{i18n>issuesingstoragelocation}" labelFor="inpInlineRemark"/>
                     <Input id="inpInlineIssueStr" value="{view>/newEntry/IssuesingStorageLocation}" width="200px"/>
+                    <Label id="lblInlineRemark" text="{i18n>remark}" labelFor="inpInlineRemark"/>
+                    <Input id="inpInlineRemark" value="{view>/newEntry/Remark}" width="200px"/>
                 </VBox>
             </Panel>
         </VBox>
