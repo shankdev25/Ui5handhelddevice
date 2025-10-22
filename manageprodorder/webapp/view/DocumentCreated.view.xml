@@ -7,7 +7,6 @@
                 <Table id="createdItemsTable" items="{created>/items}" class="sapUiSmallMarginTop">
                     <columns>
                         <Column id="colCreatedMat"><header><Text id="txtCreatedMatHdr" text="{i18n>material}"/></header></Column>
-                        <Column id="colCreatedSerial"><header><Text id="txtCreatedSerialHdr" text="{i18n>serialNumber}"/></header></Column>
                     </columns>
                     <items>
                         <ColumnListItem id="cliCreatedItem">

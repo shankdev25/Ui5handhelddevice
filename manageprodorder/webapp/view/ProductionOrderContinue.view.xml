@@ -10,14 +10,6 @@
             </HBox>
                 <!-- Input fields for table columns, aligned vertically -->
                 <VBox id="inputFieldsVBox" class="sapUiSmallMarginBottom">
-                    <HBox id="hboxInputLocation" class="sapUiTinyMarginBottom" alignItems="Center">
-                        <Text id="lblInputLocation" text="{i18n>location}" width="10em" textAlign="End" class="sapUiTinyMarginEnd"/>
-                        <Input id="inputLocation" value="{inputFields>/Location}" placeholder="{i18n>location}" width="16em" enabled="false"/>
-                    </HBox>
-                    <HBox id="hboxInputStock" class="sapUiTinyMarginBottom" alignItems="Center">
-                        <Text id="lblInputStock" text="{i18n>stock}" width="10em" textAlign="End" class="sapUiTinyMarginEnd"/>
-                        <Input id="inputStock" value="{inputFields>/Stock}" placeholder="{i18n>stock}" width="16em" enabled="false"/>
-                    </HBox>
                     <HBox id="hboxInputMaterial" class="sapUiTinyMarginBottom" alignItems="Center">
                         <Text id="lblInputMaterial" text="{i18n>material}" width="10em" textAlign="End" class="sapUiTinyMarginEnd"/>
                         <Input id="inputMaterial" value="{inputFields>/Material}" placeholder="{i18n>material}" width="16em" enabled="false"/>
@@ -29,6 +21,14 @@
                     <HBox id="hboxInputUOM" class="sapUiTinyMarginBottom" alignItems="Center">
                         <Text id="lblInputUOM" text="{i18n>uom}" width="10em" textAlign="End" class="sapUiTinyMarginEnd"/>
                         <Input id="inputUOM" value="{inputFields>/UOM}" placeholder="{i18n>uom}" width="16em" enabled="false"/>
+                    </HBox>
+                                        <HBox id="hboxInputLocation" class="sapUiTinyMarginBottom" alignItems="Center">
+                        <Text id="lblInputLocation" text="{i18n>location}" width="10em" textAlign="End" class="sapUiTinyMarginEnd"/>
+                        <Input id="inputLocation" value="{inputFields>/Location}" placeholder="{i18n>location}" width="16em" enabled="false"/>
+                    </HBox>
+                    <HBox id="hboxInputStock" class="sapUiTinyMarginBottom" alignItems="Center">
+                        <Text id="lblInputStock" text="{i18n>stock}" width="10em" textAlign="End" class="sapUiTinyMarginEnd"/>
+                        <Input id="inputStock" value="{inputFields>/Stock}" placeholder="{i18n>stock}" width="16em" enabled="false"/>
                     </HBox>
                 </VBox>
 
@@ -43,7 +43,7 @@
                         <Column id="colItem"><header><Text id="txtColItem" text="{i18n>item}"/></header></Column>
                         <Column id="colItemDesc"><header><Text id="txtColItemDesc" text="{i18n>itemDescription}"/></header></Column>
                         <Column id="colDate"><header><Text id="txtColDate" text="{i18n>date}"/></header></Column>
-                        <Column id="colLocation"><header><Text id="txtColLocation" text="{i18n>location}"/></header></Column>
+                        <Column id="colLocation"><header><Text id="txtColLocation" text="{i18n>downlocator}"/></header></Column>
                         <Column id="colInventory"><header><Text id="txtColInventory" text="{i18n>inventory}"/></header></Column>
                         <Column id="colQtyInReservation"><header><Text id="txtColQtyInReservation" text="{i18n>qtyInReservation}"/></header></Column>
                         <Column id="colQtyToPick"><header><Text id="txtColQtyToPick" text="{i18n>qtyToPick}"/></header></Column>
