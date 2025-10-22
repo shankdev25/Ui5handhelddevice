@@ -5,7 +5,6 @@
         <VBox id="issueItemsVBox" class="sapUiSmallMargin">
             <HBox id="issueItemsButtonsBar" class="sapUiSmallMarginBottom">
                 <Button id="btnIssueSave" text="{i18n>save}" type="Emphasized" press="onSave"/>
-                </HBox>
                 <HBox id="issueItemsSummaryBar" class="sapUiSmallMarginBottom" justifyContent="Center">
                     <Text id="txtIssueItemsSummary" text="{i18n>summary}" class="sapUiHighlight"/>
                 </HBox>
