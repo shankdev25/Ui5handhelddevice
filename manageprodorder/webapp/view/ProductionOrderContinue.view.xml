@@ -5,7 +5,7 @@
     <Page id="prodOrderContinuePage" title="{i18n>prodOrderTileHeader}" showNavButton="true" navButtonPress="onNavBack">
         <VBox id="continueVBox" class="sapUiSmallMargin">
             <HBox id="continueButtons" class="sapUiSmallMarginBottom">
-                <Button id="btnDisplayIssue" text="{i18n>displayItemsForIssue}" type="Emphasized" press="onDisplayIssueItems" class="greenButton"/>
+                <Button id="btnDisplayIssue" text="{i18n>displayItemsForIssue}"  press="onDisplayIssueItems" class="greenButton"/>
                 <Button id="btnClearSelection" text="{i18n>clearSelection}" class="sapUiSmallMarginBegin" press="onClearSelection"/>
             </HBox>
                 <!-- Input fields for table columns, aligned vertically -->
