@@ -16,7 +16,7 @@
             <VBox id="homeVBox" class="sapUiMediumMargin" width="100%" renderType="Bare">
                 <Text id="introText" text="{i18n>introText}" wrapping="true"/>
                 <HBox id="tilesRow" renderType="Bare">
-                    <GenericTile id="app_id_1"
+                    <GenericTile id="ProductionOrder"
                         header="{i18n>prodOrderTileHeader}"
                         headerImage="sap-icon://factory"
                         press="onProductionOrderPress"

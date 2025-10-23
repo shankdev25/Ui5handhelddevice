@@ -28,20 +28,18 @@ sap.ui.define([
                 success: function(data, textStatus, jqXHR) {
                     console.log("POST /app_list success:", data);
                     console.log("Status:", textStatus);
-                    // Dynamically set tile text for all app_id_X tiles
-                    // if (data && data.APPS && Array.isArray(data.APPS)) {
-                    //     data.APPS.forEach(function(app) {
-                    //         var tileId = "app_id_" + app.APP_ID;
-                    //         var oTile = sap.ui.getCore().byId(tileId);
-                    //         if (oTile && app.APP_DESC) {
-                    //             var oTileContent = oTile.getTileContent()[0];
-                    //             var oText = oTileContent.getContent();
-                    //             if (oText && oText.setText) {
-                    //                 oText.setText(app.APP_DESC);
-                    //             }
-                    //         }
-                    //     });
-                    // }
+                        // Loop through the APPS array and set the app_desc on the corresponding tile
+                        if (data && data.APPS && Array.isArray(data.APPS)) {
+                            data.APPS.forEach(function(app) {
+                                if (app.APP_NAME === "ProductionOrder") {
+                                    var oTileText = sap.ui.getCore().byId("prodOrderTileText");
+                                    if (oTileText) {
+                                        oTileText.setText(app.APP_DESC);
+                                    }
+                                }
+                                // Add more conditions here for other tiles if needed
+                            });
+                        }
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     console.error("POST /app_list failed:", textStatus, errorThrown);
