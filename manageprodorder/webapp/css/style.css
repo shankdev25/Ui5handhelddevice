@@ -10,3 +10,13 @@
 	color: #fff !important;
 	border-color: #388e3c !important;
 }
+
+/* Deep override for SAPUI5 Button inner elements */
+.greenButton .sapMBtnInner {
+	background-color: #43a047 !important;
+	color: #fff !important;
+	border-color: #388e3c !important;
+}
+.greenButton .sapMBtnText {
+	color: #fff !important;
+}
