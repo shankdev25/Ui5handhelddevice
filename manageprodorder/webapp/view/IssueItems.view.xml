@@ -24,28 +24,30 @@
                     <Input id="issueInputUOM" value="{inputFields>/UOM}" width="16em" enabled="false"/>
                 </HBox>
             </VBox>
-            <Table id="issueItemsTable" items="{issueItems>/items}" class="sapUiSmallMarginTop">
-            <columns>
-                <Column id="colIssItem"><header><Text id="txtIssItem" text="{i18n>productionOrder}"/></header></Column>
-                <Column id="colIssItemDesc"><header><Text id="txtIssItemDesc" text="{i18n>materialDescription}"/></header></Column>
-                <Column id="colIssLocation"><header><Text id="txtIssLocation" text="{i18n>shortbusnum}"/></header></Column>                
-                <Column id="colIssDate"><header><Text id="txtIssDate" text="{i18n>qtyToPick1}"/></header></Column>
-                <Column id="colIssInventory"><header><Text id="txtIssInventory" text="{i18n>batchnumber}"/></header></Column>
-                <Column id="colIssQtyInReservation"><header><Text id="txtIssQtyInReservation" text="{i18n>serialNumber}"/></header></Column>
-            </columns>
-            <items>
-                <ColumnListItem id="cliIssueItem">
-                    <cells>
-                        <Text id="cellIssItem" text="{issueItems>AUFNR}"/>
-                        <Text id="cellIssItemDesc" text="{issueItems>MODEL_DESC}"/>
-                        <Text id="cellIssLocation" text="{issueItems>CY_SEQNR}"/>
-                       <Text id="cellIssDate" text="{issueItems>PICKING_QTY}"/>
-                        <Text id="cellIssInventory" text="{issueItems>CHARG}"/>
-                        <Text id="cellIssQtyInReservation" text="{issueItems>SERNR}"/>
-                    </cells>
-                </ColumnListItem>
-            </items>
-        </Table>
+            <VBox class="scrollableTableContainer">
+                <Table id="issueItemsTable" items="{issueItems>/items}" class="sapUiSmallMarginTop">
+                <columns>
+                    <Column id="colIssItem"><header><Text id="txtIssItem" text="{i18n>productionOrder}"/></header></Column>
+                    <Column id="colIssItemDesc"><header><Text id="txtIssItemDesc" text="{i18n>materialDescription}"/></header></Column>
+                    <Column id="colIssLocation"><header><Text id="txtIssLocation" text="{i18n>shortbusnum}"/></header></Column>                
+                    <Column id="colIssDate"><header><Text id="txtIssDate" text="{i18n>qtyToPick1}"/></header></Column>
+                    <Column id="colIssInventory"><header><Text id="txtIssInventory" text="{i18n>batchnumber}"/></header></Column>
+                    <Column id="colIssQtyInReservation"><header><Text id="txtIssQtyInReservation" text="{i18n>serialNumber}"/></header></Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="cliIssueItem">
+                        <cells>
+                            <Text id="cellIssItem" text="{issueItems>AUFNR}"/>
+                            <Text id="cellIssItemDesc" text="{issueItems>MODEL_DESC}"/>
+                            <Text id="cellIssLocation" text="{issueItems>CY_SEQNR}"/>
+                           <Text id="cellIssDate" text="{issueItems>PICKING_QTY}"/>
+                            <Text id="cellIssInventory" text="{issueItems>CHARG}"/>
+                            <Text id="cellIssQtyInReservation" text="{issueItems>SERNR}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+            </VBox>
         </VBox>
     </Page>
 </mvc:View>
