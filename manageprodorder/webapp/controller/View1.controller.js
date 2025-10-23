@@ -34,9 +34,9 @@ sap.ui.define([
                     if (data && data.APPS && Array.isArray(data.APPS)) {
                         data.APPS.forEach((app) => {
                             if (app.APP_NAME === "ProductionOrder") {
-                                var oTileText = that.getView().byId("prodOrderTileText");
-                                if (oTileText) {
-                                    oTileText.setText(app.APP_DESC);
+                                var oTileHeader = that.getView().byId("ProductionOrder");
+                                if (oTileHeader) {
+                                    oTileHeader.setHeader(app.APP_DESC);
                                 }
                             }
                             // Add more conditions here for other tiles if needed

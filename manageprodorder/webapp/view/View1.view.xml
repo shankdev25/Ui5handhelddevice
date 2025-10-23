@@ -21,9 +21,9 @@
                         headerImage="sap-icon://factory"
                         press="onProductionOrderPress"
                         class="sapUiTinyMargin">
-                        <TileContent id="prodOrderTileContent">
+                        <!-- <TileContent id="prodOrderTileContent">
                             <Text id="prodOrderTileText" text="{i18n>prodOrderTileText}"/>
-                        </TileContent>
+                        </TileContent> -->
                     </GenericTile>
                 </HBox>
             </VBox>
