@@ -32,37 +32,40 @@
                     </HBox>
                 </VBox>
 
-                <!-- Table for picking items -->
-                <Table id="pickTable" items="{pickItems>items}" mode="None" class="sapUiSmallMarginTop">
-                    <columns>
-                        <Column id="colAction" width="3em">
-                            <header>
-                                <CheckBox id="selectAllCheckBox" select="onSelectAll"/>
-                            </header>
-                        </Column>
-                        <Column id="colItem"><header><Text id="txtColItem" text="{i18n>action}"/></header></Column>
-                        <Column id="colItemDesc"><header><Text id="txtColItemDesc" text="{i18n>material}"/></header></Column>
-                        <Column id="colDate"><header><Text id="txtColDate" text="{i18n>materialDescription}"/></header></Column>
-                        <Column id="colLocation"><header><Text id="txtColLocation" text="{i18n>shortbusnum}"/></header></Column>
-                        <Column id="colInventory"><header><Text id="txtColInventory" text="{i18n>date}"/></header></Column>
-                        <Column id="colQtyInReservation"><header><Text id="txtColQtyInReservation" text="{i18n>qtyInReservation}"/></header></Column>
-                        <Column id="colQtyToPick"><header><Text id="txtColQtyToPick" text="{i18n>qtyToPick}"/></header></Column>
-                    </columns>
-                    <items>
-                        <ColumnListItem id="pickTableRowTemplate">
-                            <cells>
-                                <CheckBox id="rowSelectCheckBox" selected="{pickItems>selected}" select="onSelectRow"/>
-                                <Text id="rowItem" text="{pickItems>VORNR}"/>
-                                <Text id="rowItemDesc" text="{pickItems>MATNR}"/>
-                                <Text id="rowDate" text="{pickItems>MAKTX}"/>
-                                <Text id="rowLocation" text="{pickItems>CY_SEQNR}"/>
-                                <Text id="rowInventory" text="{pickItems>BDTER}"/>
-                                <Text id="rowQtyInReservation" text="{pickItems>RESERVED_QTY}"/>
-                                <Input id="rowQtyToPick" value="{pickItems>PICKING_QTY}" valueLiveUpdate="true" type="Number" width="6em"/>
-                            </cells>
-                        </ColumnListItem>
-                    </items>
-                </Table>
+
+                <!-- Table for picking items, now scrollable -->
+                <VBox class="scrollableTableContainer">
+                    <Table id="pickTable" items="{pickItems>items}" mode="None" class="sapUiSmallMarginTop">
+                        <columns>
+                            <Column id="colAction" width="3em">
+                                <header>
+                                    <CheckBox id="selectAllCheckBox" select="onSelectAll"/>
+                                </header>
+                            </Column>
+                            <Column id="colItem"><header><Text id="txtColItem" text="{i18n>action}"/></header></Column>
+                            <Column id="colItemDesc"><header><Text id="txtColItemDesc" text="{i18n>material}"/></header></Column>
+                            <Column id="colDate"><header><Text id="txtColDate" text="{i18n>materialDescription}"/></header></Column>
+                            <Column id="colLocation"><header><Text id="txtColLocation" text="{i18n>shortbusnum}"/></header></Column>
+                            <Column id="colInventory"><header><Text id="txtColInventory" text="{i18n>date}"/></header></Column>
+                            <Column id="colQtyInReservation"><header><Text id="txtColQtyInReservation" text="{i18n>qtyInReservation}"/></header></Column>
+                            <Column id="colQtyToPick"><header><Text id="txtColQtyToPick" text="{i18n>qtyToPick}"/></header></Column>
+                        </columns>
+                        <items>
+                            <ColumnListItem id="pickTableRowTemplate">
+                                <cells>
+                                    <CheckBox id="rowSelectCheckBox" selected="{pickItems>selected}" select="onSelectRow"/>
+                                    <Text id="rowItem" text="{pickItems>VORNR}"/>
+                                    <Text id="rowItemDesc" text="{pickItems>MATNR}"/>
+                                    <Text id="rowDate" text="{pickItems>MAKTX}"/>
+                                    <Text id="rowLocation" text="{pickItems>CY_SEQNR}"/>
+                                    <Text id="rowInventory" text="{pickItems>BDTER}"/>
+                                    <Text id="rowQtyInReservation" text="{pickItems>RESERVED_QTY}"/>
+                                    <Input id="rowQtyToPick" value="{pickItems>PICKING_QTY}" valueLiveUpdate="true" type="Number" width="6em"/>
+                                </cells>
+                            </ColumnListItem>
+                        </items>
+                    </Table>
+                </VBox>
 
         </VBox>
     </Page>

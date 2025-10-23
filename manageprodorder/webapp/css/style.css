@@ -1,1 +1,6 @@
 /* Enter your custom styles here */
+
+.scrollableTableContainer {
+	max-height: 400px; /* Adjust as needed */
+	overflow-y: auto;
+}
