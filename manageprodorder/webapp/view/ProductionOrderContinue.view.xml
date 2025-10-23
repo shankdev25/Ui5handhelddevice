@@ -35,7 +35,7 @@
 
                 <!-- Table for picking items, now scrollable -->
                 <VBox class="scrollableTableContainer">
-                    <Table id="pickTable" items="{pickItems>items}" mode="None" class="sapUiSmallMarginTop">
+                    <Table id="pickTable" sticky="ColumnHeaders" items="{pickItems>items}" mode="None" class="sapUiSmallMarginTop">
                         <columns>
                             <Column id="colAction" width="3em">
                                 <header>

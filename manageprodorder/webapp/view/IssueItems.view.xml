@@ -25,7 +25,7 @@
                 </HBox>
             </VBox>
             <VBox class="scrollableTableContainer">
-                <Table id="issueItemsTable" items="{issueItems>/items}" class="sapUiSmallMarginTop">
+                <Table id="issueItemsTable" sticky="ColumnHeaders" items="{issueItems>/items}" class="sapUiSmallMarginTop">
                 <columns>
                     <Column id="colIssItem"><header><Text id="txtIssItem" text="{i18n>productionOrder}"/></header></Column>
                     <Column id="colIssItemDesc"><header><Text id="txtIssItemDesc" text="{i18n>materialDescription}"/></header></Column>
