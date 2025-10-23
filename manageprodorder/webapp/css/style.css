@@ -4,3 +4,9 @@
 	max-height: 400px; /* Adjust as needed */
 	overflow-y: auto;
 }
+
+.greenButton {
+	background-color: #43a047 !important; /* Material green 600 */
+	color: #fff !important;
+	border-color: #388e3c !important;
+}
