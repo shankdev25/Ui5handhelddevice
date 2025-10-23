@@ -7,7 +7,7 @@
                     <Button id="btnIssueSave" text="{i18n>save}"  press="onSave" class="greenButton"/>
             </HBox>
              <VBox id="issueItemsSummaryBox" class="sapUiSmallMarginBottom" justifyContent="Center">
-                    <Text id="txtIssueItemsSummary" text="Summary: {issueItems>/selectedCount} items selected" class="sapUiHighlight"/>
+                    <Text id="txtIssueItemsSummary" text="{i18n>summary}" class="sapUiHighlight"/>
             </VBox>
             <!-- Mirror input fields from ProductionOrderContinue (display-only) -->
             <VBox id="issueInputFieldsVBox" class="sapUiSmallMarginBottom">
