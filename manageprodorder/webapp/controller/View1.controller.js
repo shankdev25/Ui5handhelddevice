@@ -18,6 +18,8 @@ sap.ui.define([
             var url = "app_list";
             var payload = {};
 
+            var that = this;
+
             jQuery.ajax({
                 url: baseUrl + url,
                 method: "POST",
@@ -25,28 +27,26 @@ sap.ui.define([
                 data: payload,
                 dataType: "json",
                 timeout: 10000,
-                success: function(data, textStatus, jqXHR) {
+                success: (data, textStatus, jqXHR) => {
                     console.log("POST /app_list success:", data);
                     console.log("Status:", textStatus);
-                        // Loop through the APPS array and set the app_desc on the corresponding tile
-                        if (data && data.APPS && Array.isArray(data.APPS)) {
-                            data.APPS.forEach(function(app) {
-                                if (app.APP_NAME === "ProductionOrder") {
-                                    var oTileText = sap.ui.getCore().byId("prodOrderTileText");
-                                    if (oTileText) {
-                                        oTileText.setText(app.APP_DESC);
-                                    }
+                    // Loop through the APPS array and set the app_desc on the corresponding tile
+                    if (data && data.APPS && Array.isArray(data.APPS)) {
+                        data.APPS.forEach((app) => {
+                            if (app.APP_NAME === "ProductionOrder") {
+                                var oTileText = that.getView().byId("prodOrderTileText");
+                                if (oTileText) {
+                                    oTileText.setText(app.APP_DESC);
                                 }
-                                // Add more conditions here for other tiles if needed
-                            });
-                        }
+                            }
+                            // Add more conditions here for other tiles if needed
+                        });
+                    }
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
+                error: (jqXHR, textStatus, errorThrown) => {
                     console.error("POST /app_list failed:", textStatus, errorThrown);
                     console.error("Status code:", jqXHR.status);
                     console.error("Response text:", jqXHR.responseText);
-
-                  
                 }
             });
         },
