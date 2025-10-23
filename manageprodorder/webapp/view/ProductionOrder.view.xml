@@ -6,7 +6,7 @@
     <Page id="prodOrderPage" title="{i18n>prodOrderTileHeader}" showNavButton="true" navButtonPress="onNavBack">
         <VBox id="prodOrderVBox" class="sapUiSmallMargin">
             <HBox id="prodOrderButtonsBar" class="sapUiSmallMarginBottom">
-                <Button id="btnInlineContinue" text="{i18n>continue}" press="onContinue" class="greenButton"/>
+                <Button id="btnInlineContinue" text="{i18n>continue}" type="Accept" press="onContinue"/>
                 <Button id="btnInlineClear" text="{i18n>clear}" class="sapUiSmallMarginBegin" press="onInlineClear"/>
             </HBox>
             <Panel id="prodOrderPanel" headerText="{i18n>prodOrderPanelHeader}" expandable="false" class="sapUiResponsiveMargin" width="auto">

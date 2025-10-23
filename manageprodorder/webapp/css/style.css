@@ -5,27 +5,3 @@
 	overflow-y: auto;
 }
 
-.greenButton {
-	background-color: #43a047 !important; /* Material green 600 */
-	color: #fff !important;
-	border-color: #388e3c !important;
-	border-radius: 0.5rem !important;
-	border-width: 1px !important;
-	border-style: solid !important;
-	box-sizing: border-box !important;
-	padding: 0.375rem 1rem !important;
-	min-width: 4.5rem !important;
-	min-height: 2.25rem !important;
-	font-size: 1rem !important;
-	font-family: inherit !important;
-}
-
-/* Deep override for SAPUI5 Button inner elements */
-.greenButton .sapMBtnInner {
-	background-color: #43a047 !important;
-	color: #fff !important;
-	border-color: #388e3c !important;
-}
-.greenButton .sapMBtnText {
-	color: #fff !important;
-}
