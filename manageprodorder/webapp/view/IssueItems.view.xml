@@ -28,7 +28,7 @@
                 <Table id="issueItemsTable" sticky="ColumnHeaders" items="{issueItems>/items}" class="sapUiSmallMarginTop">
                 <columns>
                     <Column id="colIssItem"><header><Text id="txtIssItem" text="{i18n>productionOrder}"/></header></Column>
-                    <Column id="colIssItemDesc"><header><Text id="txtIssItemDesc" text="{i18n>materialDescription}"/></header></Column>
+                    <Column id="colIssItemDesc"><header><Text id="txtIssItemDesc" text="{i18n>materialDescription1}"/></header></Column>
                     <Column id="colIssLocation"><header><Text id="txtIssLocation" text="{i18n>shortbusnum}"/></header></Column>                
                     <Column id="colIssDate"><header><Text id="txtIssDate" text="{i18n>qtyToPick1}"/></header></Column>
                     <Column id="colIssInventory"><header><Text id="txtIssInventory" text="{i18n>batchnumber}"/></header></Column>
