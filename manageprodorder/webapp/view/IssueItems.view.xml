@@ -37,7 +37,7 @@
                 <ColumnListItem id="cliIssueItem">
                     <cells>
                         <Text id="cellIssItem" text="{issueItems>AUFNR}"/>
-                        <Text id="cellIssItemDesc" text="{issueItems>MAKTX}"/>
+                        <Text id="cellIssItemDesc" text="{issueItems>MODEL_DESC}"/>
                         <Text id="cellIssLocation" text="{issueItems>CY_SEQNR}"/>
                        <Text id="cellIssDate" text="{issueItems>PICKING_QTY}"/>
                         <Text id="cellIssInventory" text="{issueItems>CHARG}"/>
