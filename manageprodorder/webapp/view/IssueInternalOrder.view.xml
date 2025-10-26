@@ -1,7 +1,7 @@
 <mvc:View controllerName="com.merkavim.ewm.manageprodorder.controller.IssueInternalOrder"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page id="issueInternalOrderPage" title="{i18n>addedItemsTitle}" showHeader="true">
+    <Page id="issueInternalOrderPage" title="{i18n>addedItemsTitle}" showHeader="true"  navButtonPress="onNavBack">
         <content>
             <VBox class="sapUiMediumMargin sapUiAlignCenter">
                 <HBox>

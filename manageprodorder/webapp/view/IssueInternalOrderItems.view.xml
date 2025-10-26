@@ -3,19 +3,20 @@
     xmlns="sap.m">
     <Page id="issueInternalOrderItemsPage" title="{i18n>addedItemsTitle}" showNavButton="true" navButtonPress="onNavBack">
         <content>
-            <VBox class="sapUiMediumMargin">
-                <Table id="itemsTable" items="{items>/items}">
+            <VBox class="sapUiMediumMargin" style="max-width:1200px; margin:auto;">
+                    <Table id="itemsTable" items="{items>/items}" width="100%" fixedLayout="true">
                     <columns>
-                        <Column><Text text="Material Description"/></Column>
-                        <Column><Text text="Item Locator"/></Column>
-                        <Column><Text text="UoM"/></Column>
-                        <Column><Text text="Quantity in Stock"/></Column>
-                        <Column><Text text="Issuing Storage Location"/></Column>
-                        <Column><Text text="Internal Order"/></Column>
-                        <Column><Text text="Cost Center"/></Column>
-                        <Column><Text text="Material"/></Column>
-                        <Column><Text text="Issue Quantity"/></Column>
-                        <Column><Text text="Remark"/></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Material Description"/></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Item Locator"/></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="UoM"/></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Quantity in Stock"/></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Issuing Storage Location"/></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Internal Order"/></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Cost Center"/></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Material"/></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Issue Quantity"/></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Remark"/></Column>
+                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Actions"/></Column>
                     </columns>
                     <items>
                         <ColumnListItem>
@@ -29,6 +30,10 @@
                             <Text text="{items>material}"/>
                             <Text text="{items>issueQuantity}"/>
                             <Text text="{items>remark}"/>
+                            <HBox>
+                                <Button icon="sap-icon://edit" type="Transparent" press="onEditItem" tooltip="Edit"/>
+                                <Button icon="sap-icon://delete" type="Transparent" press="onDeleteItem" tooltip="Delete"/>
+                            </HBox>
                         </ColumnListItem>
                     </items>
                 </Table>
