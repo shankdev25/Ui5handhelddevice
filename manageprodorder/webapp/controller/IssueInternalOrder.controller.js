@@ -8,6 +8,10 @@ sap.ui.define([
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.IssueInternalOrder", {
         // Models are now initialized in Component.js
 
+        onNavBack: function() {
+            this.getOwnerComponent().getRouter().navTo("RouteView1");
+        },
+
         onInit: function() {
             this.getView().setModel(new sap.ui.model.json.JSONModel({
                 issuingStorageLocation: "",

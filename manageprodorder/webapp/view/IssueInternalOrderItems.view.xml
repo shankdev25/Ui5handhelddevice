@@ -6,17 +6,17 @@
             <VBox class="sapUiMediumMargin" style="max-width:1200px; margin:auto;">
                     <Table id="itemsTable" items="{items>/items}" width="100%" fixedLayout="true">
                     <columns>
-                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Material Description"/></Column>
-                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Item Locator"/></Column>
-                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="UoM"/></Column>
-                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Quantity in Stock"/></Column>
-                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Issuing Storage Location"/></Column>
-                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Internal Order"/></Column>
-                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Cost Center"/></Column>
-                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Material"/></Column>
-                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Issue Quantity"/></Column>
-                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Remark"/></Column>
-                        <Column minScreenWidth="Tablet" demandPopin="false"><Text text="Actions"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Material Description"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Item Locator"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="UoM"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Quantity in Stock"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Issuing Storage Location"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Internal Order"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Cost Center"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Material"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Issue Quantity"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Remark"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Actions"/></Column>
                     </columns>
                     <items>
                         <ColumnListItem>
