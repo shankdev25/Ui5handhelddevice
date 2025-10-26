@@ -3,7 +3,26 @@
     xmlns="sap.m">
     <Page id="issueInternalOrderPage" showHeader="true">
         <content>
-            <!-- Blank view for Issue Internal Order -->
+            <VBox class="sapUiMediumMargin" width="100%">
+                <Label text="{i18n>issuingStorageLocationLabel}" labelFor="issuingStorageLocationInput"/>
+                <Input id="issuingStorageLocationInput" placeholder="{i18n>issuingStorageLocationPlaceholder}"/>
+
+                <Label text="{i18n>internalOrderLabel}" labelFor="internalOrderInput"/>
+                <Input id="internalOrderInput" placeholder="{i18n>internalOrderPlaceholder}"/>
+
+                <Label text="{i18n>costCenterLabel}" labelFor="costCenterInput"/>
+                <Input id="costCenterInput" placeholder="{i18n>costCenterPlaceholder}"/>
+
+                <Label text="{i18n>itemLabel}" labelFor="itemInput"/>
+                <Input id="itemInput" placeholder="{i18n>itemPlaceholder}"/>
+
+                <Label text="{i18n>issueQuantityLabel}" labelFor="issueQuantityInput"/>
+                <Input id="issueQuantityInput" placeholder="{i18n>issueQuantityPlaceholder}" type="Number"/>
+
+                <Label text="{i18n>noteLabel}" labelFor="noteInput"/>
+                <TextArea id="noteInput" placeholder="{i18n>notePlaceholder}" rows="3"/>
+                <Button text="{i18n>clearButton}" press="onClearFields" type="Emphasized"/>
+            </VBox>
         </content>
     </Page>
 </mvc:View>
