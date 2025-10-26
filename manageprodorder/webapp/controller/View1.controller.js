@@ -38,6 +38,13 @@ sap.ui.define([
                                 if (oTileHeader) {
                                     oTileHeader.setHeader(app.APP_DESC);
                                 }
+                            } else if (app.APP_NAME === "IssueInternalOrder") {
+                                var oTileHeader = that.getView().byId("IssueInternalOrder");
+                                if (oTileHeader) {
+                                    oTileHeader.setHeader(app.APP_DESC);
+                                }
+                            }else{
+
                             }
                             // Add more conditions here for other tiles if needed
                         });
@@ -55,5 +62,10 @@ sap.ui.define([
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("ProductionOrder");
         }
+            ,
+            onIssueInternalOrderPress: function() {
+                var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+                oRouter.navTo("IssueInternalOrder");
+            }
     });
 });

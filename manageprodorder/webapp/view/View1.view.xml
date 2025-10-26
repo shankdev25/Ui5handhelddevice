@@ -21,10 +21,13 @@
                         headerImage="sap-icon://factory"
                         press="onProductionOrderPress"
                         class="sapUiTinyMargin">
-                        <!-- <TileContent id="prodOrderTileContent">
-                            <Text id="prodOrderTileText" text="{i18n>prodOrderTileText}"/>
-                        </TileContent> -->
                     </GenericTile>
+                        <GenericTile id="IssueInternalOrder"
+                            header="{i18n>issueInternalOrderTileHeader}"
+                            headerImage="sap-icon://order-status"
+                            press="onIssueInternalOrderPress"
+                            class="sapUiTinyMargin">
+                        </GenericTile>
                 </HBox>
             </VBox>
         </content>

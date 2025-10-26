@@ -117,6 +117,14 @@
             "TargetDocumentCreated"
           ]
         }
+          ,
+          {
+            "name": "IssueInternalOrder",
+            "pattern": "IssueInternalOrder",
+            "target": [
+              "TargetIssueInternalOrder"
+            ]
+          }
       ],
       "targets": {
         "TargetView1": {
@@ -139,6 +147,11 @@
           "id": "DocumentCreated",
           "name": "DocumentCreated"
         }
+          ,
+          "TargetIssueInternalOrder": {
+            "id": "IssueInternalOrder",
+            "name": "IssueInternalOrder"
+          }
       }
     },
     "rootView": {

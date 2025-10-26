@@ -1,0 +1,9 @@
+<mvc:View controllerName="com.merkavim.ewm.manageprodorder.controller.IssueInternalOrder"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="issueInternalOrderPage" showHeader="true">
+        <content>
+            <!-- Blank view for Issue Internal Order -->
+        </content>
+    </Page>
+</mvc:View>
