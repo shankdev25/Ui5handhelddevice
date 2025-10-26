@@ -23,22 +23,22 @@
                     <Button text="{i18n>continueButton}" press="onContinue" type="Accept"/>
                 </HBox>
                 <Label text="{i18n>issuingStorageLocationLabel}" labelFor="issuingStorageLocationInput"/>
-                <Input id="issuingStorageLocationInput" placeholder="{i18n>issuingStorageLocationPlaceholder}" width="400px"/>
+                <Input id="issuingStorageLocationInput" placeholder="{i18n>issuingStorageLocationPlaceholder}" width="200px"/>
 
                 <Label text="{i18n>internalOrderLabel}" labelFor="internalOrderInput"/>
-                <Input id="internalOrderInput" placeholder="{i18n>internalOrderPlaceholder}" width="400px"/>
+                <Input id="internalOrderInput" placeholder="{i18n>internalOrderPlaceholder}" width="200px"/>
 
                 <Label text="{i18n>costCenterLabel}" labelFor="costCenterInput"/>
-                <Input id="costCenterInput" placeholder="{i18n>costCenterPlaceholder}" width="400px"/>
+                <Input id="costCenterInput" placeholder="{i18n>costCenterPlaceholder}" width="200px"/>
 
                 <Label text="{i18n>itemLabel}" labelFor="itemInput"/>
-                <Input id="itemInput" placeholder="{i18n>itemPlaceholder}" width="400px"/>
+                <Input id="itemInput" placeholder="{i18n>itemPlaceholder}" width="200px"/>
 
                 <Label text="{i18n>issueQuantityLabel}" labelFor="issueQuantityInput"/>
-                <Input id="issueQuantityInput" placeholder="{i18n>issueQuantityPlaceholder}" type="Number" width="400px"/>
+                <Input id="issueQuantityInput" placeholder="{i18n>issueQuantityPlaceholder}" type="Number" width="200px"/>
 
                 <Label text="{i18n>noteLabel}" labelFor="noteInput"/>
-                <TextArea id="noteInput" placeholder="{i18n>notePlaceholder}" rows="3" width="400px"/>
+                <TextArea id="noteInput" placeholder="{i18n>notePlaceholder}" rows="3" width="200px"/>
                 
             </VBox>
         </content>
