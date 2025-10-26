@@ -4,6 +4,12 @@
     <Page id="issueInternalOrderPage" showHeader="true">
         <content>
             <VBox class="sapUiMediumMargin" width="100%">
+                <HBox>
+                    <Button text="{i18n>clearButton}" press="onClearFields" type="Emphasized"/>
+                    <Button text="{i18n>saveButton}" type="Emphasized" press="onSave"/>
+                    <Button text="{i18n>addButton}" type="Default" press="onAdd" style="margin-left:8px;"/>
+                    <Button text="{i18n>continueButton}" type="Default" press="onContinue" style="margin-left:8px;"/>
+                </HBox>
                 <Label text="{i18n>issuingStorageLocationLabel}" labelFor="issuingStorageLocationInput"/>
                 <Input id="issuingStorageLocationInput" placeholder="{i18n>issuingStorageLocationPlaceholder}" width="400px"/>
 
@@ -21,7 +27,7 @@
 
                 <Label text="{i18n>noteLabel}" labelFor="noteInput"/>
                 <TextArea id="noteInput" placeholder="{i18n>notePlaceholder}" rows="3" width="400px"/>
-                <Button text="{i18n>clearButton}" press="onClearFields" type="Emphasized"/>
+                
             </VBox>
         </content>
     </Page>
