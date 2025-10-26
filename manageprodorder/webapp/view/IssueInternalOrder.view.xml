@@ -5,10 +5,22 @@
         <content>
             <VBox class="sapUiMediumMargin" width="100%">
                 <HBox>
-                    <Button text="{i18n>clearButton}" press="onClearFields" type="Emphasized"/>
-                    <Button text="{i18n>saveButton}" type="Emphasized" press="onSave"/>
-                    <Button text="{i18n>addButton}" type="Default" press="onAdd" style="margin-left:8px;"/>
-                    <Button text="{i18n>continueButton}" type="Default" press="onContinue" style="margin-left:8px;"/>
+                    <Button text="{i18n>clearButton}" press="onClearFields" type="Default">
+                        <layoutData>
+                            <FlexItemData styleClass="sapUiTinyMarginEnd" />
+                        </layoutData>
+                    </Button>
+                    <Button text="{i18n>saveButton}" press="onSave" type="Default">
+                        <layoutData>
+                            <FlexItemData styleClass="sapUiTinyMarginEnd" />
+                        </layoutData>
+                    </Button>
+                    <Button text="{i18n>addButton}" press="onAdd" type="Default">
+                        <layoutData>
+                            <FlexItemData styleClass="sapUiTinyMarginEnd" />
+                        </layoutData>
+                    </Button>
+                    <Button text="{i18n>continueButton}" press="onContinue" type="Accept"/>
                 </HBox>
                 <Label text="{i18n>issuingStorageLocationLabel}" labelFor="issuingStorageLocationInput"/>
                 <Input id="issuingStorageLocationInput" placeholder="{i18n>issuingStorageLocationPlaceholder}" width="400px"/>
