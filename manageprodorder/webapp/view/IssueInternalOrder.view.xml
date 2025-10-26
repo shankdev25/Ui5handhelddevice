@@ -22,7 +22,7 @@
                     </Button>
                     <Button text="{i18n>continueButton}" press="onContinue" type="Accept"/>
                 </HBox>
-                <Panel headerText="Order Details" expandable="false" class="sapUiResponsiveMargin">
+                <Panel headerText="Order Details" expandable="false" class="sapUiResponsiveMargin"  width="auto">
                     <VBox>
                         <Label text="{i18n>issuingStorageLocationLabel}" labelFor="issuingStorageLocationInput"/>
                         <Input id="issuingStorageLocationInput"  width="200px"/>
