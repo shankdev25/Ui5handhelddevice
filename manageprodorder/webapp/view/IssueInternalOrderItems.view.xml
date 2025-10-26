@@ -1,0 +1,38 @@
+<mvc:View controllerName="com.merkavim.ewm.manageprodorder.controller.IssueInternalOrderItems"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m">
+    <Page id="issueInternalOrderItemsPage" title="{i18n>addedItemsTitle}" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <VBox class="sapUiMediumMargin">
+                <Table id="itemsTable" items="{items>/items}">
+                    <columns>
+                        <Column><Text text="Material Description"/></Column>
+                        <Column><Text text="Item Locator"/></Column>
+                        <Column><Text text="UoM"/></Column>
+                        <Column><Text text="Quantity in Stock"/></Column>
+                        <Column><Text text="Issuing Storage Location"/></Column>
+                        <Column><Text text="Internal Order"/></Column>
+                        <Column><Text text="Cost Center"/></Column>
+                        <Column><Text text="Material"/></Column>
+                        <Column><Text text="Issue Quantity"/></Column>
+                        <Column><Text text="Remark"/></Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <Text text="{items>materialDescription}"/>
+                            <Text text="{items>itemLocator}"/>
+                            <Text text="{items>uom}"/>
+                            <Text text="{items>quantityInStock}"/>
+                            <Text text="{items>issuingStorageLocation}"/>
+                            <Text text="{items>internalOrder}"/>
+                            <Text text="{items>costCenter}"/>
+                            <Text text="{items>material}"/>
+                            <Text text="{items>issueQuantity}"/>
+                            <Text text="{items>remark}"/>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </VBox>
+        </content>
+    </Page>
+</mvc:View>

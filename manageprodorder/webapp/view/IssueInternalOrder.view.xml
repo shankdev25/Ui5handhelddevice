@@ -1,9 +1,9 @@
 <mvc:View controllerName="com.merkavim.ewm.manageprodorder.controller.IssueInternalOrder"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page id="issueInternalOrderPage" showHeader="true">
+    <Page id="issueInternalOrderPage" title="{i18n>addedItemsTitle}" showHeader="true">
         <content>
-            <VBox class="sapUiMediumMargin" width="100%">
+            <VBox class="sapUiMediumMargin sapUiAlignCenter">
                 <HBox>
                     <Button text="{i18n>clearButton}" press="onClearFields" type="Default">
                         <layoutData>
@@ -20,27 +20,40 @@
                             <FlexItemData styleClass="sapUiTinyMarginEnd" />
                         </layoutData>
                     </Button>
-                    <Button text="{i18n>continueButton}" press="onContinue" type="Accept"/>
+                    <Button text="{i18n>showitem}" press="onContinue" type="Accept"/>
                 </HBox>
-                <Panel headerText="Order Details" expandable="false" class="sapUiResponsiveMargin"  width="auto">
-                    <VBox>
+                <Panel headerText="Order Details" expandable="false" class="sapUiResponsiveMargin sapUiMediumMargin centered-panel">
+                    <VBox class="centered-panel">
                         <Label text="{i18n>issuingStorageLocationLabel}" labelFor="issuingStorageLocationInput"/>
-                        <Input id="issuingStorageLocationInput"  width="200px"/>
+                        <Input id="issuingStorageLocationInput" width="200px" value="{view>/issuingStorageLocation}"/>
 
                         <Label text="{i18n>internalOrderLabel}" labelFor="internalOrderInput"/>
-                        <Input id="internalOrderInput"  width="200px"/>
+                        <Input id="internalOrderInput" width="200px" value="{view>/internalOrder}"/>
 
                         <Label text="{i18n>costCenterLabel}" labelFor="costCenterInput"/>
-                        <Input id="costCenterInput" width="200px"/>
+                        <Input id="costCenterInput" width="200px" value="{view>/costCenter}"/>
 
-                        <Label text="{i18n>itemLabel}" labelFor="itemInput"/>
-                        <Input id="itemInput"  width="200px"/>
+                        <Label text="{i18n>materialLabel}" labelFor="materialInput"/>
+                        <Input id="materialInput" width="200px" value="{view>/material}"/>
 
                         <Label text="{i18n>issueQuantityLabel}" labelFor="issueQuantityInput"/>
-                        <Input id="issueQuantityInput" type="Number" width="200px"/>
+                        <Input id="issueQuantityInput" type="Number" width="200px" value="{view>/issueQuantity}"/>
 
-                        <Label text="{i18n>noteLabel}" labelFor="noteInput"/>
-                        <TextArea id="noteInput" rows="3" width="200px"/>
+                        <Label text="{i18n>remarkLabel}" labelFor="remarkInput"/>
+                        <TextArea id="remarkInput"  width="200px" value="{view>/remark}"/>
+
+                        <!-- New disabled fields from attachment -->
+                        <Label text="{i18n>materialDescriptionLabel}" labelFor="materialDescriptionInput"/>
+                        <Input id="materialDescriptionInput" width="200px" value="{view>/materialDescription}" enabled="false"/>
+
+                        <Label text="{i18n>itemLocatorLabel}" labelFor="itemLocatorInput"/>
+                        <Input id="itemLocatorInput" width="200px" value="{view>/itemLocator}" enabled="false"/>
+
+                        <Label text="{i18n>uomLabel}" labelFor="uomInput"/>
+                        <Input id="uomInput" width="200px" value="{view>/uom}" enabled="false"/>
+
+                        <Label text="{i18n>quantityInStockLabel}" labelFor="quantityInStockInput"/>
+                        <Input id="quantityInStockInput" width="200px" value="{view>/quantityInStock}" enabled="false"/>
                     </VBox>
                 </Panel>
                 

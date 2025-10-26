@@ -42,6 +42,21 @@ sap.ui.define([
             });
             this.setModel(oSelectionModel, "selection");
 
+            // Add form and items models for IssueInternalOrder
+            var oFormModel = new sap.ui.model.json.JSONModel({
+                issuingStorageLocation: "",
+                internalOrder: "",
+                costCenter: "",
+                material: "",
+                issueQuantity: "",
+                remark: ""
+            });
+            oFormModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+            this.setModel(oFormModel, "form");
+
+            var oItemsModel = new sap.ui.model.json.JSONModel({ items: [] });
+            this.setModel(oItemsModel, "items");
+
             // diagnostic log to verify component-level models are present at startup
             try {
                 console.log("[Component] initialized models:", {
@@ -50,6 +65,13 @@ sap.ui.define([
                     selection: this.getModel("selection") && this.getModel("selection").getData()
                 });
             } catch (e) { /* ignore in environments without console */ }
+
+                // Diagnostic log for form model
+                try {
+                    console.log("[Component] form model instance:", this.getModel("form"));
+                    console.log("[Component] form model binding mode:", this.getModel("form").getDefaultBindingMode());
+                    console.log("[Component] form model initial data:", this.getModel("form").getData());
+                } catch (e) { /* ignore in environments without console */ }
 
             // enable routing
             this.getRouter().initialize();

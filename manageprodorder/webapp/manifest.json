@@ -125,6 +125,12 @@
               "TargetIssueInternalOrder"
             ]
           }
+      ,
+      {
+        "name": "IssueInternalOrderItems",
+        "pattern": "IssueInternalOrderItems",
+        "target": ["TargetIssueInternalOrderItems"]
+      }
       ],
       "targets": {
         "TargetView1": {
@@ -151,6 +157,10 @@
           "TargetIssueInternalOrder": {
             "id": "IssueInternalOrder",
             "name": "IssueInternalOrder"
+          },
+          "TargetIssueInternalOrderItems": {
+            "id": "IssueInternalOrderItems",
+            "name": "IssueInternalOrderItems"
           }
       }
     },

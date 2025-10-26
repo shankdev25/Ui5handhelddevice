@@ -1,5 +1,11 @@
 /* Enter your custom styles here */
 
+.centered-panel {
+	max-width: 400px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
 .scrollableTableContainer {
 	max-height: 400px; /* Adjust as needed */
 	overflow-y: auto;
