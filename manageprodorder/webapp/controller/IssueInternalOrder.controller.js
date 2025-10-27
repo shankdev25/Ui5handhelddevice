@@ -6,7 +6,15 @@ sap.ui.define([
     "use strict";
 
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.IssueInternalOrder", {
-        // Models are now initialized in Component.js
+        /**
+         * Handler for Enter key press on input fields
+         * @param {sap.ui.base.Event} oEvent
+         */
+        onEnterPress: function(oEvent) {
+            var oInput = oEvent.getSource();
+            var sValue = oInput.getValue();
+            sap.m.MessageToast.show("Enter pressed. Value: " + sValue);
+        },
 
         onNavBack: function () {
             this.getOwnerComponent().getRouter().navTo("RouteView1");

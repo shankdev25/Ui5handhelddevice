@@ -20,26 +20,26 @@ sap.ui.define([
             var oDialog = new sap.m.Dialog({
                 title: "Edit Item",
                 content: [
-                    new sap.m.Label({ text: "Material Description" }),
-                    new sap.m.Input({ value: oData.materialDescription, liveChange: function(e){ oData.materialDescription = e.getParameter("value"); } }),
-                    new sap.m.Label({ text: "Item Locator" }),
-                    new sap.m.Input({ value: oData.itemLocator, liveChange: function(e){ oData.itemLocator = e.getParameter("value"); } }),
-                    new sap.m.Label({ text: "UoM" }),
-                    new sap.m.Input({ value: oData.uom, liveChange: function(e){ oData.uom = e.getParameter("value"); } }),
-                    new sap.m.Label({ text: "Quantity in Stock" }),
-                    new sap.m.Input({ value: oData.quantityInStock, liveChange: function(e){ oData.quantityInStock = e.getParameter("value"); } }),
-                    new sap.m.Label({ text: "Issuing Storage Location" }),
-                    new sap.m.Input({ value: oData.LGORT, liveChange: function(e){ oData.LGORT = e.getParameter("value"); } }),
-                    new sap.m.Label({ text: "Internal Order" }),
-                    new sap.m.Input({ value: oData.AUFNR, liveChange: function(e){ oData.AUFNR = e.getParameter("value"); } }),
-                    new sap.m.Label({ text: "Cost Center" }),
-                    new sap.m.Input({ value: oData.KOSTL, liveChange: function(e){ oData.KOSTL = e.getParameter("value"); } }),
-                    new sap.m.Label({ text: "Material" }),
-                    new sap.m.Input({ value: oData.material, liveChange: function(e){ oData.material = e.getParameter("value"); } }),
-                    new sap.m.Label({ text: "Issue Quantity" }),
-                    new sap.m.Input({ value: oData.issueQuantity, liveChange: function(e){ oData.issueQuantity = e.getParameter("value"); } }),
-                    new sap.m.Label({ text: "Remark" }),
-                    new sap.m.Input({ value: oData.remark, liveChange: function(e){ oData.remark = e.getParameter("value"); } })
+                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("materialDescription") }),
+                    new sap.m.Input({ value: oData.materialDescription, liveChange: function(e){ oData.materialDescription = e.getParameter("value"); }, style: "margin-bottom: 16px;", width: "60%" }),
+                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("itemLocator") }),
+                    new sap.m.Input({ value: oData.itemLocator, liveChange: function(e){ oData.itemLocator = e.getParameter("value"); }, style: "margin-bottom: 16px;", width: "60%" }),
+                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("uom") }),
+                    new sap.m.Input({ value: oData.uom, liveChange: function(e){ oData.uom = e.getParameter("value"); }, style: "margin-bottom: 16px;", width: "60%" }),
+                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("quantityInStock") }),
+                    new sap.m.Input({ value: oData.quantityInStock, liveChange: function(e){ oData.quantityInStock = e.getParameter("value"); }, style: "margin-bottom: 16px;", width: "60%" }),
+                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("issuingStorageLocation") }),
+                    new sap.m.Input({ value: oData.LGORT, liveChange: function(e){ oData.LGORT = e.getParameter("value"); }, style: "margin-bottom: 16px;", width: "60%" }),
+                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("internalOrder") }),
+                    new sap.m.Input({ value: oData.AUFNR, liveChange: function(e){ oData.AUFNR = e.getParameter("value"); }, style: "margin-bottom: 16px;", width: "60%" }),
+                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("costCenter") }),
+                    new sap.m.Input({ value: oData.KOSTL, liveChange: function(e){ oData.KOSTL = e.getParameter("value"); }, style: "margin-bottom: 16px;", width: "60%" }),
+                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("material") }),
+                    new sap.m.Input({ value: oData.material, liveChange: function(e){ oData.material = e.getParameter("value"); }, style: "margin-bottom: 16px;", width: "60%" }),
+                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("issueQuantity") }),
+                    new sap.m.Input({ value: oData.issueQuantity, liveChange: function(e){ oData.issueQuantity = e.getParameter("value"); }, style: "margin-bottom: 16px;", width: "60%" }),
+                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("remark") }),
+                    new sap.m.Input({ value: oData.remark, liveChange: function(e){ oData.remark = e.getParameter("value"); }, style: "margin-bottom: 16px;", width: "60%" })
                 ],
                 beginButton: new sap.m.Button({
                     text: "Save",
@@ -67,5 +67,9 @@ sap.ui.define([
             aItems.splice(iIndex, 1);
             oModel.setProperty("/items", aItems);
         }
+            ,
+
+            onContinue: function() {
+            }
     });
 });

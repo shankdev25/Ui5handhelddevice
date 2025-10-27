@@ -55,8 +55,8 @@
                                 <cells>
                                     <CheckBox id="rowSelectCheckBox" selected="{pickItems>selected}" select="onSelectRow"/>
                                     <Text id="rowItem" text="{pickItems>VORNR}"/>
-                                    <Text id="rowItemDesc" text="{pickItems>MATNR}"/>
-                                    <Text id="rowDate" text="{pickItems>MAKTX}"/>
+                                    <Text id="rowItemDesc" text="{pickItems>MODEL}"/>
+                                    <Text id="rowDate" text="{pickItems>MODEL_DESC}"/>
                                     <Text id="rowLocation" text="{pickItems>CY_SEQNR}"/>
                                     <Text id="rowInventory" text="{pickItems>BDTER}"/>
                                     <Text id="rowQtyInReservation" text="{pickItems>RESERVED_QTY}"/>
