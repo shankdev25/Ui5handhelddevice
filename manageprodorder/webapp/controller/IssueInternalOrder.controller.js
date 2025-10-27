@@ -14,32 +14,33 @@ sap.ui.define([
 
         onInit: function() {
             this.getView().setModel(new sap.ui.model.json.JSONModel({
-                issuingStorageLocation: "",
-                internalOrder: "",
-                costCenter: "",
-                material: "",
-                issueQuantity: "",
-                remark: "",
-                materialDescription: "",
-                itemLocator: "",
-                uom: "",
-                quantityInStock: ""
+                LGORT: "",
+                AUFNR: "",
+                KOSTL: "",
+                MATNR: "",
+                PICKING_QTY: "",
+                BKTXT: "",
+                MAKTX: "",
+                LGPBE: "",
+                MEINS: "",
+                LABST: ""
             }), "view");
         },
 
         onClearFields: function() {
             var oModel = this.getView().getModel("view");
+            var oData = oModel.getData();
             oModel.setData({
-                issuingStorageLocation: "",
-                internalOrder: "",
-                costCenter: "",
-                material: "",
-                issueQuantity: "",
-                remark: "",
-                materialDescription: "",
-                itemLocator: "",
-                uom: "",
-                quantityInStock: ""
+                LGORT: oData.LGORT,
+                AUFNR: oData.AUFNR,
+                KOSTL: oData.KOSTL,
+                MATNR: "",
+                PICKING_QTY: "",
+                BKTXT: "",
+                MAKTX: "",
+                LGPBE: "",
+                MEINS: "",
+                LABST: ""
             });
         },
 

@@ -10,11 +10,6 @@
                             <FlexItemData styleClass="sapUiTinyMarginEnd" />
                         </layoutData>
                     </Button>
-                    <Button text="{i18n>saveButton}" press="onSave" type="Default">
-                        <layoutData>
-                            <FlexItemData styleClass="sapUiTinyMarginEnd" />
-                        </layoutData>
-                    </Button>
                     <Button text="{i18n>addButton}" press="onAdd" type="Default">
                         <layoutData>
                             <FlexItemData styleClass="sapUiTinyMarginEnd" />
@@ -25,35 +20,35 @@
                 <Panel headerText="Order Details" expandable="false" class="sapUiResponsiveMargin sapUiMediumMargin centered-panel">
                     <VBox class="centered-panel">
                         <Label text="{i18n>issuingStorageLocationLabel}" labelFor="issuingStorageLocationInput"/>
-                        <Input id="issuingStorageLocationInput" width="200px" value="{view>/issuingStorageLocation}"/>
+                        <Input id="issuingStorageLocationInput" width="200px" value="{view>/LGORT}"/>
 
                         <Label text="{i18n>internalOrderLabel}" labelFor="internalOrderInput"/>
-                        <Input id="internalOrderInput" width="200px" value="{view>/internalOrder}"/>
+                        <Input id="internalOrderInput" width="200px" value="{view>/AUFNR}"/>
 
                         <Label text="{i18n>costCenterLabel}" labelFor="costCenterInput"/>
-                        <Input id="costCenterInput" width="200px" value="{view>/costCenter}"/>
+                        <Input id="costCenterInput" width="200px" value="{view>/KOSTL}"/>
 
                         <Label text="{i18n>materialLabel}" labelFor="materialInput"/>
-                        <Input id="materialInput" width="200px" value="{view>/material}"/>
+                        <Input id="materialInput" width="200px" value="{view>/MATNR}"/>
 
                         <Label text="{i18n>issueQuantityLabel}" labelFor="issueQuantityInput"/>
-                        <Input id="issueQuantityInput" type="Number" width="200px" value="{view>/issueQuantity}"/>
+                        <Input id="issueQuantityInput" type="Number" width="200px" value="{view>/PICKING_QTY}"/>
 
                         <Label text="{i18n>remarkLabel}" labelFor="remarkInput"/>
-                        <TextArea id="remarkInput"  width="200px" value="{view>/remark}"/>
+                        <TextArea id="remarkInput"  width="200px" value="{view>/BKTXT}"/>
 
                         <!-- New disabled fields from attachment -->
                         <Label text="{i18n>materialDescriptionLabel}" labelFor="materialDescriptionInput"/>
-                        <Input id="materialDescriptionInput" width="200px" value="{view>/materialDescription}" enabled="false"/>
+                        <Input id="materialDescriptionInput" width="200px" value="{view>/MAKTX}" enabled="false"/>
 
                         <Label text="{i18n>itemLocatorLabel}" labelFor="itemLocatorInput"/>
-                        <Input id="itemLocatorInput" width="200px" value="{view>/itemLocator}" enabled="false"/>
+                        <Input id="itemLocatorInput" width="200px" value="{view>/LGPBE}" enabled="false"/>
 
                         <Label text="{i18n>uomLabel}" labelFor="uomInput"/>
-                        <Input id="uomInput" width="200px" value="{view>/uom}" enabled="false"/>
+                        <Input id="uomInput" width="200px" value="{view>/MEINS}" enabled="false"/>
 
                         <Label text="{i18n>quantityInStockLabel}" labelFor="quantityInStockInput"/>
-                        <Input id="quantityInStockInput" width="200px" value="{view>/quantityInStock}" enabled="false"/>
+                        <Input id="quantityInStockInput" width="200px" value="{view>/LABST}" enabled="false"/>
                     </VBox>
                 </Panel>
                 
