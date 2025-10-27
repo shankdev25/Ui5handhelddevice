@@ -38,7 +38,7 @@ sap.ui.define([
                     "LABST": 0,
                     "MAKTX": "",
                     "BKTXT": "",
-                    "SPRAS": "H",
+                    "SPRAS": sap.ui.getCore().getConfiguration().getLanguage() || "E",
                     "PICKING_QTY": 0
                 }
             };
