@@ -8,11 +8,11 @@ sap.ui.define([
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.IssueInternalOrder", {
         // Models are now initialized in Component.js
 
-        onNavBack: function() {
+        onNavBack: function () {
             this.getOwnerComponent().getRouter().navTo("RouteView1");
         },
 
-        onInit: function() {
+        onInit: function () {
             this.getView().setModel(new sap.ui.model.json.JSONModel({
                 LGORT: "",
                 AUFNR: "",
@@ -25,9 +25,43 @@ sap.ui.define([
                 MEINS: "",
                 LABST: ""
             }), "view");
+
+            var oPayload = {
+                "DATA": {
+                    "WERKS": "",
+                    "LGORT": "",
+                    "AUFNR": "",
+                    "KOSTL": "",
+                    "MATNR": "",
+                    "MEINS": "",
+                    "LGPBE": "",
+                    "LABST": 0,
+                    "MAKTX": "",
+                    "BKTXT": "",
+                    "SPRAS": "H",
+                    "PICKING_QTY": 0
+                }
+            };
+
+            var that = this;
+            var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
+            var url = "ISSUE_ORD_INIT";
+            $.ajax({
+                url: baseUrl + url,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(oPayload),
+                success: function (oData) {
+                    var oIssueOrdInitModel = new sap.ui.model.json.JSONModel(oData);
+                    that.getView().setModel(oIssueOrdInitModel, "issueOrdInitModel");
+                },
+                error: function (xhr, status, error) {
+                    sap.m.MessageToast.show("Failed to fetch F4 help data");
+                }
+            });
         },
 
-        onClearFields: function() {
+        onClearFields: function () {
             var oModel = this.getView().getModel("view");
             var oData = oModel.getData();
             oModel.setData({
@@ -44,7 +78,7 @@ sap.ui.define([
             });
         },
 
-        onAdd: function() {
+        onAdd: function () {
             var oViewModel = this.getView().getModel("view");
             var oItemsModel = this.getView().getModel("items");
             var oData = Object.assign({}, oViewModel.getData());
@@ -57,88 +91,88 @@ sap.ui.define([
             this.onClearFields();
         },
 
-        onContinue: function() {
+        onContinue: function () {
             this.getOwnerComponent().getRouter().navTo("IssueInternalOrderItems");
         },
-        
-            onInternalOrderValueHelp: function(oEvent) {
-                var aInternalOrders = [
-                    { key: "100001", text: "Internal Order 100001" },
-                    { key: "100002", text: "Internal Order 100002" },
-                    { key: "100003", text: "Internal Order 100003" }
-                ];
-                var oInput = oEvent.getSource();
-                var oDialog = new sap.m.SelectDialog({
-                    title: "Select Internal Order",
-                    items: aInternalOrders.map(function(item) {
-                        return new sap.m.StandardListItem({
-                            title: item.text,
-                            description: item.key
-                        });
-                    }),
-                    confirm: function(oConfirmEvent) {
-                        var oSelected = oConfirmEvent.getParameter("selectedItem");
-                        if (oSelected) {
-                            oInput.setValue(oSelected.getDescription());
-                            var oModel = oInput.getBindingContext("view").getModel();
-                            oModel.setProperty("/AUFNR", oSelected.getDescription());
-                        }
-                    },
-                    search: function(oSearchEvent) {
-                        var sValue = oSearchEvent.getParameter("value");
-                        var aFiltered = aInternalOrders.filter(function(item) {
-                            return item.text.toLowerCase().includes(sValue.toLowerCase()) || item.key.includes(sValue);
-                        });
-                        oDialog.removeAllItems();
-                        aFiltered.forEach(function(item) {
-                            oDialog.addItem(new sap.m.StandardListItem({
-                                title: item.text,
-                                description: item.key
-                            }));
-                        });
-                    }
-                });
-                oDialog.open();
-            },
 
-            onCostCenterValueHelp: function(oEvent) {
-                var aCostCenters = [
-                    { key: "C100", text: "Cost Center C100" },
-                    { key: "C200", text: "Cost Center C200" },
-                    { key: "C300", text: "Cost Center C300" }
-                ];
-                var oInput = oEvent.getSource();
-                var oDialog = new sap.m.SelectDialog({
-                    title: "Select Cost Center",
-                    items: aCostCenters.map(function(item) {
-                        return new sap.m.StandardListItem({
+        onInternalOrderValueHelp: function (oEvent) {
+            var aInternalOrders = [
+                { key: "100001", text: "Internal Order 100001" },
+                { key: "100002", text: "Internal Order 100002" },
+                { key: "100003", text: "Internal Order 100003" }
+            ];
+            var oInput = oEvent.getSource();
+            var oDialog = new sap.m.SelectDialog({
+                title: "Select Internal Order",
+                items: aInternalOrders.map(function (item) {
+                    return new sap.m.StandardListItem({
+                        title: item.text,
+                        description: item.key
+                    });
+                }),
+                confirm: function (oConfirmEvent) {
+                    var oSelected = oConfirmEvent.getParameter("selectedItem");
+                    if (oSelected) {
+                        oInput.setValue(oSelected.getDescription());
+                        var oModel = oInput.getBindingContext("view").getModel();
+                        oModel.setProperty("/AUFNR", oSelected.getDescription());
+                    }
+                },
+                search: function (oSearchEvent) {
+                    var sValue = oSearchEvent.getParameter("value");
+                    var aFiltered = aInternalOrders.filter(function (item) {
+                        return item.text.toLowerCase().includes(sValue.toLowerCase()) || item.key.includes(sValue);
+                    });
+                    oDialog.removeAllItems();
+                    aFiltered.forEach(function (item) {
+                        oDialog.addItem(new sap.m.StandardListItem({
                             title: item.text,
                             description: item.key
-                        });
-                    }),
-                    confirm: function(oConfirmEvent) {
-                        var oSelected = oConfirmEvent.getParameter("selectedItem");
-                        if (oSelected) {
-                            oInput.setValue(oSelected.getDescription());
-                            var oModel = oInput.getBindingContext("view").getModel();
-                            oModel.setProperty("/KOSTL", oSelected.getDescription());
-                        }
-                    },
-                    search: function(oSearchEvent) {
-                        var sValue = oSearchEvent.getParameter("value");
-                        var aFiltered = aCostCenters.filter(function(item) {
-                            return item.text.toLowerCase().includes(sValue.toLowerCase()) || item.key.includes(sValue);
-                        });
-                        oDialog.removeAllItems();
-                        aFiltered.forEach(function(item) {
-                            oDialog.addItem(new sap.m.StandardListItem({
-                                title: item.text,
-                                description: item.key
-                            }));
-                        });
+                        }));
+                    });
+                }
+            });
+            oDialog.open();
+        },
+
+        onCostCenterValueHelp: function (oEvent) {
+            var aCostCenters = [
+                { key: "C100", text: "Cost Center C100" },
+                { key: "C200", text: "Cost Center C200" },
+                { key: "C300", text: "Cost Center C300" }
+            ];
+            var oInput = oEvent.getSource();
+            var oDialog = new sap.m.SelectDialog({
+                title: "Select Cost Center",
+                items: aCostCenters.map(function (item) {
+                    return new sap.m.StandardListItem({
+                        title: item.text,
+                        description: item.key
+                    });
+                }),
+                confirm: function (oConfirmEvent) {
+                    var oSelected = oConfirmEvent.getParameter("selectedItem");
+                    if (oSelected) {
+                        oInput.setValue(oSelected.getDescription());
+                        var oModel = oInput.getBindingContext("view").getModel();
+                        oModel.setProperty("/KOSTL", oSelected.getDescription());
                     }
-                });
-                oDialog.open();
-            }
+                },
+                search: function (oSearchEvent) {
+                    var sValue = oSearchEvent.getParameter("value");
+                    var aFiltered = aCostCenters.filter(function (item) {
+                        return item.text.toLowerCase().includes(sValue.toLowerCase()) || item.key.includes(sValue);
+                    });
+                    oDialog.removeAllItems();
+                    aFiltered.forEach(function (item) {
+                        oDialog.addItem(new sap.m.StandardListItem({
+                            title: item.text,
+                            description: item.key
+                        }));
+                    });
+                }
+            });
+            oDialog.open();
+        }
     });
 });
