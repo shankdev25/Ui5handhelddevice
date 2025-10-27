@@ -14,7 +14,6 @@
                         <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>stock}"/></Column>
                         <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>materialDescription}"/></Column>
                         <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>documentText}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>language}"/></Column>
                         <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>pickingQty}"/></Column>
                         <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>storageLocation}"/></Column>
                         <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>internalOrder}"/></Column>
@@ -30,7 +29,6 @@
                             <Text text="{items>LABST}"/>
                             <Text text="{items>MAKTX}"/>
                             <Text text="{items>BKTXT}"/>
-                            <Text text="{items>SPRAS}"/>
                             <Text text="{items>PICKING_QTY}"/>
                             <Text text="{items>LGORT}"/>
                             <Text text="{items>AUFNR}"/>
