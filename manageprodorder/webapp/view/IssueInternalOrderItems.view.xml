@@ -6,30 +6,42 @@
             <VBox class="sapUiMediumMargin" style="max-width:1200px; margin:auto;">
                     <Table id="itemsTable" items="{items>/items}" width="100%" fixedLayout="true">
                     <columns>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Material Description"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Item Locator"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="UoM"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Quantity in Stock"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Issuing Storage Location"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Internal Order"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Cost Center"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Material"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Issue Quantity"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Remark"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="WERKS"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="MATNR"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="MEINS"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="LGPBE"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="LABST"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="MAKTX"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="BKTXT"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="SPRAS"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="PICKING_QTY"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="materialDescription"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="itemLocator"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="uom"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="quantityInStock"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="LGORT"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="AUFNR"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="KOSTL"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="issuingStorageLocation"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="material"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="issueQuantity"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="remark"/></Column>
                         <Column minScreenWidth="Phone" demandPopin="false"><Text text="Actions"/></Column>
                     </columns>
                     <items>
                         <ColumnListItem>
-                            <Text text="{items>materialDescription}"/>
-                            <Text text="{items>itemLocator}"/>
-                            <Text text="{items>uom}"/>
-                            <Text text="{items>quantityInStock}"/>
-                            <Text text="{items>issuingStorageLocation}"/>
-                            <Text text="{items>internalOrder}"/>
-                            <Text text="{items>costCenter}"/>
-                            <Text text="{items>material}"/>
-                            <Text text="{items>issueQuantity}"/>
-                            <Text text="{items>remark}"/>
+                            <Text text="{items>WERKS}"/>
+                            <Text text="{items>MATNR}"/>
+                            <Text text="{items>MEINS}"/>
+                            <Text text="{items>LGPBE}"/>
+                            <Text text="{items>LABST}"/>
+                            <Text text="{items>MAKTX}"/>
+                            <Text text="{items>BKTXT}"/>
+                            <Text text="{items>SPRAS}"/>
+                            <Text text="{items>PICKING_QTY}"/>
+                            <Text text="{items>LGORT}"/>
+                            <Text text="{items>AUFNR}"/>
+                            <Text text="{items>KOSTL}"/>
                             <HBox>
                                 <Button icon="sap-icon://edit" type="Transparent" press="onEditItem" tooltip="Edit"/>
                                 <Button icon="sap-icon://delete" type="Transparent" press="onDeleteItem" tooltip="Delete"/>
