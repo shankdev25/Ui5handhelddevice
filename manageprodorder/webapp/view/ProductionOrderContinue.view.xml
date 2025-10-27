@@ -43,8 +43,8 @@
                                 </header>
                             </Column>
                             <Column id="colItem"><header><Text id="txtColItem" text="{i18n>action}"/></header></Column>
-                            <Column id="colItemDesc"><header><Text id="txtColItemDesc" text="{i18n>material}"/></header></Column>
-                            <Column id="colDate"><header><Text id="txtColDate" text="{i18n>materialDescription}"/></header></Column>
+                            <Column id="colItemDesc"><header><Text id="txtColItemDesc" text="{i18n>model}"/></header></Column>
+                            <Column id="colDate"><header><Text id="txtColDate" text="{i18n>modelDesc}"/></header></Column>
                             <Column id="colLocation"><header><Text id="txtColLocation" text="{i18n>shortbusnum}"/></header></Column>
                             <Column id="colInventory"><header><Text id="txtColInventory" text="{i18n>date}"/></header></Column>
                             <Column id="colQtyInReservation"><header><Text id="txtColQtyInReservation" text="{i18n>qtyInReservation}"/></header></Column>
