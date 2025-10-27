@@ -23,10 +23,10 @@
                         <Input id="issuingStorageLocationInput" width="200px" value="{view>/LGORT}"/>
 
                         <Label text="{i18n>internalOrderLabel}" labelFor="internalOrderInput"/>
-                        <Input id="internalOrderInput" width="200px" value="{view>/AUFNR}"/>
+                        <Input id="internalOrderInput" width="200px" value="{view>/AUFNR}" showValueHelp="true" valueHelpRequest="onInternalOrderValueHelp"/>
 
                         <Label text="{i18n>costCenterLabel}" labelFor="costCenterInput"/>
-                        <Input id="costCenterInput" width="200px" value="{view>/KOSTL}"/>
+                        <Input id="costCenterInput" width="200px" value="{view>/KOSTL}" showValueHelp="true" valueHelpRequest="onCostCenterValueHelp"/>
 
                         <Label text="{i18n>materialLabel}" labelFor="materialInput"/>
                         <Input id="materialInput" width="200px" value="{view>/MATNR}"/>
