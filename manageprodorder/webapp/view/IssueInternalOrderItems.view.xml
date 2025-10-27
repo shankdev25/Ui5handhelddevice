@@ -4,7 +4,8 @@
     <Page id="issueInternalOrderItemsPage" title="{i18n>addedItemsTitle}" showNavButton="true" navButtonPress="onNavBack">
         <content>
             <VBox class="sapUiMediumMargin" style="max-width:1200px; margin:auto;">
-                <Button id="continueButton" text="{i18n>continue}" type="Accept" press="onContinue" style="margin-bottom:16px;"/>
+                <Button id="continueButton" text="{i18n>continue}" type="Accept" press="onContinue"/>
+                <VBox height="16px" />
                 <Table id="itemsTable" items="{items>/items}" width="100%" fixedLayout="true">
                     <columns>
                         <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>plant}"/></Column>
