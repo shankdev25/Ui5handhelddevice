@@ -103,7 +103,11 @@ sap.ui.define([
                 contentType: "application/json",
                 data: JSON.stringify(oPayload),
                 success: function (oData) {
-                    MessageBox.success("Order saved successfully.");
+                    if (oData && oData.MSG && oData.MSG.MSGTY === "E") {
+                        MessageBox.error(oData.MSG.MSGTX );
+                    } else {
+                        MessageBox.success("Order saved successfully.");
+                    }
                 },
                 error: function (xhr, status, error) {
                     MessageBox.error("Failed to save issue order");
