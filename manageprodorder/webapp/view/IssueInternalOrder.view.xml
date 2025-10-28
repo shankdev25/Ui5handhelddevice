@@ -5,17 +5,17 @@
         <content>
             <VBox class="sapUiMediumMargin sapUiAlignCenter">
                 <HBox>
-                    <Button text="{i18n>clearButton}" press="onClearFields" type="Default">
+                    <Button text="{i18n>clearButton}" press="onClearFields" type="Unstyled" class="doubleHeightButton lightBlueButton" >
                         <layoutData>
                             <FlexItemData styleClass="sapUiTinyMarginEnd" />
                         </layoutData>
                     </Button>
-                    <Button text="{i18n>addButton}" press="onAdd" type="Default">
+                    <Button text="{i18n>addButton}" press="onAdd" type="Unstyled" class="doubleHeightButton lightBlueButton" >
                         <layoutData>
                             <FlexItemData styleClass="sapUiTinyMarginEnd" />
                         </layoutData>
                     </Button>
-                    <Button text="{i18n>showitem}" press="onContinue" type="Accept"/>
+                    <Button text="{i18n>showitem}" press="onContinue"  type="Unstyled" class="doubleHeightButton greenButton" />
                 </HBox>
                 <Panel headerText="Order Details" expandable="false" class="sapUiResponsiveMargin sapUiMediumMargin centered-panel">
                     <VBox class="centered-panel">

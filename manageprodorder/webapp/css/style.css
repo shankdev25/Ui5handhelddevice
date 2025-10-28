@@ -11,3 +11,60 @@
 	overflow-y: auto;
 }
 
+.doubleHeightButton {
+	height: 2.5rem; /* 4rem - 1/3rd = ~2.67rem */
+	min-height: 2.5rem;
+	font-size: 1.1rem;
+	border-radius: 0.7rem;
+}
+
+.greenButton {
+    background-color: #4CAF50;
+    color: black !important;
+    border: none;
+    border-radius: 0.7rem;
+    font-weight: bold;
+}
+
+.lightBlueButton {
+	background-color: #5bc0ff;
+	color: black;
+	border: none;
+	border-radius: 0.7rem;
+	font-weight: bold;
+}
+
+.lightBlueButton:hover, .lightBlueButton:active {
+	background-color: #3399cc;
+	box-shadow: 0 0 8px #3399cc;
+	outline: none;
+}
+
+.greenButton:hover, .greenButton:active {
+	background-color: #388E3C;
+	box-shadow: 0 0 8px #388E3C;
+	outline: none;
+}
+
+.doubleHeightButton:active {
+	box-shadow: 0 0 8px #888;
+	outline: none;
+}
+
+
+.greenButton {
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	border-radius: 0.7rem;
+	font-weight: bold;
+}
+
+
+
+
+
+
+
+
+
