@@ -111,6 +111,10 @@ sap.ui.define([
                     that.getView().setModel(oIssueOrdInitModel, "issueOrdInitModel");
                     let oModel = that.getView().getModel("view");
                     oModel.setData(oData.DATA || response);
+                        // Save WERKS globally on the component for later use
+                        if (oData.DATA && oData.DATA.WERKS) {
+                            that.getOwnerComponent().setModel(new sap.ui.model.json.JSONModel({ WERKS: oData.DATA.WERKS }), "globalWerks");
+                        }
 
                 },
                 error: function (xhr, status, error) {

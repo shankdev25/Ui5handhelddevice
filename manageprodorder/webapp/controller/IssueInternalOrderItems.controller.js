@@ -80,9 +80,14 @@ sap.ui.define([
         onContinue: function () {
             var oViewModel = this.getOwnerComponent().getModel("view");
             var oItemsModel = this.getView().getModel("items");
-
+            var oGlobalWerksModel = this.getOwnerComponent().getModel("globalWerks");
+            var oData = oViewModel ? oViewModel.getData() : {};
+            // Use WERKS from global model if available
+            if (oGlobalWerksModel && oGlobalWerksModel.getProperty("/WERKS")) {
+                oData.WERKS = oGlobalWerksModel.getProperty("/WERKS");
+            }
             var oPayload = {
-                DATA: oViewModel ? oViewModel.getData() : {},
+                DATA: oData,
                 ITEM: oItemsModel ? oItemsModel.getProperty("/items") : [],
                 DOC: {
                     MBLNR: "",
