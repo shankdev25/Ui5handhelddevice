@@ -18,18 +18,27 @@ sap.ui.define([
 
             // Build payload
             var oPayload = {
-                DATA: oData
+                DATA: oData,
+                MSG: {
+                    MSGTX: "",
+                    MSGTY: ""
+                }
             };
 
             var that = this;
             var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
-            var url = "ISSUE_ORD_INIT";
+            var url = "ISSUE_ORD_1_CHECK";
             $.ajax({
                 url: baseUrl + url,
                 type: "POST",
                 contentType: "application/json",
                 data: JSON.stringify(oPayload),
                 success: function (response) {
+                    // Check for error indicator 'E' in SAP message structure
+                    if (response && response.MSG && response.MSG.MSGTY === "E") {
+                        MessageBox.error(response.MSG.MSGTX || "Error occurred");
+                        return;
+                    }
                     // Bind response to the view model
                     oModel.setData(response.DATA || response);
                     sap.m.MessageToast.show("Data updated from server.");
