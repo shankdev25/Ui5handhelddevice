@@ -34,13 +34,16 @@ sap.ui.define([
                 contentType: "application/json",
                 data: JSON.stringify(oPayload),
                 success: function (response) {
-                    // Check for error indicator 'E' in SAP message structure
+                   
+                    // Bind response to the view model
+                    oModel.setData(response.DATA || response);
+
+                     // Check for error indicator 'E' in SAP message structure
                     if (response && response.MSG && response.MSG.MSGTY === "E") {
                         MessageBox.error(response.MSG.MSGTX || "Error occurred");
                         return;
                     }
-                    // Bind response to the view model
-                    oModel.setData(response.DATA || response);
+                    
                     sap.m.MessageToast.show("Data updated from server.");
                 },
                 error: function (xhr, status, error) {
