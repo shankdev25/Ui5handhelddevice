@@ -78,7 +78,7 @@ sap.ui.define([
         ,
 
         onContinue: function () {
-            var oViewModel = this.getView().getModel("view");
+            var oViewModel = this.getOwnerComponent().getModel("view");
             var oItemsModel = this.getView().getModel("items");
 
             var oPayload = {
