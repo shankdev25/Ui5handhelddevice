@@ -11,9 +11,33 @@ sap.ui.define([
          * @param {sap.ui.base.Event} oEvent
          */
         onEnterPress: function(oEvent) {
-            var oInput = oEvent.getSource();
-            var sValue = oInput.getValue();
-            sap.m.MessageToast.show("Enter pressed. Value: " + sValue);
+            console.log("Enter key pressed on screen");
+            var oView = this.getView();
+            var oModel = oView.getModel("view");
+            var oData = oModel.getData();
+
+            // Build payload
+            var oPayload = {
+                DATA: oData
+            };
+
+            var that = this;
+            var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
+            var url = "ISSUE_ORD_INIT";
+            $.ajax({
+                url: baseUrl + url,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(oPayload),
+                success: function (response) {
+                    // Bind response to the view model
+                    oModel.setData(response.DATA || response);
+                    sap.m.MessageToast.show("Data updated from server.");
+                },
+                error: function (xhr, status, error) {
+                    sap.m.MessageToast.show("Failed to fetch data on Enter.");
+                }
+            });
         },
 
         onNavBack: function () {
@@ -34,6 +58,18 @@ sap.ui.define([
                 LABST: ""
             }), "view");
 
+            // Add global keydown listener for Enter
+            var that = this;
+            document.addEventListener("keydown", function(e) {
+                if (e.key === "Enter") {
+                    // Create a dummy event object to pass to onEnterPress
+                    that.onEnterPress({
+                        getSource: function() { return null; },
+                        getParameter: function() { return null; }
+                    });
+                }
+            });
+
             var oPayload = {
                 "DATA": {
                     "WERKS": "",
@@ -51,7 +87,6 @@ sap.ui.define([
                 }
             };
 
-            var that = this;
             var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
             var url = "ISSUE_ORD_INIT";
             $.ajax({
