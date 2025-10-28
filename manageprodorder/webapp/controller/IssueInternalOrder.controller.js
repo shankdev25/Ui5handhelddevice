@@ -90,13 +90,38 @@ sap.ui.define([
             var oViewModel = this.getView().getModel("view");
             var oItemsModel = this.getView().getModel("items");
             var oData = Object.assign({}, oViewModel.getData());
-            var aItems = oItemsModel.getProperty("/items");
-            aItems.push(oData);
-            oItemsModel.setProperty("/items", aItems);
-            // Show success message
-            MessageBox.success(this.getView().getModel("i18n").getResourceBundle().getText("itemAddedSuccess"));
-            // Clear form after add
-            this.onClearFields();
+            var that = this;
+            var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
+            var url = "ISSUE_ORD_1_CHECK";
+            var oPayload = {
+                DATA: oData,
+                MSG: {
+                    MSGTX: "",
+                    MSGTY: ""
+                }
+            };
+            $.ajax({
+                url: baseUrl + url,
+                type: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(oPayload),
+                success: function (response) {
+                    // Check for error indicator 'E' in SAP message structure
+                    if (response && response.MSG && response.MSG.MSGTY === "E") {
+                        MessageBox.error(response.MSG.MSGTX || "Error occurred");
+                        return;
+                    }
+                    // No error, proceed to add
+                    var aItems = oItemsModel.getProperty("/items");
+                    aItems.push(oData);
+                    oItemsModel.setProperty("/items", aItems);
+                    MessageBox.success(that.getView().getModel("i18n").getResourceBundle().getText("itemAddedSuccess"));
+                    that.onClearFields();
+                },
+                error: function (xhr, status, error) {
+                    MessageBox.error("Failed to check item before adding");
+                }
+            });
         },
 
         onContinue: function () {
