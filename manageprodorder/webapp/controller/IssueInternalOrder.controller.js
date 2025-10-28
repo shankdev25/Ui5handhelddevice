@@ -43,7 +43,7 @@ sap.ui.define([
                         MessageBox.error(response.MSG.MSGTX || "Error occurred");
                         return;
                     }
-                    
+
                     sap.m.MessageToast.show("Data updated from server.");
                 },
                 error: function (xhr, status, error) {
@@ -109,6 +109,9 @@ sap.ui.define([
                 success: function (oData) {
                     var oIssueOrdInitModel = new sap.ui.model.json.JSONModel(oData);
                     that.getView().setModel(oIssueOrdInitModel, "issueOrdInitModel");
+                    let oModel = oView.getModel("view");
+                    oModel.setData(oData.DATA || response);
+
                 },
                 error: function (xhr, status, error) {
                     sap.m.MessageToast.show("Failed to fetch F4 help data");
