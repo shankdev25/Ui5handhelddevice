@@ -109,7 +109,7 @@ sap.ui.define([
                 success: function (oData) {
                     var oIssueOrdInitModel = new sap.ui.model.json.JSONModel(oData);
                     that.getView().setModel(oIssueOrdInitModel, "issueOrdInitModel");
-                    let oModel = oView.getModel("view");
+                    let oModel = that.getView().getModel("view");
                     oModel.setData(oData.DATA || response);
 
                 },
