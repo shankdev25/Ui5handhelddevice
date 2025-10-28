@@ -28,23 +28,23 @@
                         <Label text="{i18n>costCenterLabel}" labelFor="costCenterInput"/>
                         <Input id="costCenterInput" width="200px" value="{view>/KOSTL}" showValueHelp="true" valueHelpRequest="onCostCenterValueHelp"/>
 
-                        <Label text="{i18n>materialLabel}" labelFor="materialInput"/>
+                        <Label text="{i18n>materialNumberLabel}" labelFor="materialInput"/>
                         <Input id="materialInput" width="200px" value="{view>/MATNR}"/>
 
                         <Label text="{i18n>issueQuantityLabel}" labelFor="issueQuantityInput"/>
                         <Input id="issueQuantityInput" type="Number" width="200px" value="{view>/PICKING_QTY}"/>
 
-                        <Label text="{i18n>remarkLabel}" labelFor="remarkInput"/>
+                        <Label text="{i18n>remark}" labelFor="remarkInput"/>
                         <TextArea id="remarkInput"  width="200px" value="{view>/BKTXT}"/>
 
                         <!-- New disabled fields from attachment -->
-                        <Label text="{i18n>materialDescriptionLabel}" labelFor="materialDescriptionInput"/>
+                        <Label text="{i18n>materialDescription}" labelFor="materialDescriptionInput"/>
                         <Input id="materialDescriptionInput" width="200px" value="{view>/MAKTX}" enabled="false"/>
 
                         <Label text="{i18n>itemLocatorLabel}" labelFor="itemLocatorInput"/>
                         <Input id="itemLocatorInput" width="200px" value="{view>/LGPBE}" enabled="false"/>
 
-                        <Label text="{i18n>uomLabel}" labelFor="uomInput"/>
+                        <Label text="{i18n>baseUoM}" labelFor="uomInput"/>
                         <Input id="uomInput" width="200px" value="{view>/MEINS}" enabled="false"/>
 
                         <Label text="{i18n>quantityInStockLabel}" labelFor="quantityInStockInput"/>
