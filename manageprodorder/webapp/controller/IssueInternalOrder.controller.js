@@ -57,18 +57,18 @@ sap.ui.define([
         },
 
         onInit: function () {
-            this.getView().setModel(new sap.ui.model.json.JSONModel({
-                LGORT: "",
-                AUFNR: "",
-                KOSTL: "",
-                MATNR: "",
-                PICKING_QTY: "",
-                BKTXT: "",
-                MAKTX: "",
-                LGPBE: "",
-                MEINS: "",
-                LABST: ""
-            }), "view");
+            // this.getView().setModel(new sap.ui.model.json.JSONModel({
+            //     LGORT: "",
+            //     AUFNR: "",
+            //     KOSTL: "",
+            //     MATNR: "",
+            //     PICKING_QTY: "",
+            //     BKTXT: "",
+            //     MAKTX: "",
+            //     LGPBE: "",
+            //     MEINS: "",
+            //     LABST: ""
+            // }), "view");
 
             // Add global keydown listener for Enter
             var that = this;
