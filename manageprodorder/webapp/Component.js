@@ -56,6 +56,11 @@ sap.ui.define([
 
             var oItemsModel = new sap.ui.model.json.JSONModel({ items: [] });
             this.setModel(oItemsModel, "items");
+            
+                // Add a global view model
+                var oViewModel = new sap.ui.model.json.JSONModel({});
+                oViewModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+                this.setModel(oViewModel, "view");
 
             // diagnostic log to verify component-level models are present at startup
             try {
