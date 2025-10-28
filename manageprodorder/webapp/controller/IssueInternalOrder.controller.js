@@ -139,7 +139,11 @@ sap.ui.define([
         onAdd: function () {
             var oViewModel = this.getView().getModel("view");
             var oItemsModel = this.getView().getModel("items");
-            var oData = Object.assign({}, oViewModel.getData());
+                var oData = Object.assign({}, oViewModel.getData());
+                // Ensure WERKS is present in the item being added
+                if (!oData.WERKS) {
+                    oData.WERKS = oViewModel.getProperty("/WERKS") || this.getOwnerComponent().getModel("view").getProperty("/WERKS") || "";
+                }
             var that = this;
             var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
             var url = "ISSUE_ORD_1_CHECK";
@@ -163,7 +167,7 @@ sap.ui.define([
                     }
                     // No error, proceed to add
                     var aItems = oItemsModel.getProperty("/items");
-                    aItems.push(oData);
+                        aItems.push(oData);
                     oItemsModel.setProperty("/items", aItems);
                     MessageBox.success(that.getView().getModel("i18n").getResourceBundle().getText("itemAddedSuccess"));
                     that.onClearFields();
