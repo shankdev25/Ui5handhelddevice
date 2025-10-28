@@ -8,32 +8,24 @@
                 <VBox height="16px" />
                 <Table id="itemsTable" items="{items>/items}" width="100%" fixedLayout="true">
                     <columns>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>plant}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>materialNumber}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>baseUoM}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>storageBin}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>stock}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>materialDescription}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>documentText}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>pickingQty}"/></Column>
+                         <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>internalOrder}"/></Column>
                         <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>storageLocation}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>internalOrder}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>costCenter}"/></Column>
+                         <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>materialNumber}"/></Column>
+                          <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>materialDescription}"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>baseUoM}"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>stock}"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>pickingQty}"/></Column>
                         <Column minScreenWidth="Phone" demandPopin="false"><Text text="Actions"/></Column>
                     </columns>
                     <items>
                         <ColumnListItem>
-                            <Text text="{items>WERKS}"/>
-                            <Text text="{items>MATNR}"/>
-                            <Text text="{items>MEINS}"/>
-                            <Text text="{items>LGPBE}"/>
-                            <Text text="{items>LABST}"/>
-                            <Text text="{items>MAKTX}"/>
-                            <Text text="{items>BKTXT}"/>
-                            <Text text="{items>PICKING_QTY}"/>
+                            <Text text="{= ${items>AUFNR} ? ${items>AUFNR} : ${items>KOSTL} }"/>
                             <Text text="{items>LGORT}"/>
-                            <Text text="{items>AUFNR}"/>
-                            <Text text="{items>KOSTL}"/>
+                             <Text text="{items>MATNR}"/>
+                            <Text text="{items>MAKTX}"/> 
+                            <Text text="{items>MEINS}"/>
+                            <Text text="{items>LABST}"/>
+                            <Text text="{items>PICKING_QTY}"/>
                             <HBox>
                                 <Button icon="sap-icon://edit" type="Transparent" press="onEditItem" tooltip="Edit"/>
                                 <Button icon="sap-icon://delete" type="Transparent" press="onDeleteItem" tooltip="Delete"/>
