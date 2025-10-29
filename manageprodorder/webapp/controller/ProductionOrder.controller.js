@@ -39,6 +39,7 @@ sap.ui.define([
                             OperationFrom: oResponse.DATA.VORNR_F || "",
                             OperationTo: oResponse.DATA.VORNR_T || "",
                             ReservationStorageLocation: oResponse.DATA.LGORT_F || "",
+                            ReservationStorageLocationTo : oResponse.DATA.LGORT_FT || "",
                             LogisticsGroup: oResponse.DATA.LOGGR || "",
                             Remark: oResponse.DATA.BKTXT || "",
                             IssuesingStorageLocation: oResponse.DATA.LGORT_T || ""
@@ -74,6 +75,7 @@ sap.ui.define([
                     VORNR_F: oSelectionData.OperationFrom || "",
                     VORNR_T: oSelectionData.OperationTo || "",
                     LGORT_F: oSelectionData.ReservationStorageLocation || "",
+                    LGORT_FT: oSelectionData.ReservationStorageLocationTo || "",
                     LGORT_T: oSelectionData.IssuesingStorageLocation || "",
                     LOGGR: oSelectionData.LogisticsGroup || "",
                     BKTXT: oSelectionData.Remark || "",
