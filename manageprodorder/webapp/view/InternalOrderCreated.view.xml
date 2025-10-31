@@ -9,6 +9,7 @@
             <VBox alignItems="Center" justifyContent="Center">
                 <HBox alignItems="Center" justifyContent="Center">
                     <Text text="{i18n>documentCreatedTitle}" design="Bold"/>
+                </HBox>
                 <HBox alignItems="Center" justifyContent="Center">
                     <Text id="docInfo" text="{i18n>documentNumber}: {internalOrderCreated>/docNumber} {i18n>documentYear}: {internalOrderCreated>/docYear}"/>
                 </HBox>
