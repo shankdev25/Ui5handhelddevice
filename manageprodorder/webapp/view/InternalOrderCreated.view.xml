@@ -11,7 +11,7 @@
                     <Text text="{i18n>documentCreatedTitle}" design="Bold"/>
                 </HBox>
                 <HBox alignItems="Center" justifyContent="Center">
-                    <Text id="docInfo" text="{i18n>documentNumber}: {internalOrderCreated>/docNumber} {i18n>documentYear}: {internalOrderCreated>/docYear}"/>
+                    <Text id="docInfo" text="{i18n>documentNumber}: {internalOrderCreated>/docNumber}"/>
                 </HBox>
                 <Button text="{i18n>goToDigitalSign}" press="onSign" class="doubleHeightButton greenButton"  type="Unstyled"/>
             </VBox>
