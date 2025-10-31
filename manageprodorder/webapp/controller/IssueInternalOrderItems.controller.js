@@ -112,7 +112,7 @@ sap.ui.define([
                         MessageBox.error(oData.MSG.MSGTX );
                     } else {
                             // Navigate to DocumentCreated view and pass document data
-                            that.getOwnerComponent().getRouter().navTo("DocumentCreated", {
+                            that.getOwnerComponent().getRouter().navTo("IssueInternalOrder", {
                                 MBLNR: oData.DOC.MBLNR,
                                 MJAHR: oData.DOC.MJAHR
                             });
