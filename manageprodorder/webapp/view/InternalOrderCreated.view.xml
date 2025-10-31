@@ -9,9 +9,11 @@
             <VBox alignItems="Center" justifyContent="Center">
                 <HBox alignItems="Center" justifyContent="Center">
                     <Text text="{i18n>documentCreatedTitle}" design="Bold"/>
+                <HBox alignItems="Center" justifyContent="Center">
+                    <Text id="docInfo" text="{i18n>documentNumber}: {internalOrderCreated>/docNumber} {i18n>documentYear}: {internalOrderCreated>/docYear}"/>
                 </HBox>
                 <Text id="docInfo" text="{i18n>documentNumber}: {view>/docNumber}"/>
-                <Button text="{i18n>goToDigitalSign}" press="onSign" class="doubleHeightButton greenButton" />
+                <Button text="{i18n>goToDigitalSign}" press="onSign" class="doubleHeightButton greenButton"  type="Unstyled"/>
             </VBox>
         </content>
         <headerContent>

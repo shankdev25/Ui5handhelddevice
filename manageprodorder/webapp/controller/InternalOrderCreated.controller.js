@@ -9,9 +9,16 @@ sap.ui.define([
             oRouter.getRoute("InternalOrderCreated").attachPatternMatched(this._onRouteMatched, this);
         },
         _onRouteMatched: function (oEvent) {
-            var oArgs = oEvent.getParameter("arguments");
-            var sText = "מספר מסמך: " + oArgs.MBLNR + " שנה: " + oArgs.MJAHR;
-            this.byId("docInfo").setText(sText);
+            var oArgs = oEvent.getParameter("arguments") || {};
+            var oView = this.getView();
+            var oViewModel = oView.getModel("internalOrderCreated");
+            if (!oViewModel) {
+                oViewModel = new sap.ui.model.json.JSONModel();
+                oView.setModel(oViewModel, "internalOrderCreated");
+            }
+            // Defensive: fallback to empty string if undefined
+            oViewModel.setProperty("/docNumber", oArgs.MBLNR || "");
+            oViewModel.setProperty("/docYear", oArgs.MJAHR || "");
         },
         onSign: function () {
             // Implement digital signature navigation here
