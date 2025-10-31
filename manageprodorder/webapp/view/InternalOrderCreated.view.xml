@@ -9,9 +9,8 @@
             <VBox alignItems="Center" justifyContent="Center">
                 <HBox alignItems="Center" justifyContent="Center">
                     <Text text="{i18n>documentCreatedTitle}" design="Bold"/>
-                    <core:Icon src="sap-icon://attachment" size="2rem"/>
                 </HBox>
-                <Text id="docInfo" text=""/>
+                <Text id="docInfo" text="{i18n>documentNumber}: {view>/docNumber}"/>
                 <Button text="{i18n>goToDigitalSign}" press="onSign"/>
             </VBox>
         </content>
