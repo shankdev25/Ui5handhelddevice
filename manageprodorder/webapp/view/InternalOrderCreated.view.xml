@@ -4,7 +4,7 @@
     xmlns:core="sap.ui.core"
     controllerName="com.merkavim.ewm.manageprodorder.controller.InternalOrderCreated"
     displayBlock="true">
-    <Page title="{i18n>documentCreatedTitle}">
+    <Page title="{i18n>addedItemsTitle}">
         <content>
             <VBox alignItems="Center" justifyContent="Center">
                 <HBox alignItems="Center" justifyContent="Center">
@@ -13,7 +13,11 @@
                 <HBox alignItems="Center" justifyContent="Center">
                     <Text id="docInfo" text="{i18n>documentNumber}: {internalOrderCreated>/docNumber}"/>
                 </HBox>
-                <Button text="{i18n>goToDigitalSign}" press="onSign" class="doubleHeightButton greenButton"  type="Unstyled"/>
+                <Button text="{i18n>goToDigitalSign}" press="onSign" class="doubleHeightButton greenButton" type="Unstyled">
+                    <layoutData>
+                        <FlexItemData xmlns="sap.m" marginTop="2rem" />
+                    </layoutData>
+                </Button>
             </VBox>
         </content>
         <headerContent>
