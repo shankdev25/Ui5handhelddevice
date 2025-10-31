@@ -1,0 +1,21 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    controllerName="com.merkavim.ewm.manageprodorder.controller.InternalOrderCreated"
+    displayBlock="true">
+    <Page title="מסמך נוצר">
+        <content>
+            <VBox alignItems="Center" justifyContent="Center">
+                <HBox alignItems="Center" justifyContent="Center">
+                    <Text text="מסמך נוצר" design="Bold"/>
+                    <Icon src="sap-icon://attachment" size="2rem"/>
+                </HBox>
+                <Text id="docInfo" text=""/>
+                <Button text="מעבר לחתימה דיגיטלית" press="onSign"/>
+            </VBox>
+        </content>
+        <headerContent>
+            <Button icon="sap-icon://home" press="onNavHome"/>
+        </headerContent>
+    </Page>
+</mvc:View>

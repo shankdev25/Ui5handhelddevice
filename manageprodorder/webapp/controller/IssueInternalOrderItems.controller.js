@@ -111,7 +111,11 @@ sap.ui.define([
                     if (oData && oData.MSG && oData.MSG.MSGTY === "E") {
                         MessageBox.error(oData.MSG.MSGTX );
                     } else {
-                        MessageBox.success("Order saved successfully.");
+                            // Navigate to DocumentCreated view and pass document data
+                            that.getOwnerComponent().getRouter().navTo("DocumentCreated", {
+                                MBLNR: oData.DOC.MBLNR,
+                                MJAHR: oData.DOC.MJAHR
+                            });
                     }
                 },
                 error: function (xhr, status, error) {
