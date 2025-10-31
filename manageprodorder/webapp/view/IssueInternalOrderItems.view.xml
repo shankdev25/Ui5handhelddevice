@@ -6,15 +6,15 @@
             <VBox class="sapUiMediumMargin" style="max-width:1200px; margin:auto;">
                 <Button id="continueButton" text="{i18n>continue}" type="Unstyled" class="doubleHeightButton greenButton" press="onContinue"/>
                 <VBox height="16px" />
-                <Table id="itemsTable" items="{items>/items}" width="100%" fixedLayout="true">
+                <Table id="itemsTable" items="{items>/items}" width="100%" fixedLayout="true" sort="onSort">
                     <columns>
-                         <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>internalOrder}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>storageLocation}"/></Column>
-                         <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>materialNumber}"/></Column>
-                          <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>materialDescription}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>baseUoM}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>stock}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="{i18n>pickingQty}"/></Column>
+                         <Column minScreenWidth="Phone" demandPopin="false" sortProperty="AUFNR"><Text text="{i18n>internalOrder}"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false" sortProperty="LGORT"><Text text="{i18n>storageLocation}"/></Column>
+                         <Column minScreenWidth="Phone" demandPopin="false" sortProperty="MATNR"><Text text="{i18n>materialNumber}"/></Column>
+                          <Column minScreenWidth="Phone" demandPopin="false" sortProperty="MAKTX"><Text text="{i18n>materialDescription}"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false" sortProperty="MEINS"><Text text="{i18n>baseUoM}"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false" sortProperty="LABST"><Text text="{i18n>stock}"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false" sortProperty="PICKING_QTY"><Text text="{i18n>pickingQty}"/></Column>
                         <Column minScreenWidth="Phone" demandPopin="false"><Text text="Actions"/></Column>
                     </columns>
                     <items>

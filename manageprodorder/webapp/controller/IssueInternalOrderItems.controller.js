@@ -74,8 +74,19 @@ sap.ui.define([
             var iIndex = oContext.getPath().split("/").pop();
             aItems.splice(iIndex, 1);
             oModel.setProperty("/items", aItems);
-        }
-        ,
+        },
+
+        /**
+         * Sort handler for table columns
+         */
+        onSort: function(oEvent) {
+            var sPath = oEvent.getParameter("column").getSortProperty();
+            var bDescending = oEvent.getParameter("sortOrder") === "Descending";
+            var oTable = this.byId("itemsTable");
+            var oBinding = oTable.getBinding("items");
+            var oSorter = new sap.ui.model.Sorter(sPath, bDescending);
+            oBinding.sort(oSorter);
+        },
 
         onContinue: function () {
             var oViewModel = this.getOwnerComponent().getModel("view");
