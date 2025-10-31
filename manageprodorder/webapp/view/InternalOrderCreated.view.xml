@@ -11,7 +11,7 @@
                     <Text text="{i18n>documentCreatedTitle}" design="Bold"/>
                 </HBox>
                 <Text id="docInfo" text="{i18n>documentNumber}: {view>/docNumber}"/>
-                <Button text="{i18n>goToDigitalSign}" press="onSign"/>
+                <Button text="{i18n>goToDigitalSign}" press="onSign" class="doubleHeightButton greenButton" />
             </VBox>
         </content>
         <headerContent>
