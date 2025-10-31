@@ -30,5 +30,5 @@ server:
       configuration:
         backend:
           - path: /yoito_ui5/yms
-            url: http://merkdev.mrk.local:8000
+            url: http://16.190.80.13:8000
             client: '400'
