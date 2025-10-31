@@ -13,11 +13,8 @@
                 <HBox alignItems="Center" justifyContent="Center">
                     <Text id="docInfo" text="{i18n>documentNumber}: {internalOrderCreated>/docNumber}"/>
                 </HBox>
-                <Button text="{i18n>goToDigitalSign}" press="onSign" class="doubleHeightButton greenButton" type="Unstyled">
-                    <layoutData>
-                        <FlexItemData xmlns="sap.m" marginTop="2rem" />
-                    </layoutData>
-                </Button>
+                    <Label text="" height="5rem"/>
+                    <Button text="{i18n>goToDigitalSign}" press="onSign" class="doubleHeightButton greenButton" type="Unstyled"/>
             </VBox>
         </content>
         <headerContent>
