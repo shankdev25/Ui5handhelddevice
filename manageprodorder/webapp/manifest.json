@@ -3,9 +3,12 @@
   "sap.app": {
     "id": "com.merkavim.ewm.manageprodorder",
     "type": "application",
-  "i18n": "i18n/i18n.properties",
-  "supportedLocales": ["en", "he"],
-  "fallbackLocale": "en",
+    "i18n": "i18n/i18n.properties",
+    "supportedLocales": [
+      "en",
+      "he"
+    ],
+    "fallbackLocale": "en",
     "applicationVersion": {
       "version": "0.0.1"
     },
@@ -116,21 +119,28 @@
           "target": [
             "TargetDocumentCreated"
           ]
+        },
+        {
+          "name": "IssueInternalOrder",
+          "pattern": "IssueInternalOrder",
+          "target": [
+            "TargetIssueInternalOrder"
+          ]
+        },
+        {
+          "name": "InternalOrderCreated",
+          "pattern": "InternalOrderCreated",
+          "target": [
+            "TargetInternalOrderCreated"
+          ]
+        },
+        {
+          "name": "IssueInternalOrderItems",
+          "pattern": "IssueInternalOrderItems",
+          "target": [
+            "TargetIssueInternalOrderItems"
+          ]
         }
-          ,
-          {
-            "name": "IssueInternalOrder",
-            "pattern": "IssueInternalOrder",
-            "target": [
-              "TargetIssueInternalOrder"
-            ]
-          }
-      ,
-      {
-        "name": "IssueInternalOrderItems",
-        "pattern": "IssueInternalOrderItems",
-        "target": ["TargetIssueInternalOrderItems"]
-      }
       ],
       "targets": {
         "TargetView1": {
@@ -152,16 +162,19 @@
         "TargetDocumentCreated": {
           "id": "DocumentCreated",
           "name": "DocumentCreated"
+        },
+        "TargetIssueInternalOrder": {
+          "id": "IssueInternalOrder",
+          "name": "IssueInternalOrder"
+        },
+        "TargetIssueInternalOrderItems": {
+          "id": "IssueInternalOrderItems",
+          "name": "IssueInternalOrderItems"
+        },
+        "TargetInternalOrderCreated": {
+          "id": "InternalOrderCreated",
+          "name": "InternalOrderCreated"
         }
-          ,
-          "TargetIssueInternalOrder": {
-            "id": "IssueInternalOrder",
-            "name": "IssueInternalOrder"
-          },
-          "TargetIssueInternalOrderItems": {
-            "id": "IssueInternalOrderItems",
-            "name": "IssueInternalOrderItems"
-          }
       }
     },
     "rootView": {
