@@ -288,6 +288,18 @@ sap.ui.define([
             var oHeaderCB = this.byId("selectAllCheckBox");
             if (oHeaderCB) { oHeaderCB.setSelected(false); }
             sap.m.MessageToast.show("Selection cleared");
+        },
+
+        /**
+         * Sort handler for table columns
+         */
+        onSort: function(oEvent) {
+            var sPath = oEvent.getParameter("column").getSortProperty();
+            var bDescending = oEvent.getParameter("sortOrder") === "Descending";
+            var oTable = this.byId("pickTable");
+            var oBinding = oTable.getBinding("items");
+            var oSorter = new sap.ui.model.Sorter(sPath, bDescending);
+            oBinding.sort(oSorter);
         }
     });
 });
