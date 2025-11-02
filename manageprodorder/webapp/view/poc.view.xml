@@ -1,0 +1,85 @@
+<mvc:View controllerName="project1.controller.View1"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table"
+    xmlns:tableRowModes="sap.ui.table.rowmodes">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <Table id="productsTable" items="{/items}" mode="None">
+                <columns>
+                    <!-- General column for mobile only -->
+                    <Column id="colGeneral" visible="{path: 'device>/isPhone', formatter: '.isPhoneVisible'}">
+                        <header>
+                            <Label id="lblGeneral" text="General"/>
+                        </header>
+                    </Column>
+                    <!-- Original columns for non-mobile only -->
+                    <Column id="colName" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}">
+                        <header>
+                            <Label id="lblName" text="Name"/>
+                        </header>
+                    </Column>
+                    <Column id="colCategory" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}">
+                        <header>
+                            <Label id="lblCategory" text="Category"/>
+                        </header>
+                    </Column>
+                    <Column id="colPrice" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}">
+                        <header>
+                            <Label id="lblPrice" text="Price"/>
+                        </header>
+                    </Column>
+                    <Column id="colRating" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}">
+                        <header>
+                            <Label id="lblRating" text="Rating"/>
+                        </header>
+                    </Column>
+                    <Column id="colSupplier" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}">
+                        <header>
+                            <Label id="lblSupplier" text="Supplier"/>
+                        </header>
+                    </Column>
+                    <Column id="colStock" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}">
+                        <header>
+                            <Label id="lblStock" text="Stock"/>
+                        </header>
+                    </Column>
+                    <Column id="colDiscount">
+                        <header>
+                            <Label id="lblDiscount" text="Discount (%)"/>
+                        </header>
+                    </Column>
+                    <Column id="colDateAdded">
+                        <header>
+                            <Label id="lblDateAdded" text="Date Added"/>
+                        </header>
+                    </Column>
+                    <Column id="colStatus">
+                        <header>
+                            <Label id="lblStatus" text="Status"/>
+                        </header>
+                    </Column>
+                </columns>
+                <items>
+                    <ColumnListItem id="cliProduct">
+                        <cells>
+                            <!-- General cell for mobile only -->
+                            <Text id="txtGeneral" visible="{path: 'device>/isPhone', formatter: '.isPhoneVisible'}"
+                                text="{= 'Name: ' + ${Name} + ', Category: ' + ${Category} + ', Price: ' + ${Price} + ', Rating: ' + ${Rating} + ', Supplier: ' + ${Supplier} + ', Stock: ' + ${Stock} }"/>
+                            <!-- Original cells for non-mobile only -->
+                            <Text id="txtName" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}" text="{Name}"/>
+                            <Text id="txtCategory" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}" text="{Category}"/>
+                            <Text id="txtPrice" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}" text="{ path: 'Price', type: 'sap.ui.model.type.Float', formatOptions: { minFractionDigits: 2, maxFractionDigits: 2 } }"/>
+                            <Text id="txtRating" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}" text="{Rating}"/>
+                            <Text id="txtSupplier" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}" text="{Supplier}"/>
+                            <Text id="txtStock" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}" text="{Stock}"/>
+                            <Text id="txtDiscount" text="{Discount}"/>
+                            <Text id="txtDateAdded" text="{DateAdded}"/>
+                            <Text id="txtStatus" text="{Status}"/>
+                        </cells>
+                    </ColumnListItem>
+                </items>
+            </Table>
+        </content>
+    </Page>
+</mvc:View>

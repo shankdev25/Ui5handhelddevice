@@ -2,6 +2,19 @@ sap.ui.define([], function() {
     "use strict";
     return {
         /**
+         * Returns true if device is phone (for mobile-only columns)
+         */
+        isPhoneVisible: function(bIsPhone) {
+            return !!bIsPhone;
+        },
+
+        /**
+         * Returns true if device is NOT phone (for desktop/tablet columns)
+         */
+        isNotPhoneVisible: function(bIsPhone) {
+            return !bIsPhone;
+        },
+        /**
          * Converts yyyy-mm-dd to dd/mm/yyyy
          * @param {string} sDate - Date string in yyyy-mm-dd format
          * @returns {string} Date string in dd/mm/yyyy format

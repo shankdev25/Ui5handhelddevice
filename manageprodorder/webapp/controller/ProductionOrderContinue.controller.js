@@ -8,6 +8,11 @@ sap.ui.define([
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.ProductionOrderContinue", {
         formatter: formatter,
         onInit: function() {
+            // Device model for mobile/desktop detection
+            var oDeviceModel = new JSONModel({
+                isPhone: sap.ui.Device.system.phone
+            });
+            this.getView().setModel(oDeviceModel, "device");
 
             // `inputFields` model is initialized at the component level; rely on that model here
 
