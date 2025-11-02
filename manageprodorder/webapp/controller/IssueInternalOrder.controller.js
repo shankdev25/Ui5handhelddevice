@@ -1,8 +1,9 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageBox"
-], function (Controller, JSONModel, MessageBox) {
+    "sap/m/MessageBox",
+    "sap/m/MessageToast"
+], function (Controller, JSONModel, MessageBox, MessageToast) {
     "use strict";
 
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.IssueInternalOrder", {
@@ -173,7 +174,7 @@ sap.ui.define([
                     var aItems = oItemsModel.getProperty("/items");
                         aItems.push(oData);
                     oItemsModel.setProperty("/items", aItems);
-                    MessageBox.success(that.getView().getModel("i18n").getResourceBundle().getText("itemAddedSuccess"));
+                    MessageToast.show(that.getView().getModel("i18n").getResourceBundle().getText("itemAddedSuccess"));
                     that.onClearFields();
                 },
                 error: function (xhr, status, error) {
@@ -183,7 +184,14 @@ sap.ui.define([
         },
 
         onContinue: function () {
-            this.getOwnerComponent().getRouter().navTo("IssueInternalOrderItems");
+            var oItemsModel = this.getView().getModel("items");
+            var aItems = oItemsModel && oItemsModel.getProperty("/items");
+            if (aItems && aItems.length > 0) {
+                this.getOwnerComponent().getRouter().navTo("IssueInternalOrderItems");
+            } else {
+                var sMsg = this.getView().getModel("i18n").getResourceBundle().getText("noRecordsFound");
+                MessageBox.error(sMsg);
+            }
         },
 
         onInternalOrderValueHelp: function (oEvent) {
