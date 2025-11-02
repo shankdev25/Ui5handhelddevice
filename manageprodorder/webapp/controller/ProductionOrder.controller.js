@@ -97,7 +97,9 @@ sap.ui.define([
                     if (oResponse.MSG.MSGTY === "S") {
 
                         var oValidDataModel = new sap.ui.model.json.JSONModel(oResponse.DATA);
+                        // Set validData model at both view and component level for global access
                         that.getView().setModel(oValidDataModel, "validData");
+                        that.getOwnerComponent().setModel(oValidDataModel, "validData");
 
                         //Get the data for selection
                         let baseUrl = that.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
