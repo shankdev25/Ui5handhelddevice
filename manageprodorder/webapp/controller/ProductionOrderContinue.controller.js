@@ -2,11 +2,11 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
     "com/merkavim/ewm/manageprodorder/model/formatter"
-], function(Controller, JSONModel) {
+], function(Controller, JSONModel , formatter) {
 // formatter is loaded for view binding
     "use strict";
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.ProductionOrderContinue", {
-        formatter: require('com/merkavim/ewm/manageprodorder/model/formatter'),
+        formatter: formatter,
         onInit: function() {
 
             // `inputFields` model is initialized at the component level; rely on that model here
