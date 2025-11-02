@@ -1,7 +1,9 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/ui/model/json/JSONModel"
+    "sap/ui/model/json/JSONModel",
+    "com/merkavim/ewm/manageprodorder/model/formatter"
 ], function(Controller, JSONModel) {
+// formatter is loaded for view binding
     "use strict";
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.ProductionOrderContinue", {
         onInit: function() {

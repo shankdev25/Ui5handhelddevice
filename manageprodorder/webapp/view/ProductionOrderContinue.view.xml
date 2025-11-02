@@ -33,21 +33,21 @@
 
 
                 <!-- Table for picking items, now scrollable -->
-                <VBox class="scrollableTableContainer">
-                    <Table id="pickTable" sticky="ColumnHeaders" items="{pickItems>items}" mode="None" class="sapUiSmallMarginTop" sort="onSort">
+                <VBox id="_IDGenVBox1" >
+                    <Table id="pickTable" sticky="ColumnHeaders" items="{pickItems>items}" mode="None" class="sapUiSmallMarginTop">
                         <columns>
                             <Column id="colAction" width="3em">
                                 <header>
                                     <CheckBox id="selectAllCheckBox" select="onSelectAll"/>
                                 </header>
                             </Column>
-                            <Column id="colItem" sortProperty="VORNR"><header><Text id="txtColItem" text="{i18n>action}"/></header></Column>
-                            <Column id="colItemDesc" sortProperty="MODEL"><header><Text id="txtColItemDesc" text="{i18n>model}"/></header></Column>
-                            <Column id="colDate" sortProperty="MODEL_DESC"><header><Text id="txtColDate" text="{i18n>modelDesc}"/></header></Column>
-                            <Column id="colLocation" sortProperty="CY_SEQNR"><header><Text id="txtColLocation" text="{i18n>shortbusnum}"/></header></Column>
-                            <Column id="colInventory" sortProperty="BDTER"><header><Text id="txtColInventory" text="{i18n>date}"/></header></Column>
-                            <Column id="colQtyInReservation" sortProperty="RESERVED_QTY"><header><Text id="txtColQtyInReservation" text="{i18n>qtyInReservation}"/></header></Column>
-                            <Column id="colQtyToPick" sortProperty="PICKING_QTY"><header><Text id="txtColQtyToPick" text="{i18n>qtyToPick}"/></header></Column>
+                            <Column id="colItem"><header><Text id="txtColItem" text="{i18n>action}"/></header></Column>
+                            <Column id="colItemDesc"><header><Text id="txtColItemDesc" text="{i18n>model}"/></header></Column>
+                            <Column id="colDate"><header><Text id="txtColDate" text="{i18n>modelDesc}"/></header></Column>
+                            <Column id="colLocation"><header><Text id="txtColLocation" text="{i18n>shortbusnum}"/></header></Column>
+                            <Column id="colInventory"><header><Text id="txtColInventory" text="{i18n>date}"/></header></Column>
+                            <Column id="colQtyInReservation"><header><Text id="txtColQtyInReservation" text="{i18n>qtyInReservation}"/></header></Column>
+                            <Column id="colQtyToPick"><header><Text id="txtColQtyToPick" text="{i18n>qtyToPick}"/></header></Column>
                         </columns>
                         <items>
                             <ColumnListItem id="pickTableRowTemplate">
@@ -57,7 +57,7 @@
                                     <Text id="rowItemDesc" text="{pickItems>MODEL}"/>
                                     <Text id="rowDate" text="{pickItems>MODEL_DESC}"/>
                                     <Text id="rowLocation" text="{pickItems>CY_SEQNR}"/>
-                                    <Text id="rowInventory" text="{pickItems>BDTER}"/>
+                                        <Text id="rowInventory" text="{pickItems>BDTER, formatter: 'com.merkavim.ewm.manageprodorder.model.formatter.bdterToDDMMYYYY'}"/>
                                     <Text id="rowQtyInReservation" text="{pickItems>RESERVED_QTY}"/>
                                     <Input id="rowQtyToPick" value="{pickItems>PICKING_QTY}" valueLiveUpdate="true" type="Number" width="6em"/>
                                 </cells>
