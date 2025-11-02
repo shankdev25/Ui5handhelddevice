@@ -36,23 +36,23 @@
                 <VBox id="_IDGenVBox1" >
                     <Table id="pickTable" sticky="ColumnHeaders" items="{pickItems>items}" mode="None" class="sapUiSmallMarginTop">
                         <columns>
-                            <!-- General column for mobile devices -->
-                            <Column id="colGeneralMobile" visible="{path: 'device>/isPhone', formatter: '.isPhoneVisible'}">
+                            <!-- General column for mobile devices only -->
+                            <Column id="colGeneralMobile" visible="{= ${device>/isPhone} === true }">
                                 <header>
                                     <Text id="lblGeneralMobile" text="{i18n>general}"/>
                                 </header>
                             </Column>
                             <!-- Individual columns for non-mobile devices -->
-                            <Column id="colAction" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}" width="3em">
+                            <Column id="colAction" visible="{= ${device>/isPhone} !== true }" width="3em">
                                 <header>
                                     <CheckBox id="selectAllCheckBox" select="onSelectAll"/>
                                 </header>
                             </Column>
-                            <Column id="colItem" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}"><header><Text id="txtColItem" text="{i18n>action}"/></header></Column>
-                            <Column id="colItemDesc" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}"><header><Text id="txtColItemDesc" text="{i18n>model}"/></header></Column>
-                            <Column id="colDate" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}"><header><Text id="txtColDate" text="{i18n>modelDesc}"/></header></Column>
-                            <Column id="colLocation" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}"><header><Text id="txtColLocation" text="{i18n>shortbusnum}"/></header></Column>
-                            <Column id="colInventory" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}"><header><Text id="txtColInventory" text="{i18n>date}"/></header></Column>
+                            <Column id="colItem" visible="{= ${device>/isPhone} !== true }"><header><Text id="txtColItem" text="{i18n>action}"/></header></Column>
+                            <Column id="colItemDesc" visible="{= ${device>/isPhone} !== true }"><header><Text id="txtColItemDesc" text="{i18n>model}"/></header></Column>
+                            <Column id="colDate" visible="{= ${device>/isPhone} !== true }"><header><Text id="txtColDate" text="{i18n>modelDesc}"/></header></Column>
+                            <Column id="colLocation" visible="{= ${device>/isPhone} !== true }"><header><Text id="txtColLocation" text="{i18n>shortbusnum}"/></header></Column>
+                            <Column id="colInventory" visible="{= ${device>/isPhone} !== true }"><header><Text id="txtColInventory" text="{i18n>date}"/></header></Column>
                             <!-- Reserved and Picking Quantity always shown -->
                             <Column id="colQtyInReservation"><header><Text id="txtColQtyInReservation" text="{i18n>qtyInReservation}"/></header></Column>
                             <Column id="colQtyToPick"><header><Text id="txtColQtyToPick" text="{i18n>qtyToPick}"/></header></Column>
@@ -60,16 +60,16 @@
                         <items>
                             <ColumnListItem id="pickTableRowTemplate">
                                 <cells>
-                                    <!-- General cell for mobile devices -->
-                                    <Text id="txtGeneralMobile" visible="{path: 'device>/isPhone', formatter: '.isPhoneVisible'}"
+                                    <!-- General cell for mobile devices only -->
+                                    <Text id="txtGeneralMobile" visible="{= ${device>/isPhone} === true }"
                                         text="{= 'Action: ' + ${pickItems>VORNR} + ', Model: ' + ${pickItems>MODEL} + ', Desc: ' + ${pickItems>MODEL_DESC} + ', Location: ' + ${pickItems>CY_SEQNR} + ', Date: ' + ${pickItems>BDTER} }"/>
                                     <!-- Individual cells for non-mobile devices -->
-                                    <CheckBox id="rowSelectCheckBox" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}" selected="{pickItems>selected}" select="onSelectRow"/>
-                                    <Text id="rowItem" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}" text="{pickItems>VORNR}"/>
-                                    <Text id="rowItemDesc" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}" text="{pickItems>MODEL}"/>
-                                    <Text id="rowDate" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}" text="{pickItems>MODEL_DESC}"/>
-                                    <Text id="rowLocation" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}" text="{pickItems>CY_SEQNR}"/>
-                                    <Text id="rowInventory" visible="{path: 'device>/isPhone', formatter: '.isNotPhoneVisible'}" text="{path: 'pickItems>BDTER', formatter: '.formatter.bdterToDDMMYY'}"/>
+                                    <CheckBox id="rowSelectCheckBox" visible="{= ${device>/isPhone} !== true }" selected="{pickItems>selected}" select="onSelectRow"/>
+                                    <Text id="rowItem" visible="{= ${device>/isPhone} !== true }" text="{pickItems>VORNR}"/>
+                                    <Text id="rowItemDesc" visible="{= ${device>/isPhone} !== true }" text="{pickItems>MODEL}"/>
+                                    <Text id="rowDate" visible="{= ${device>/isPhone} !== true }" text="{pickItems>MODEL_DESC}"/>
+                                    <Text id="rowLocation" visible="{= ${device>/isPhone} !== true }" text="{pickItems>CY_SEQNR}"/>
+                                    <Text id="rowInventory" visible="{= ${device>/isPhone} !== true }" text="{path: 'pickItems>BDTER', formatter: '.formatter.bdterToDDMMYY'}"/>
                                     <!-- Reserved and Picking Quantity always shown -->
                                     <Text id="rowQtyInReservation" text="{pickItems>RESERVED_QTY}"/>
                                     <Input id="rowQtyToPick" value="{pickItems>PICKING_QTY}" valueLiveUpdate="true" type="Number" width="6em"/>
