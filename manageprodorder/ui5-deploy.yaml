@@ -17,7 +17,7 @@ builder:
       configuration:
         ignoreCertError: true
         target:
-          url: http://merkdev.mrk.local:8000
+          url: http://16.190.80.13:8000
           client: '400'
         app:
           name: Z_PICKING_BY_WB
