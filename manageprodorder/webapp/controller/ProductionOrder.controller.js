@@ -146,10 +146,16 @@ sap.ui.define([
                                         BDTER: items[i].BDTER
                                     });
                                 }
-                                    // Sort aPicking by BDTER ascending
-                                    aPicking.sort(function(a, b) {
-                                        return (a.BDTER > b.BDTER) ? 1 : (a.BDTER < b.BDTER) ? -1 : 0;
-                                    });
+                                // If aPicking is blank, show error and do not route
+                                if (!aPicking || aPicking.length === 0) {
+                                    var oBundle = that.getOwnerComponent().getModel("i18n").getResourceBundle();
+                                    MessageBox.error(oBundle.getText("noDataFound"));
+                                    return;
+                                }
+                                // Sort aPicking by BDTER ascending
+                                aPicking.sort(function(a, b) {
+                                    return (a.BDTER > b.BDTER) ? 1 : (a.BDTER < b.BDTER) ? -1 : 0;
+                                });
 
                                 let aHeader = {
                                     Location: header.LGPBE,
