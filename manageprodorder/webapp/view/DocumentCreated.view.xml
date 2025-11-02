@@ -2,6 +2,9 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Page id="docCreatedPage" title="{i18n>prodOrderTileHeader}" showNavButton="true" navButtonPress="onNavBack">
+        <headerContent>
+            <Button id="homeButton" icon="sap-icon://home" press="onNavHome"/>
+        </headerContent>
         <content>
             <VBox id="docCreatedVBox" class="sapUiSmallMargin" renderType="Bare">
                 <Table id="createdItemsTable" items="{created>/items}" class="sapUiSmallMarginTop">

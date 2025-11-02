@@ -4,6 +4,9 @@
     xmlns:smartTable="sap.ui.comp.smarttable"
     xmlns:core="sap.ui.core">
     <Page id="prodOrderPage" title="{i18n>prodOrderTileHeader}" showNavButton="true" navButtonPress="onNavBack">
+            <headerContent>
+                <Button id="prodOrderHomeButton" icon="sap-icon://home" press="onNavHome"/>
+            </headerContent>
         <VBox id="prodOrderVBox" class="sapUiSmallMargin">
             <HBox id="prodOrderButtonsBar" class="sapUiSmallMarginBottom">
                     <Button id="btnInlineContinue" text="{i18n>continue}" type="Unstyled" press="onContinue" class="doubleHeightButton greenButton" />

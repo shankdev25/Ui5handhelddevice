@@ -39,7 +39,7 @@ sap.ui.define([
                             OperationFrom: oResponse.DATA.VORNR_F || "",
                             OperationTo: oResponse.DATA.VORNR_T || "",
                             ReservationStorageLocation: oResponse.DATA.LGORT_F || "",
-                            ReservationStorageLocationTo : oResponse.DATA.LGORT_FT || "",
+                            ReservationStorageLocationTo: oResponse.DATA.LGORT_FT || "",
                             LogisticsGroup: oResponse.DATA.LOGGR || "",
                             Remark: oResponse.DATA.BKTXT || "",
                             IssuesingStorageLocation: oResponse.DATA.LGORT_T || ""
@@ -60,7 +60,10 @@ sap.ui.define([
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("RouteView1", {}, true);
         },
-
+        onNavHome: function () {
+            var oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("RouteView1");
+        },
         onContinue: function () {
             var oViewModel = this.getView().getModel("view");
             var oSelectionData = Object.assign({}, oViewModel.getProperty("/newEntry"));

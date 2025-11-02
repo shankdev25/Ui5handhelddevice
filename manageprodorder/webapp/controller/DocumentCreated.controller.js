@@ -1,9 +1,9 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller"
-], function(Controller) {
+], function (Controller) {
     "use strict";
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.DocumentCreated", {
-        onInit: function() {
+        onInit: function () {
             var oComponent = this.getOwnerComponent();
 
             // attach route matched to ensure binding (handles timing issues)
@@ -11,7 +11,7 @@ sap.ui.define([
                 var oRouter = oComponent.getRouter();
                 if (oRouter && oRouter.getRoute("DocumentCreated")) {
                     var that = this;
-                    oRouter.getRoute("DocumentCreated").attachPatternMatched(function() {
+                    oRouter.getRoute("DocumentCreated").attachPatternMatched(function () {
                         that._ensureCreatedModel();
                     });
                 } else {
@@ -22,13 +22,18 @@ sap.ui.define([
             }
         },
 
-        onNavBack: function() {
+        onNavBack: function () {
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             // Navigate back to start page (View1) for a fresh flow
             oRouter.navTo("RouteView1");
-        }
+        },
+        
+        onNavHome: function () {
+            var oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("IssueInternalOrder");
+        },
 
-        , _ensureCreatedModel: function() {
+        _ensureCreatedModel: function () {
             var oView = this.getView();
             var oComponent = this.getOwnerComponent();
             var oCreatedModel = oComponent.getModel("created");
@@ -46,7 +51,7 @@ sap.ui.define([
                         oTable.setModel(oCreatedModel, "created");
                         console.log("[DocumentCreated] created model set on table");
                         var oBinding = oTable.getBinding("items");
-                        if (oBinding) { try { oBinding.refresh(); console.log("[DocumentCreated] table items binding refreshed"); } catch(e){} }
+                        if (oBinding) { try { oBinding.refresh(); console.log("[DocumentCreated] table items binding refreshed"); } catch (e) { } }
                     }
                     try {
                         var aRenderedItems = oTable.getItems && oTable.getItems();
@@ -64,12 +69,12 @@ sap.ui.define([
                             console.log("[DocumentCreated] items binding contexts/length:", iContextsCount, "model items:", iModelItemsCount);
                             if ((aRenderedItems ? aRenderedItems.length : 0) === 0 && (iContextsCount > 0 || iModelItemsCount > 0)) {
                                 console.log("[DocumentCreated] Binding has contexts or model items but no rendered items — attempting retries and forcing rebind if needed");
-                                try { oCreatedModel.refresh && oCreatedModel.refresh(true); } catch (e) {}
-                                try { oItemsBinding.refresh && oItemsBinding.refresh(); } catch (e) {}
-                                try { oTable.invalidate && oTable.invalidate(); oTable.rerender && oTable.rerender(); } catch (e) {}
+                                try { oCreatedModel.refresh && oCreatedModel.refresh(true); } catch (e) { }
+                                try { oItemsBinding.refresh && oItemsBinding.refresh(); } catch (e) { }
+                                try { oTable.invalidate && oTable.invalidate(); oTable.rerender && oTable.rerender(); } catch (e) { }
 
                                 var iAttempts = 0;
-                                var fnRetry = function() {
+                                var fnRetry = function () {
                                     iAttempts++;
                                     var aNowRendered = oTable.getItems && oTable.getItems();
                                     if (aNowRendered && aNowRendered.length > 0) {
@@ -77,8 +82,8 @@ sap.ui.define([
                                         return;
                                     }
                                     if (iAttempts <= 3) {
-                                        try { oTable.unbindItems(); } catch (e) {}
-                                        try { oTable.bindItems({ path: "created>/items", template: oTemplate || null }); } catch (e) {}
+                                        try { oTable.unbindItems(); } catch (e) { }
+                                        try { oTable.bindItems({ path: "created>/items", template: oTemplate || null }); } catch (e) { }
                                         setTimeout(fnRetry, 100);
                                         return;
                                     }
