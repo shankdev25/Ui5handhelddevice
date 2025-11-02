@@ -144,6 +144,10 @@ sap.ui.define([
                                         BDTER: items[i].BDTER
                                     });
                                 }
+                                    // Sort aPicking by BDTER ascending
+                                    aPicking.sort(function(a, b) {
+                                        return (a.BDTER > b.BDTER) ? 1 : (a.BDTER < b.BDTER) ? -1 : 0;
+                                    });
 
                                 let aHeader = {
                                     Location: header.LGPBE,
