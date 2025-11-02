@@ -5,6 +5,19 @@ sap.ui.define([
 ], function (Controller, JSONModel,MessageBox) {
     "use strict";
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.IssueItems", {
+        onInit: function () {
+            var oIssueItemsModel = this.getOwnerComponent().getModel("issueItems");
+            var aItems = (oIssueItemsModel && oIssueItemsModel.getProperty("/items")) || [];
+            var sum = aItems.reduce(function(acc, item) {
+                var val = parseFloat(item.PICKING_QTY);
+                return acc + (isNaN(val) ? 0 : val);
+            }, 0);
+            var oView = this.getView();
+            var oInput = oView.byId("inputSummary") ;
+            if (oInput) {
+                oInput.setValue(sum);
+            }
+        },
         onNavBack: function () {
             var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
             oRouter.navTo("ProductionOrderContinue");

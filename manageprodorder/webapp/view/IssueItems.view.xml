@@ -24,7 +24,11 @@
                     <Input id="issueInputUOM" value="{inputFields>/UOM}" width="16em" enabled="false"/>
                 </HBox>
             </VBox>
-            <VBox class="scrollableTableContainer">
+            <VBox id="summaryInputBox" class="sapUiSmallMarginBottom" direction="Row" alignItems="Center">
+                <Text id="txtSummary" text= "{i18n>summary}" class="sapUiSmallMarginEnd"/>
+                <Input id="inputSummary" value="" enabled="false" width="16em"/>
+            </VBox>
+            <VBox id="_IDGenVBox2" class="scrollableTableContainer">
                 <Table id="issueItemsTable" sticky="ColumnHeaders" items="{issueItems>/items}" class="sapUiSmallMarginTop">
                 <columns>
                     <Column id="colIssItem"><header><Text id="txtIssItem" text="{i18n>productionOrder}"/></header></Column>
