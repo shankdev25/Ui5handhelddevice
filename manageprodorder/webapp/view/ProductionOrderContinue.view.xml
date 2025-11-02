@@ -57,7 +57,7 @@
                                     <Text id="rowItemDesc" text="{pickItems>MODEL}"/>
                                     <Text id="rowDate" text="{pickItems>MODEL_DESC}"/>
                                     <Text id="rowLocation" text="{pickItems>CY_SEQNR}"/>
-                                    <Text id="rowInventory" text="{path: 'pickItems>BDTER', formatter: '.formatter.bdterToDDMMYYYY'}"/>
+                                    <Text id="rowInventory" text="{path: 'pickItems>BDTER', formatter: '.formatter.bdterToDDMMYY'}"/>
                                     <Text id="rowQtyInReservation" text="{pickItems>RESERVED_QTY}"/>
                                     <Input id="rowQtyToPick" value="{pickItems>PICKING_QTY}" valueLiveUpdate="true" type="Number" width="6em"/>
                                 </cells>
