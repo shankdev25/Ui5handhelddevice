@@ -24,7 +24,7 @@ sap.ui.define([
             // Implement digital signature navigation here
         },
         onNavHome: function () {
-            this.getOwnerComponent().getRouter().navTo("IssueInternalOrder");
+            this.getOwnerComponent().getRouter().navTo("RouteView1");
         }
     });
 });

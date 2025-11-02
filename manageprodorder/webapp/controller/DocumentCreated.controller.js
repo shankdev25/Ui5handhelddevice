@@ -30,7 +30,7 @@ sap.ui.define([
         
         onNavHome: function () {
             var oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("IssueInternalOrder");
+            oRouter.navTo("RouteView1");
         },
 
         _ensureCreatedModel: function () {
