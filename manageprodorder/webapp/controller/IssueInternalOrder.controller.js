@@ -11,7 +11,7 @@ sap.ui.define([
          * Handler for Enter key press on input fields
          * @param {sap.ui.base.Event} oEvent
          */
-        onEnterPress: function(oEvent) {
+        onEnterPress: function (oEvent) {
             console.log("Enter key pressed on screen");
             var oView = this.getView();
             var oModel = oView.getModel("view");
@@ -35,11 +35,11 @@ sap.ui.define([
                 contentType: "application/json",
                 data: JSON.stringify(oPayload),
                 success: function (response) {
-                   
+
                     // Bind response to the view model
                     oModel.setData(response.DATA || response);
 
-                     // Check for error indicator 'E' in SAP message structure
+                    // Check for error indicator 'E' in SAP message structure
                     if (response && response.MSG && response.MSG.MSGTY === "E") {
                         MessageBox.error(response.MSG.MSGTX || "Error occurred");
                         return;
@@ -54,6 +54,10 @@ sap.ui.define([
         },
 
         onNavBack: function () {
+            this.getOwnerComponent().getRouter().navTo("RouteView1");
+        },
+
+        onNavHome: function () {
             this.getOwnerComponent().getRouter().navTo("RouteView1");
         },
 
@@ -73,12 +77,12 @@ sap.ui.define([
 
             // Add global keydown listener for Enter
             var that = this;
-            document.addEventListener("keydown", function(e) {
+            document.addEventListener("keydown", function (e) {
                 if (e.key === "Enter") {
                     // Create a dummy event object to pass to onEnterPress
                     that.onEnterPress({
-                        getSource: function() { return null; },
-                        getParameter: function() { return null; }
+                        getSource: function () { return null; },
+                        getParameter: function () { return null; }
                     });
                 }
             });
@@ -112,10 +116,10 @@ sap.ui.define([
                     that.getView().setModel(oIssueOrdInitModel, "issueOrdInitModel");
                     let oModel = that.getView().getModel("view");
                     oModel.setData(oData.DATA || response);
-                        // Save WERKS globally on the component for later use
-                        if (oData.DATA && oData.DATA.WERKS) {
-                            that.getOwnerComponent().setModel(new sap.ui.model.json.JSONModel({ WERKS: oData.DATA.WERKS }), "globalWerks");
-                        }
+                    // Save WERKS globally on the component for later use
+                    if (oData.DATA && oData.DATA.WERKS) {
+                        that.getOwnerComponent().setModel(new sap.ui.model.json.JSONModel({ WERKS: oData.DATA.WERKS }), "globalWerks");
+                    }
 
                 },
                 error: function (xhr, status, error) {
@@ -144,11 +148,11 @@ sap.ui.define([
         onAdd: function () {
             var oViewModel = this.getView().getModel("view");
             var oItemsModel = this.getView().getModel("items");
-                var oData = Object.assign({}, oViewModel.getData());
-                // Ensure WERKS is present in the item being added
-                if (!oData.WERKS) {
-                    oData.WERKS = oViewModel.getProperty("/WERKS") || this.getOwnerComponent().getModel("view").getProperty("/WERKS") || "";
-                }
+            var oData = Object.assign({}, oViewModel.getData());
+            // Ensure WERKS is present in the item being added
+            if (!oData.WERKS) {
+                oData.WERKS = oViewModel.getProperty("/WERKS") || this.getOwnerComponent().getModel("view").getProperty("/WERKS") || "";
+            }
             var that = this;
             var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
             var url = "ISSUE_ORD_1_CHECK";
@@ -172,7 +176,7 @@ sap.ui.define([
                     }
                     // No error, proceed to add
                     var aItems = oItemsModel.getProperty("/items");
-                        aItems.push(oData);
+                    aItems.push(oData);
                     oItemsModel.setProperty("/items", aItems);
                     MessageToast.show(that.getView().getModel("i18n").getResourceBundle().getText("itemAddedSuccess"));
                     that.onClearFields();

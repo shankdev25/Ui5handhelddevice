@@ -2,6 +2,9 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Page id="issueInternalOrderPage" title="{i18n>addedItemsTitle}" showHeader="true"  showNavButton="true" navButtonPress="onNavBack" >
+            <headerContent>
+                <Button id="issueInternalOrderHomeButton" icon="sap-icon://home" press="onNavHome"/>
+            </headerContent>
         <content>
             <VBox class="sapUiMediumMargin sapUiAlignCenter">
                 <HBox>
