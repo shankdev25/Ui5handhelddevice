@@ -33,7 +33,7 @@
 
 
                 <!-- Table for picking items, now scrollable -->
-                <VBox id="_IDGenVBox1" >
+                <VBox id="_IDGenVBox1" class="scrollableTableContainer" >
                     <Table id="pickTable" sticky="ColumnHeaders" items="{pickItems>items}" mode="None" class="sapUiSmallMarginTop">
                         <columns>
                             <!-- General column for mobile devices only -->
