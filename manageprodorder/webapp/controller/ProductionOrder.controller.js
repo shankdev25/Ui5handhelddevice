@@ -105,11 +105,13 @@ sap.ui.define([
                         let baseUrl = that.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
                         var url = "ISSUE_PR_1_DATA";
 
+
+
                         $.ajax({
                             url: baseUrl + url,
                             method: "POST",
                             contentType: "application/json",
-                            data: JSON.stringify(oPayload),
+                            data: JSON.stringify(oResponse),
                             success: function (oResponse) {
 
                                 let items = oResponse.ITEM;
