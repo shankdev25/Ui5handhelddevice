@@ -37,7 +37,7 @@
                         </HBox>
                     </VBox>
                     <Label id="lblInlineIssueStr" text="{i18n>issuesingstoragelocation}" labelFor="inpInlineRemark"/>
-                    <Input id="inpInlineIssueStr" value="{view>/newEntry/IssuesingStorageLocation}" width="200px"/>
+                    <Input id="inpInlineIssueStr" value="{view>/newEntry/IssuesingStorageLocation}" width="200px" required="true"/>
                     <Label id="lblInlineRemark" text="{i18n>remark}" labelFor="inpInlineRemark"/>
                     <Input id="inpInlineRemark" value="{view>/newEntry/Remark}" width="200px"/>
                 </VBox>

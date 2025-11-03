@@ -65,6 +65,14 @@ sap.ui.define([
             oRouter.navTo("RouteView1");
         },
         onContinue: function () {
+            // Validate IssuesingStorageLocation is not blank
+            var oViewModel = this.getView().getModel("view");
+            var oSelectionData = Object.assign({}, oViewModel.getProperty("/newEntry"));
+            if (!oSelectionData.IssuesingStorageLocation || oSelectionData.IssuesingStorageLocation.trim() === "") {
+                var oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+                MessageBox.error(oBundle.getText("issuesingstoragelocationRequired") || "Storage Location is required.");
+                return;
+            }
             var oViewModel = this.getView().getModel("view");
             var oSelectionData = Object.assign({}, oViewModel.getProperty("/newEntry"));
             var that = this;
