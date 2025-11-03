@@ -69,8 +69,8 @@
                                     <Text id="rowLocation" visible="{= ${device>/isPhone} !== true }" text="{pickItems>CY_SEQNR}"/>
                                     <Text id="rowInventory" visible="{= ${device>/isPhone} !== true }" text="{path: 'pickItems>BDTER', formatter: '.formatter.bdterToDDMMYY'}"/>
                                     <!-- Reserved and Picking Quantity always shown -->
-                                    <Text id="rowQtyInReservation" text="{pickItems>RESERVED_QTY}"/>
-                                    <Input id="rowQtyToPick" value="{pickItems>PICKING_QTY}" valueLiveUpdate="true" type="Number" width="6em"
+                                    <Text id="rowQtyInReservation" text="{pickItems>RESERVED_QTY}" width="4em"/>
+                                    <Input id="rowQtyToPick" value="{pickItems>PICKING_QTY}" valueLiveUpdate="true" type="Number" width="4em"
                                         liveChange="onQtyToPickLiveChange"/>
                                 </cells>
                             </ColumnListItem>
