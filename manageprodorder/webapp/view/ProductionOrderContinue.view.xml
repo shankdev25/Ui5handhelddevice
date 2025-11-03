@@ -43,11 +43,11 @@
                                 </header>
                             </Column>
                             <!-- Individual columns for non-mobile devices -->
-                            <Column id="colAction" visible="{= ${device>/isPhone} !== true }" width="3em">
-                                <header>
-                                    <CheckBox id="selectAllCheckBox" select="onSelectAll"/>
-                                </header>
-                            </Column>
+                                <Column id="colAction" width="3em">
+                                    <header>
+                                        <CheckBox id="selectAllCheckBox" select="onSelectAll"/>
+                                    </header>
+                                </Column>
                             <Column id="colItem" visible="{= ${device>/isPhone} !== true }"><header><Text id="txtColItem" text="{i18n>action}"/></header></Column>
                             <Column id="colItemDesc" visible="{= ${device>/isPhone} !== true }"><header><Text id="txtColItemDesc" text="{i18n>model}"/></header></Column>
                             <Column id="colDate" visible="{= ${device>/isPhone} !== true }"><header><Text id="txtColDate" text="{i18n>modelDesc}"/></header></Column>
@@ -62,9 +62,9 @@
                                 <cells>
                                     <!-- General cell for mobile devices only -->
                                     <Text id="txtGeneralMobile" visible="{= ${device>/isPhone} === true }"
-                                        text="{= 'Action: ' + ${pickItems>VORNR} + ', Model: ' + ${pickItems>MODEL} + ', Desc: ' + ${pickItems>MODEL_DESC} + ', Location: ' + ${pickItems>CY_SEQNR} + ', Date: ' + ${pickItems>BDTER} }"/>
+                                        text="{= ${pickItems>VORNR} + ', ' + ${pickItems>MODEL} + ', ' + ${pickItems>MODEL_DESC} + ', ' + ${pickItems>CY_SEQNR} + ', ' + ${pickItems>BDTER} }"/>
                                     <!-- Individual cells for non-mobile devices -->
-                                    <CheckBox id="rowSelectCheckBox" visible="{= ${device>/isPhone} !== true }" selected="{pickItems>selected}" select="onSelectRow"/>
+                                    <CheckBox id="rowSelectCheckBox" selected="{pickItems>selected}" select="onSelectRow"/>
                                     <Text id="rowItem" visible="{= ${device>/isPhone} !== true }" text="{pickItems>VORNR}"/>
                                     <Text id="rowItemDesc" visible="{= ${device>/isPhone} !== true }" text="{pickItems>MODEL}"/>
                                     <Text id="rowDate" visible="{= ${device>/isPhone} !== true }" text="{pickItems>MODEL_DESC}"/>
