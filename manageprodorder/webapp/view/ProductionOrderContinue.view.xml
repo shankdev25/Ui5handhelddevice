@@ -70,7 +70,8 @@
                                     <Text id="rowInventory" visible="{= ${device>/isPhone} !== true }" text="{path: 'pickItems>BDTER', formatter: '.formatter.bdterToDDMMYY'}"/>
                                     <!-- Reserved and Picking Quantity always shown -->
                                     <Text id="rowQtyInReservation" text="{pickItems>RESERVED_QTY}"/>
-                                    <Input id="rowQtyToPick" value="{pickItems>PICKING_QTY}" valueLiveUpdate="true" type="Number" width="6em"/>
+                                    <Input id="rowQtyToPick" value="{pickItems>PICKING_QTY}" valueLiveUpdate="true" type="Number" width="6em"
+                                        liveChange="onQtyToPickLiveChange"/>
                                 </cells>
                             </ColumnListItem>
                         </items>

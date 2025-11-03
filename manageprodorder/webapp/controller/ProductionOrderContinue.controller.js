@@ -1,8 +1,9 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/ui/model/json/JSONModel",
+    "sap/m/MessageBox",
     "com/merkavim/ewm/manageprodorder/model/formatter"
-], function(Controller, JSONModel , formatter) {
+], function(Controller, JSONModel, MessageBox, formatter) {
 // formatter is loaded for view binding
     "use strict";
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.ProductionOrderContinue", {
@@ -297,6 +298,30 @@ sap.ui.define([
             if (oHeaderCB) { oHeaderCB.setSelected(false); }
             sap.m.MessageToast.show("Selection cleared");
         },
+
+            /**
+             * Validate picking quantity cannot be greater than reserved quantity
+             */
+            onQtyToPickLiveChange: function(oEvent) {
+                var oInput = oEvent.getSource();
+                var sValue = oEvent.getParameter("value");
+                var oContext = oInput.getBindingContext("pickItems");
+                if (!oContext) { return; }
+                var oData = oContext.getObject();
+                var reservedQty = Number(oData.RESERVED_QTY);
+                var pickingQty = Number(sValue);
+                if (pickingQty > reservedQty) {
+                    oInput.setValue(reservedQty);
+                    var oComponent = this.getOwnerComponent();
+                    var oPickModel = oComponent.getModel("pickItems");
+                    if (oPickModel) {
+                        oPickModel.setProperty(oContext.getPath() + "/PICKING_QTY", reservedQty);
+                    }
+                    var oView = this.getView();
+                    var sMsg = oView.getModel("i18n").getResourceBundle().getText("errorPickingQtyExceedsReserved");
+                    MessageBox.error(sMsg);
+                }
+            },
 
         /**
          * Sort handler for table columns
