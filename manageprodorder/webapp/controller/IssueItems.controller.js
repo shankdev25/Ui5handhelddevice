@@ -6,9 +6,11 @@ sap.ui.define([
     "use strict";
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.IssueItems", {
         onInit: function () {
-            var oIssueItemsModel = this.getOwnerComponent().getModel("issueItems");
             var oView = this.getView();
+            var oRouter = this.getOwnerComponent().getRouter();
+            var that = this;
             var fnUpdateSummary = function() {
+                var oIssueItemsModel = that.getOwnerComponent().getModel("issueItems");
                 var aItems = (oIssueItemsModel && oIssueItemsModel.getProperty("/items")) || [];
                 var sum = aItems.reduce(function(acc, item) {
                     var val = parseFloat(item.PICKING_QTY);
@@ -21,9 +23,11 @@ sap.ui.define([
             };
             // Initial summary
             fnUpdateSummary();
-            // Listen for changes to the issueItems model
-            if (oIssueItemsModel) {
-                oIssueItemsModel.attachPropertyChange(fnUpdateSummary);
+            // Update summary on every route match (view show)
+            if (oRouter && oRouter.getRoute("IssueItems")) {
+                oRouter.getRoute("IssueItems").attachPatternMatched(function() {
+                    fnUpdateSummary();
+                });
             }
         },
         onNavBack: function () {
