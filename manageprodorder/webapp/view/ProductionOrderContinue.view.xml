@@ -30,24 +30,22 @@
                         <Input id="inputStock" value="{inputFields>/Stock}" placeholder="{i18n>stock}" width="16em" enabled="false"/>
                     </HBox>
                 </VBox>
-
-
                 <!-- Table for picking items, now scrollable -->
                 <VBox id="_IDGenVBox1" class="scrollableTableContainer" >
                     <Table id="pickTable" sticky="ColumnHeaders" items="{pickItems>items}" mode="None" class="sapUiSmallMarginTop">
                         <columns>
+                            <!-- Individual columns for non-mobile devices -->
+                            <Column id="colAction" width="3em">
+                                    <header>
+                                        <CheckBox id="selectAllCheckBox" select="onSelectAll"/>
+                                    </header>
+                            </Column>
                             <!-- General column for mobile devices only -->
                             <Column id="colGeneralMobile" visible="{= ${device>/isPhone} === true }">
                                 <header>
                                     <Text id="lblGeneralMobile" text="{i18n>general}"/>
                                 </header>
                             </Column>
-                            <!-- Individual columns for non-mobile devices -->
-                                <Column id="colAction" width="3em">
-                                    <header>
-                                        <CheckBox id="selectAllCheckBox" select="onSelectAll"/>
-                                    </header>
-                                </Column>
                             <Column id="colItem" visible="{= ${device>/isPhone} !== true }"><header><Text id="txtColItem" text="{i18n>action}"/></header></Column>
                             <Column id="colItemDesc" visible="{= ${device>/isPhone} !== true }"><header><Text id="txtColItemDesc" text="{i18n>model}"/></header></Column>
                             <Column id="colDate" visible="{= ${device>/isPhone} !== true }"><header><Text id="txtColDate" text="{i18n>modelDesc}"/></header></Column>
@@ -60,11 +58,11 @@
                         <items>
                             <ColumnListItem id="pickTableRowTemplate">
                                 <cells>
+                                   <CheckBox id="rowSelectCheckBox" selected="{pickItems>selected}" select="onSelectRow"/>
                                     <!-- General cell for mobile devices only -->
                                     <Text id="txtGeneralMobile" visible="{= ${device>/isPhone} === true }"
                                         text="{= ${pickItems>VORNR} + ', ' + ${pickItems>MODEL} + ', ' + ${pickItems>MODEL_DESC} + ', ' + ${pickItems>CY_SEQNR} + ', ' + ${pickItems>BDTER} }"/>
                                     <!-- Individual cells for non-mobile devices -->
-                                    <CheckBox id="rowSelectCheckBox" selected="{pickItems>selected}" select="onSelectRow"/>
                                     <Text id="rowItem" visible="{= ${device>/isPhone} !== true }" text="{pickItems>VORNR}"/>
                                     <Text id="rowItemDesc" visible="{= ${device>/isPhone} !== true }" text="{pickItems>MODEL}"/>
                                     <Text id="rowDate" visible="{= ${device>/isPhone} !== true }" text="{pickItems>MODEL_DESC}"/>
@@ -78,7 +76,6 @@
                         </items>
                     </Table>
                 </VBox>
-
         </VBox>
     </Page>
 </mvc:View>
