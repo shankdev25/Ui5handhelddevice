@@ -7,6 +7,22 @@ sap.ui.define([
     "use strict";
 
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.IssueInternalOrder", {
+        onBeforeRendering: function() {
+            // Clear all fields in the view model every time the page is shown
+            this.getView().setModel(new sap.ui.model.json.JSONModel({
+                WERKS: "",
+                LGORT: "",
+                AUFNR: "",
+                KOSTL: "",
+                MATNR: "",
+                MEINS: "",
+                LGPBE: "",
+                LABST: "",
+                MAKTX: "",
+                BKTXT: "",
+                PICKING_QTY: ""
+            }), "view");
+        },
         /**
          * Handler for Enter key press on input fields
          * @param {sap.ui.base.Event} oEvent
@@ -62,18 +78,37 @@ sap.ui.define([
         },
 
         onInit: function () {
-            // this.getView().setModel(new sap.ui.model.json.JSONModel({
-            //     LGORT: "",
-            //     AUFNR: "",
-            //     KOSTL: "",
-            //     MATNR: "",
-            //     PICKING_QTY: "",
-            //     BKTXT: "",
-            //     MAKTX: "",
-            //     LGPBE: "",
-            //     MEINS: "",
-            //     LABST: ""
-            // }), "view");
+            var oRouter = this.getOwnerComponent().getRouter();
+            var that = this;
+            oRouter.getRoute("IssueInternalOrder").attachMatched(function() {
+                that.getView().setModel(new sap.ui.model.json.JSONModel({
+                    WERKS: "",
+                    LGORT: "",
+                    AUFNR: "",
+                    KOSTL: "",
+                    MATNR: "",
+                    MEINS: "",
+                    LGPBE: "",
+                    LABST: "",
+                    MAKTX: "",
+                    BKTXT: "",
+                    PICKING_QTY: ""
+                }), "view");
+            });
+            // Clear all fields in the view model on initialization
+            this.getView().setModel(new sap.ui.model.json.JSONModel({
+                WERKS: "",
+                LGORT: "",
+                AUFNR: "",
+                KOSTL: "",
+                MATNR: "",
+                MEINS: "",
+                LGPBE: "",
+                LABST: "",
+                MAKTX: "",
+                BKTXT: "",
+                PICKING_QTY: ""
+            }), "view");
 
             // Add global keydown listener for Enter
             var that = this;
