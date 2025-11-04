@@ -38,7 +38,7 @@
                         <Input id="issueQuantityInput" type="Number" width="200px" value="{view>/PICKING_QTY}"/>
 
                         <Label text="{i18n>remark}" labelFor="remarkInput"/>
-                        <TextArea id="remarkInput"  width="200px" value="{view>/BKTXT}"/>
+                        <TextArea id="remarkInput"  width="200px" value="{view>/BKTXT}" liveChange="onRemarkLiveChange"/>
 
                         <!-- New disabled fields from attachment -->
                         <Label text="{i18n>materialDescription}" labelFor="materialDescriptionInput"/>

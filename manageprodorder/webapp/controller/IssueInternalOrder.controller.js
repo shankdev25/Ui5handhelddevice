@@ -222,6 +222,10 @@ sap.ui.define([
             });
         },
 
+        onRemarkLiveChange: function(oEvent) {
+            var sValue = oEvent.getParameter("value");
+            this.getView().getModel("view").setProperty("/BKTXT", sValue);
+        },
         onContinue: function () {
             var oItemsModel = this.getView().getModel("items");
             var aItems = oItemsModel && oItemsModel.getProperty("/items");
