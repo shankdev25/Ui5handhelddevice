@@ -41,7 +41,7 @@ sap.ui.define([
                 });
 
             var oDialog = new sap.m.Dialog({
-                title: "Edit Item",
+                title: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("editItemTitle"),
                 content: [oSimpleForm],
                 beginButton: new sap.m.Button({
                     text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("saveLabel"),
