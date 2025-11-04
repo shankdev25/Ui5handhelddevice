@@ -15,7 +15,7 @@
                         <Column minScreenWidth="Phone" demandPopin="false" sortProperty="MEINS" sortable="true"><Text text="{i18n>baseUoM}"/></Column>
                         <Column minScreenWidth="Phone" demandPopin="false" sortProperty="LABST" sortable="true"><Text text="{i18n>stock}"/></Column>
                         <Column minScreenWidth="Phone" demandPopin="false" sortProperty="PICKING_QTY" sortable="true"><Text text="{i18n>pickingQty}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="Actions"/></Column>
+                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="  "/></Column>
                     </columns>
                     <items>
                         <ColumnListItem>
