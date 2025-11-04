@@ -23,19 +23,19 @@ sap.ui.define([
                     editable: true,
                     layout: "ResponsiveGridLayout",
                     content: [
-                        new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("internalOrder") }),
+                            new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("internalOrderLabel") }),
                         new sap.m.Input({ value: oData.AUFNR, liveChange: function (e) { oData.AUFNR = e.getParameter("value"); } }),
-                        new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("storageLocation") }),
+                            new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("storageLocationLabel") }),
                         new sap.m.Input({ value: oData.LGORT, liveChange: function (e) { oData.LGORT = e.getParameter("value"); } }),
-                        new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("materialNumber") }),
+                            new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("materialNumberLabel") }),
                         new sap.m.Input({ value: oData.MATNR, liveChange: function (e) { oData.MATNR = e.getParameter("value"); } }),
-                        new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("materialDescription") }),
+                            new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("materialDescriptionLabel") }),
                         new sap.m.Input({ value: oData.MAKTX, liveChange: function (e) { oData.MAKTX = e.getParameter("value"); } }),
-                        new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("baseUoM") }),
+                            new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("baseUoMLabel") }),
                         new sap.m.Input({ value: oData.MEINS, liveChange: function (e) { oData.MEINS = e.getParameter("value"); } }),
-                        new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("stock") }),
+                            new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("stockLabel") }),
                         new sap.m.Input({ value: oData.LABST, liveChange: function (e) { oData.LABST = e.getParameter("value"); } }),
-                        new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("pickingQty") }),
+                            new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("pickingQtyLabel") }),
                         new sap.m.Input({ value: oData.PICKING_QTY, liveChange: function (e) { oData.PICKING_QTY = e.getParameter("value"); } })
                     ]
                 });
@@ -44,7 +44,7 @@ sap.ui.define([
                 title: "Edit Item",
                 content: [oSimpleForm],
                 beginButton: new sap.m.Button({
-                    text: "Save",
+                    text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("saveLabel"),
                     press: function () {
                         aItems[iIndex] = oData;
                         oModel.setProperty("/items", aItems);
@@ -52,7 +52,7 @@ sap.ui.define([
                     }
                 }),
                 endButton: new sap.m.Button({
-                    text: "Cancel",
+                    text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("cancelLabel"),
                     press: function () { oDialog.close(); }
                 }),
                 afterClose: function () { oDialog.destroy(); }
