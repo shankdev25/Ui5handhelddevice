@@ -19,32 +19,26 @@ sap.ui.define([
             var oData = Object.assign({}, aItems[iIndex]);
 
             // Use SimpleForm for better alignment
-            var oSimpleForm = new SimpleForm({
-                editable: true,
-                layout: "ResponsiveGridLayout",
-                content: [
-                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("materialDescription") }),
-                    new sap.m.Input({ value: oData.materialDescription, enabled: false }),
-                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("itemLocator") }),
-                    new sap.m.Input({ value: oData.itemLocator, enabled: false }),
-                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("uom") }),
-                    new sap.m.Input({ value: oData.uom, enabled: false }),
-                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("quantityInStock") }),
-                    new sap.m.Input({ value: oData.quantityInStock, enabled: false }),
-                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("issuingStorageLocation") }),
-                    new sap.m.Input({ value: oData.LGORT, liveChange: function (e) { oData.LGORT = e.getParameter("value"); } }),
-                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("internalOrder") }),
-                    new sap.m.Input({ value: oData.AUFNR, liveChange: function (e) { oData.AUFNR = e.getParameter("value"); } }),
-                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("costCenter") }),
-                    new sap.m.Input({ value: oData.KOSTL, liveChange: function (e) { oData.KOSTL = e.getParameter("value"); } }),
-                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("material") }),
-                    new sap.m.Input({ value: oData.material, liveChange: function (e) { oData.material = e.getParameter("value"); } }),
-                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("issueQuantity") }),
-                    new sap.m.Input({ value: oData.issueQuantity, liveChange: function (e) { oData.issueQuantity = e.getParameter("value"); } }),
-                    new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("remark") }),
-                    new sap.m.Input({ value: oData.remark, liveChange: function (e) { oData.remark = e.getParameter("value"); } })
-                ]
-            });
+                var oSimpleForm = new SimpleForm({
+                    editable: true,
+                    layout: "ResponsiveGridLayout",
+                    content: [
+                        new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("internalOrder") }),
+                        new sap.m.Input({ value: oData.AUFNR, liveChange: function (e) { oData.AUFNR = e.getParameter("value"); } }),
+                        new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("storageLocation") }),
+                        new sap.m.Input({ value: oData.LGORT, liveChange: function (e) { oData.LGORT = e.getParameter("value"); } }),
+                        new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("materialNumber") }),
+                        new sap.m.Input({ value: oData.MATNR, liveChange: function (e) { oData.MATNR = e.getParameter("value"); } }),
+                        new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("materialDescription") }),
+                        new sap.m.Input({ value: oData.MAKTX, liveChange: function (e) { oData.MAKTX = e.getParameter("value"); } }),
+                        new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("baseUoM") }),
+                        new sap.m.Input({ value: oData.MEINS, liveChange: function (e) { oData.MEINS = e.getParameter("value"); } }),
+                        new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("stock") }),
+                        new sap.m.Input({ value: oData.LABST, liveChange: function (e) { oData.LABST = e.getParameter("value"); } }),
+                        new sap.m.Label({ text: this.getOwnerComponent().getModel("i18n").getResourceBundle().getText("pickingQty") }),
+                        new sap.m.Input({ value: oData.PICKING_QTY, liveChange: function (e) { oData.PICKING_QTY = e.getParameter("value"); } })
+                    ]
+                });
 
             var oDialog = new sap.m.Dialog({
                 title: "Edit Item",
