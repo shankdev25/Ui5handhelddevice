@@ -29,7 +29,7 @@
 
             <!-- Card-based layout for mobile mode -->
             <VBox id="mobileCardsContainer" visible="{= ${device>/isPhone} }">
-                <List id="mobileCardList" items="{pickItems>items}" mode="None" showSeparators="None">
+                <List id="mobileCardList" items="{pickItems>/items}" mode="None" showSeparators="None">
                     <items>
                         <CustomListItem id="mobileCardListItem">
                             <VBox id="mobileCardVBox" class="sapUiSmallMarginBottom sapUiResponsiveMargin" >
@@ -87,7 +87,7 @@
             </VBox>
         </VBox>
         <footer>
-            <Bar id="footerBar">
+            <Bar id="prodOrderContinueFooterBar">
                 <contentMiddle>
                     <Button id="btnDisplayIssue" text="{i18n>displayItemsForIssue}"  press="onDisplayIssueItems" type="Unstyled" class="doubleHeightButton greenButton" />
                     <Button id="btnClearSelection" text="{i18n>clearSelection}" type="Unstyled" class="sapUiSmallMarginBegin doubleHeightButton lightBlueButton"  press="onClearSelection"/>
