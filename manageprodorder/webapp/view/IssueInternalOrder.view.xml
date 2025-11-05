@@ -20,7 +20,7 @@
                     </Button>
                     <Button text="{i18n>showitem}" press="onContinue"  type="Unstyled" class="doubleHeightButton greenButton" />
                 </HBox>
-                <Panel headerText="Order Details" expandable="false" class="sapUiResponsiveMargin sapUiMediumMargin centered-panel">
+                <Panel  expandable="false" class="sapUiResponsiveMargin sapUiMediumMargin centered-panel">
                     <VBox class="centered-panel">
                         <Label text="{i18n>issuingStorageLocationLabel}" labelFor="issuingStorageLocationInput"/>
                         <Input id="issuingStorageLocationInput" width="200px" value="{view>/LGORT}"/>
