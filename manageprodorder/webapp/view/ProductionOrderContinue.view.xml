@@ -33,10 +33,10 @@
                     <items>
                         <CustomListItem id="mobileCardListItem">
                             <VBox id="mobileCardVBox" class="sapUiSmallMarginBottom sapUiResponsiveMargin" >
-                                <Text id="mobileCardActionText" text="{i18n>action}: {pickItems>VORNR}" class="sapUiTinyMarginBottom"/>
                                 <HBox id="mobileCardHeaderHBox" alignItems="Center" justifyContent="End" class="sapUiTinyMarginBottom">
                                     <CheckBox id="mobileCardSelectCheckBox" selected="{pickItems>selected}" select="onSelectRow"/>
                                 </HBox>
+                                <Text id="mobileCardActionText" text="{i18n>action}: {pickItems>VORNR}" class="sapUiTinyMarginBottom"/>
                                 <Text id="mobileCardModelText" text="{i18n>model}: {pickItems>MODEL}"/>
                                 <Text id="mobileCardModelDescText" text="{i18n>modelDesc}: {pickItems>MODEL_DESC}"/>
                                 <Text id="mobileCardShortBusNumText" text="{i18n>shortbusnum}: {pickItems>CY_SEQNR}"/>
