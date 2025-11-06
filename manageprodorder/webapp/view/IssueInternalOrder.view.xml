@@ -22,14 +22,15 @@
                 </HBox>
                 <Panel  expandable="false" class="sapUiResponsiveMargin sapUiMediumMargin centered-panel">
                     <VBox class="centered-panel">
+
+                        <Label text="{i18n>costCenterLabel}" labelFor="costCenterInput"/>
+                        <Input id="costCenterInput" width="200px" value="{view>/KOSTL}" showValueHelp="true" valueHelpRequest="onCostCenterValueHelp"/>
+
                         <Label text="{i18n>issuingStorageLocationLabel}" labelFor="issuingStorageLocationInput"/>
                         <Input id="issuingStorageLocationInput" width="200px" value="{view>/LGORT}"/>
 
                         <Label text="{i18n>internalOrderLabel}" labelFor="internalOrderInput"/>
                         <Input id="internalOrderInput" width="200px" value="{view>/AUFNR}" showValueHelp="true" valueHelpRequest="onInternalOrderValueHelp"/>
-
-                        <Label text="{i18n>costCenterLabel}" labelFor="costCenterInput"/>
-                        <Input id="costCenterInput" width="200px" value="{view>/KOSTL}" showValueHelp="true" valueHelpRequest="onCostCenterValueHelp"/>
 
                         <Label text="{i18n>materialNumberLabel}" labelFor="materialInput"/>
                         <Input id="materialInput" width="200px" value="{view>/MATNR}"/>
