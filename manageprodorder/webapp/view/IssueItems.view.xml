@@ -4,7 +4,7 @@
     <Page id="issueItemsPage" title="{i18n>prodOrderTileHeader}" showNavButton="true" navButtonPress="onNavBack">
         <VBox id="issueItemsVBox" class="sapUiSmallMargin">
             <!-- Desktop/tablet actions toolbar -->
-             <Button id="btnIssueSaveTop" text="{i18n>save}" press="onSave" type="Unstyled" class="doubleHeightButton greenButton"/>
+             <Button id="btnIssueSaveTop" text="{i18n>save}" press="onSave" type="Unstyled" class="doubleHeightButton greenButton" visible="{= ${device>/isPhone} !== true }"/>
              <VBox id="issueItemsSummaryBox" class="sapUiSmallMarginBottom" justifyContent="Center">
                     <Text id="txtIssueItemsSummary" text="{i18n>summary}" class="sapUiHighlight"/>
             </VBox>
