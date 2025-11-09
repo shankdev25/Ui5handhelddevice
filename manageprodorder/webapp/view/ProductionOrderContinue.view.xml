@@ -2,30 +2,31 @@
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
     <Page id="prodOrderContinuePage" title="{i18n>prodOrderTileHeader}" showNavButton="true" navButtonPress="onNavBack">
-        <VBox id="continueVBox" class="sapUiSmallMargin">
-            <!-- Input fields for table columns, aligned vertically -->
-            <VBox id="inputFieldsVBox" class="sapUiSmallMarginBottom">
-                <HBox id="hboxInputMaterial" class="sapUiTinyMarginBottom" >
-                    <Text id="lblInputMaterial" text="{i18n>material}" width="10em" textAlign="Begin" class="sapUiTinyMarginEnd"/>
-                    <Input id="inputMaterial" value="{inputFields>/Material}" placeholder="{i18n>material}" width="16em" enabled="false" textAlign="Begin"/>
-                </HBox>
-                <HBox id="hboxInputMaterialDescription" class="sapUiTinyMarginBottom" >
-                    <Text id="lblInputMaterialDescription" text="{i18n>materialDescription}" width="10em" textAlign="Begin" class="sapUiTinyMarginEnd"/>
-                    <Input id="inputMaterialDescription" value="{inputFields>/MaterialDescription}" placeholder="{i18n>materialDescription}" width="16em" enabled="false" textAlign="Begin"/>
-                </HBox>
-                <HBox id="hboxInputUOM" class="sapUiTinyMarginBottom" >
-                    <Text id="lblInputUOM" text="{i18n>uom}" width="10em" textAlign="Begin" class="sapUiTinyMarginEnd"/>
-                    <Input id="inputUOM" value="{inputFields>/UOM}" placeholder="{i18n>uom}" width="16em" enabled="false" textAlign="Begin"/>
-                </HBox>
-                <HBox id="hboxInputLocation" class="sapUiTinyMarginBottom" >
-                    <Text id="lblInputLocation" text="{i18n>location}" width="10em" textAlign="Begin" class="sapUiTinyMarginEnd"/>
-                    <Input id="inputLocation" value="{inputFields>/Location}" placeholder="{i18n>location}" width="16em" enabled="false" textAlign="Begin"/>
-                </HBox>
-                <HBox id="hboxInputStock" class="sapUiTinyMarginBottom" >
-                    <Text id="lblInputStock" text="{i18n>stock}" width="10em" textAlign="Begin" class="sapUiTinyMarginEnd"/>
-                    <Input id="inputStock" value="{inputFields>/Stock}" placeholder="{i18n>stock}" width="16em" enabled="false" textAlign="Begin"/>
-                </HBox>
-            </VBox>
+            <headerContent>
+                <VBox id="inputFieldsVBox" class="sapUiSmallMarginBottom">
+                    <HBox id="hboxInputMaterial" class="sapUiTinyMarginBottom" >
+                        <Text id="lblInputMaterial" text="{i18n>material}" width="10em" textAlign="Begin" class="sapUiTinyMarginEnd"/>
+                        <Input id="inputMaterial" value="{inputFields>/Material}" placeholder="{i18n>material}" width="16em" enabled="false" textAlign="Begin"/>
+                    </HBox>
+                    <HBox id="hboxInputMaterialDescription" class="sapUiTinyMarginBottom" >
+                        <Text id="lblInputMaterialDescription" text="{i18n>materialDescription}" width="10em" textAlign="Begin" class="sapUiTinyMarginEnd"/>
+                        <Input id="inputMaterialDescription" value="{inputFields>/MaterialDescription}" placeholder="{i18n>materialDescription}" width="16em" enabled="false" textAlign="Begin"/>
+                    </HBox>
+                    <HBox id="hboxInputUOM" class="sapUiTinyMarginBottom" >
+                        <Text id="lblInputUOM" text="{i18n>uom}" width="10em" textAlign="Begin" class="sapUiTinyMarginEnd"/>
+                        <Input id="inputUOM" value="{inputFields>/UOM}" placeholder="{i18n>uom}" width="16em" enabled="false" textAlign="Begin"/>
+                    </HBox>
+                    <HBox id="hboxInputLocation" class="sapUiTinyMarginBottom" >
+                        <Text id="lblInputLocation" text="{i18n>location}" width="10em" textAlign="Begin" class="sapUiTinyMarginEnd"/>
+                        <Input id="inputLocation" value="{inputFields>/Location}" placeholder="{i18n>location}" width="16em" enabled="false" textAlign="Begin"/>
+                    </HBox>
+                    <HBox id="hboxInputStock" class="sapUiTinyMarginBottom" >
+                        <Text id="lblInputStock" text="{i18n>stock}" width="10em" textAlign="Begin" class="sapUiTinyMarginEnd"/>
+                        <Input id="inputStock" value="{inputFields>/Stock}" placeholder="{i18n>stock}" width="16em" enabled="false" textAlign="Begin"/>
+                    </HBox>
+                </VBox>
+            </headerContent>
+            <VBox id="continueVBox" class="sapUiSmallMargin">
 
             <!-- Card-based layout for mobile mode -->
             <VBox id="mobileCardsContainer" visible="{= ${device>/isPhone} }">
