@@ -167,9 +167,9 @@ sap.ui.define([
             var oModel = this.getView().getModel("view");
             var oData = oModel.getData();
             oModel.setData({
-                LGORT: oData.LGORT,
-                AUFNR: oData.AUFNR,
-                KOSTL: oData.KOSTL,
+                LGORT: "",
+                AUFNR: "",
+                KOSTL: "",
                 MATNR: "",
                 PICKING_QTY: "",
                 BKTXT: "",
