@@ -4,9 +4,7 @@
     <Page id="issueItemsPage" title="{i18n>prodOrderTileHeader}" showNavButton="true" navButtonPress="onNavBack">
         <VBox id="issueItemsVBox" class="sapUiSmallMargin">
             <!-- Desktop/tablet actions toolbar -->
-            <Toolbar id="issueItemsTopToolbar" visible="{= ${device>/isPhone} !== true }" class="topActionToolbar">
-                <Button id="btnIssueSaveTop" text="{i18n>save}" press="onSave" type="Unstyled" class="doubleHeightButton greenButton"/>
-            </Toolbar>
+             <Button id="btnIssueSaveTop" text="{i18n>save}" press="onSave" type="Unstyled" class="doubleHeightButton greenButton"/>
              <VBox id="issueItemsSummaryBox" class="sapUiSmallMarginBottom" justifyContent="Center">
                     <Text id="txtIssueItemsSummary" text="{i18n>summary}" class="sapUiHighlight"/>
             </VBox>
@@ -75,8 +73,10 @@
         </VBox>
         <footer>
             <Bar id="issueItemsFooterBar" visible="{= ${device>/isPhone} }">
-                <ToolbarSpacer id="prodOrderFooterSpacer123"/>
-                <Button id="btnIssueSave" text="{i18n>save}" press="onSave" type="Unstyled" class="doubleHeightButton greenButton"/>
+                <contentRight>
+                    <ToolbarSpacer id="prodOrderFooterSpacer123"/>
+                    <Button id="btnIssueSave" text="{i18n>save}" press="onSave" type="Unstyled" class="doubleHeightButton greenButton"/>
+                </contentRight>
             </Bar>
         </footer>
     </Page>
