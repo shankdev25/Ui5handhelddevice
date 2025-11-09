@@ -5,7 +5,9 @@
     controllerName="com.merkavim.ewm.manageprodorder.controller.InternalOrderCreated"
     displayBlock="true">
     <Page id="_IDGenPage" title="{i18n>addedItemsTitle}">
-        <content>
+    showNavButton="true"
+    navButtonPress="onNavBack"
+    <content>
             <VBox id="_IDGenVBox" alignItems="Center" justifyContent="Center">
                 <HBox id="_IDGenHBox1" alignItems="Center" justifyContent="Center">
                     <Text id="_IDGenText" text="{i18n>documentCreatedTitle}" />

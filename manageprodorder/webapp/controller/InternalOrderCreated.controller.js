@@ -25,6 +25,15 @@ sap.ui.define([
         },
         onNavHome: function () {
             this.getOwnerComponent().getRouter().navTo("RouteView1");
+        },
+
+        onNavBack: function () {
+            // Clear items in the destination view's model
+            var oItemsModel = this.getOwnerComponent().getModel("items");
+            if (oItemsModel) {
+                oItemsModel.setProperty("/items", []);
+            }
+            this.getOwnerComponent().getRouter().navTo("IssueInternalOrderItems");
         }
     });
 });
