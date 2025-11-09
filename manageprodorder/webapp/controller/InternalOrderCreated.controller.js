@@ -33,7 +33,7 @@ sap.ui.define([
             if (oItemsModel) {
                 oItemsModel.setProperty("/items", []);
             }
-            this.getOwnerComponent().getRouter().navTo("IssueInternalOrderItems");
+            this.getOwnerComponent().getRouter().navTo("RouteView1");
         }
     });
 });
