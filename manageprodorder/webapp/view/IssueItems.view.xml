@@ -3,9 +3,6 @@
     xmlns="sap.m">
     <Page id="issueItemsPage" title="{i18n>prodOrderTileHeader}" showNavButton="true" navButtonPress="onNavBack">
         <VBox id="issueItemsVBox" class="sapUiSmallMargin">
-            <HBox id="issueItemsButtonsBar" class="sapUiSmallMarginBottom">
-                    <Button id="btnIssueSave" text="{i18n>save}"  press="onSave" type="Unstyled" class="doubleHeightButton greenButton" />
-            </HBox>
              <VBox id="issueItemsSummaryBox" class="sapUiSmallMarginBottom" justifyContent="Center">
                     <Text id="txtIssueItemsSummary" text="{i18n>summary}" class="sapUiHighlight"/>
             </VBox>
@@ -72,5 +69,12 @@
             </Table>
             </VBox>
         </VBox>
+        <footer>
+            <Bar id="issueItemsFooterBar">
+                <contentMiddle>
+                    <Button id="btnIssueSave" text="{i18n>save}" press="onSave" type="Unstyled" class="doubleHeightButton greenButton"/>
+                </contentMiddle>
+            </Bar>
+        </footer>
     </Page>
 </mvc:View>
