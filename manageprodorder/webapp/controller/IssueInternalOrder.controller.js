@@ -180,6 +180,23 @@ sap.ui.define([
             });
         },
 
+         onClearFieldsAdd: function () {
+            var oModel = this.getView().getModel("view");
+            var oData = oModel.getData();
+            oModel.setData({
+                LGORT: oData.LGORT,
+                AUFNR: oData.AUFNR,
+                KOSTL: oData.KOSTL,
+                MATNR: "",
+                PICKING_QTY: "",
+                BKTXT: "",
+                MAKTX: "",
+                LGPBE: "",
+                MEINS: "",
+                LABST: ""
+            });
+        },
+
         onAdd: function () {
             var oViewModel = this.getView().getModel("view");
             var oItemsModel = this.getView().getModel("items");
@@ -214,7 +231,7 @@ sap.ui.define([
                     aItems.push(oData);
                     oItemsModel.setProperty("/items", aItems);
                     MessageToast.show(that.getView().getModel("i18n").getResourceBundle().getText("itemAddedSuccess"));
-                    that.onClearFields();
+                    that.onClearFieldsAdd();
                 },
                 error: function (xhr, status, error) {
                     MessageBox.error("Failed to check item before adding");
