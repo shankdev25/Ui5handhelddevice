@@ -26,6 +26,12 @@
                     <Text id="lblInputStock" text="{i18n>stock}" width="10em" textAlign="Begin" class="sapUiTinyMarginEnd"/>
                     <Input id="inputStock" value="{inputFields>/Stock}" placeholder="{i18n>stock}" width="16em" enabled="false" textAlign="Begin"/>
                 </HBox>
+                <!-- Desktop/tablet actions toolbar -->
+                <Toolbar id="prodOrderContinueTopToolbar" visible="{= ${device>/isPhone} !== true }" class="topActionToolbar">
+                    <ToolbarSpacer id="prodOrderContinueSpacer" />
+                    <Button id="btnClearSelectionTop" text="{i18n>clearSelection}" type="Unstyled" class="sapUiSmallMarginBegin doubleHeightButton lightBlueButton"  press="onClearSelection"/>
+                    <Button id="btnDisplayIssueTop" text="{i18n>displayItemsForIssue}"  press="onDisplayIssueItems" type="Unstyled" class="doubleHeightButton greenButton" />
+                </Toolbar>
             </VBox>
 
             <!-- Card-based layout for mobile mode -->
@@ -88,7 +94,7 @@
             </VBox>
         </VBox>
         <footer>
-            <Bar id="prodOrderContinueFooterBar">
+            <Bar id="prodOrderContinueFooterBar" visible="{= ${device>/isPhone} }">
                 <contentMiddle>
                     <Button id="btnClearSelection" text="{i18n>clearSelection}" type="Unstyled" class="sapUiSmallMarginBegin doubleHeightButton lightBlueButton"  press="onClearSelection"/>
                     <Button id="btnDisplayIssue" text="{i18n>displayItemsForIssue}"  press="onDisplayIssueItems" type="Unstyled" class="doubleHeightButton greenButton" />

@@ -7,19 +7,13 @@
             </headerContent>
         <content>
             <VBox id="_IDGenVBox6" class="sapUiMediumMargin sapUiAlignCenter">
-                <HBox id="_IDGenHBox">
-                    <Button id="_IDGenButton2" text="{i18n>clearButton}" press="onClearFields" type="Unstyled" class="doubleHeightButton lightBlueButton" >
-                        <layoutData>
-                            <FlexItemData id="_IDGenFlexItemData" styleClass="sapUiTinyMarginEnd" />
-                        </layoutData>
-                    </Button>
-                    <Button id="_IDGenButton3" text="{i18n>addButton}" press="onAdd" type="Unstyled" class="doubleHeightButton lightBlueButton" >
-                        <layoutData>
-                            <FlexItemData id="_IDGenFlexItemData1" styleClass="sapUiTinyMarginEnd" />
-                        </layoutData>
-                    </Button>
+                <!-- Desktop/tablet actions toolbar (top, above inputs) -->
+                <Toolbar id="issueInternalOrderTopToolbar" visible="{= ${device>/isPhone} !== true }" class="topActionToolbar">
+                    <ToolbarSpacer id="issueInternalOrderTopSpacer" />
+                    <Button id="_IDGenButton2" text="{i18n>clearButton}" press="onClearFields" type="Unstyled" class="doubleHeightButton lightBlueButton sapUiTinyMarginEnd" />
+                    <Button id="_IDGenButton3" text="{i18n>addButton}" press="onAdd" type="Unstyled" class="doubleHeightButton lightBlueButton sapUiTinyMarginEnd" />
                     <Button id="_IDGenButton4" text="{i18n>showitem}" press="onContinue"  type="Unstyled" class="doubleHeightButton greenButton" />
-                </HBox>
+                </Toolbar>
                 <Panel id="_IDGenPanel"  expandable="false" class="sapUiResponsiveMargin sapUiMediumMargin centered-panel">
                     <VBox id="_IDGenVBox7" class="centered-panel">
 
@@ -59,5 +53,15 @@
                 
             </VBox>
         </content>
+        <footer>
+            <!-- Mobile-only footer actions -->
+            <Bar id="issueInternalOrderFooterBar" visible="{= ${device>/isPhone} }">
+                <contentMiddle>
+                    <Button id="_IDGenButton2Footer" text="{i18n>clearButton}" press="onClearFields" type="Unstyled" class="doubleHeightButton lightBlueButton sapUiTinyMarginEnd" />
+                    <Button id="_IDGenButton3Footer" text="{i18n>addButton}" press="onAdd" type="Unstyled" class="doubleHeightButton lightBlueButton sapUiTinyMarginEnd" />
+                    <Button id="_IDGenButton4Footer" text="{i18n>showitem}" press="onContinue"  type="Unstyled" class="doubleHeightButton greenButton" />
+                </contentMiddle>
+            </Bar>
+        </footer>
     </Page>
 </mvc:View>

@@ -3,6 +3,11 @@
     xmlns="sap.m">
     <Page id="issueItemsPage" title="{i18n>prodOrderTileHeader}" showNavButton="true" navButtonPress="onNavBack">
         <VBox id="issueItemsVBox" class="sapUiSmallMargin">
+            <!-- Desktop/tablet actions toolbar -->
+            <Toolbar id="issueItemsTopToolbar" visible="{= ${device>/isPhone} !== true }" class="topActionToolbar">
+                <ToolbarSpacer id="issueItemsTopSpacer" />
+                <Button id="btnIssueSaveTop" text="{i18n>save}" press="onSave" type="Unstyled" class="doubleHeightButton greenButton"/>
+            </Toolbar>
              <VBox id="issueItemsSummaryBox" class="sapUiSmallMarginBottom" justifyContent="Center">
                     <Text id="txtIssueItemsSummary" text="{i18n>summary}" class="sapUiHighlight"/>
             </VBox>
@@ -70,7 +75,7 @@
             </VBox>
         </VBox>
         <footer>
-            <Bar id="issueItemsFooterBar">
+            <Bar id="issueItemsFooterBar" visible="{= ${device>/isPhone} }">
                 <contentMiddle>
                     <Button id="btnIssueSave" text="{i18n>save}" press="onSave" type="Unstyled" class="doubleHeightButton greenButton"/>
                 </contentMiddle>
