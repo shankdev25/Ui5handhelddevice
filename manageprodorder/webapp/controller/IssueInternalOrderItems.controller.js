@@ -1,11 +1,18 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "com/merkavim/ewm/manageprodorder/controller/BaseController",
     "sap/m/MessageBox",
     "sap/ui/layout/form/SimpleForm"
-], function (Controller, MessageBox, SimpleForm) {
+], function (BaseController, MessageBox, SimpleForm) {
     "use strict";
-
-    return Controller.extend("com.merkavim.ewm.manageprodorder.controller.IssueInternalOrderItems", {
+    return BaseController.extend("com.merkavim.ewm.manageprodorder.controller.IssueInternalOrderItems", {
+        onInit: function(){
+            var that = this;
+            // initial toggle (point 3) for mobile cards vs table
+            this.toggleMobileDesktop({ mobile: "iioMobileCardsContainer", desktop: "itemsTable" });
+            sap.ui.Device.media.attachHandler(function(){
+                that.toggleMobileDesktop({ mobile: "iioMobileCardsContainer", desktop: "itemsTable" });
+            });
+        },
         onNavBack: function () {
             this.getOwnerComponent().getRouter().navTo("IssueInternalOrder");
         },

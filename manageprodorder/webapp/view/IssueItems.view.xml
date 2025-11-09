@@ -28,7 +28,26 @@
                 <Text id="txtSummary" text= "{i18n>summary}" class="sapUiSmallMarginEnd"/>
                 <Input id="inputSummary" value="" enabled="false" width="16em"/>
             </VBox>
-            <VBox id="_IDGenVBox2" class="scrollableTableContainer">
+            <!-- Mobile cards (visible on phone) -->
+            <VBox id="issueMobileCardsContainer" visible="{= ${device>/isPhone} }">
+                <List id="issueMobileCardList" items="{issueItems>/items}" mode="None" showSeparators="All">
+                    <items>
+                        <CustomListItem id="issueMobileCardListItem">
+                            <VBox id="issueMobileCardVBox" class="sapUiSmallMarginBottom sapUiResponsiveMargin">
+                                <Text id="issueMobileCardProdOrder" text="{i18n>productionOrder}: {issueItems>AUFNR}" class="sapUiTinyMarginBottom"/>
+                                <Text id="issueMobileCardMatDesc" text="{i18n>materialDescription1}: {issueItems>MODEL_DESC}"/>
+                                <Text id="issueMobileCardShortBus" text="{i18n>shortbusnum}: {issueItems>CY_SEQNR}"/>
+                                <Text id="issueMobileCardQtyToPick" text="{i18n>qtyToPick1}: {issueItems>PICKING_QTY}"/>
+                                <Text id="issueMobileCardBatch" text="{i18n>batchnumber}: {issueItems>CHARG}"/>
+                                <Text id="issueMobileCardSerial" text="{i18n>serialNumber}: {issueItems>SERNR}"/>
+                            </VBox>
+                        </CustomListItem>
+                    </items>
+                </List>
+            </VBox>
+
+            <!-- Desktop/tablet table (hidden on phone) -->
+            <VBox id="_IDGenVBox2" class="scrollableTableContainer" visible="{= ${device>/isPhone} !== true }">
                 <Table id="issueItemsTable" sticky="ColumnHeaders" items="{issueItems>/items}" class="sapUiSmallMarginTop">
                 <columns>
                     <Column id="colIssItem"><header><Text id="txtIssItem" text="{i18n>productionOrder}"/></header></Column>

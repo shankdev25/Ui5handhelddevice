@@ -13,6 +13,12 @@ function (JSONModel, Device) {
         createDeviceModel: function () {
             var oModel = new JSONModel(Device);
             oModel.setDefaultBindingMode("OneWay");
+            // Provide shortcut flags at root to simplify bindings: device>/isPhone
+            try {
+                oModel.setProperty("/isPhone", !!Device.system.phone);
+                oModel.setProperty("/isTablet", !!Device.system.tablet);
+                oModel.setProperty("/isDesktop", !!Device.system.desktop);
+            } catch (e) { /* ignore */ }
             return oModel;
         }
     };

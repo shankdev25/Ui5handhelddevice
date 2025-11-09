@@ -6,52 +6,53 @@
                 <Button id="issueInternalOrderHomeButton" icon="sap-icon://home" press="onNavHome"/>
             </headerContent>
         <content>
-            <VBox class="sapUiMediumMargin sapUiAlignCenter">
-                <HBox>
-                    <Button text="{i18n>clearButton}" press="onClearFields" type="Unstyled" class="doubleHeightButton lightBlueButton" >
+            <VBox id="_IDGenVBox6" class="sapUiMediumMargin sapUiAlignCenter">
+                <HBox id="_IDGenHBox">
+                    <Button id="_IDGenButton2" text="{i18n>clearButton}" press="onClearFields" type="Unstyled" class="doubleHeightButton lightBlueButton" >
                         <layoutData>
-                            <FlexItemData styleClass="sapUiTinyMarginEnd" />
+                            <FlexItemData id="_IDGenFlexItemData" styleClass="sapUiTinyMarginEnd" />
                         </layoutData>
                     </Button>
-                    <Button text="{i18n>addButton}" press="onAdd" type="Unstyled" class="doubleHeightButton lightBlueButton" >
+                    <Button id="_IDGenButton3" text="{i18n>addButton}" press="onAdd" type="Unstyled" class="doubleHeightButton lightBlueButton" >
                         <layoutData>
-                            <FlexItemData styleClass="sapUiTinyMarginEnd" />
+                            <FlexItemData id="_IDGenFlexItemData1" styleClass="sapUiTinyMarginEnd" />
                         </layoutData>
                     </Button>
-                    <Button text="{i18n>showitem}" press="onContinue"  type="Unstyled" class="doubleHeightButton greenButton" />
+                    <Button id="_IDGenButton4" text="{i18n>showitem}" press="onContinue"  type="Unstyled" class="doubleHeightButton greenButton" />
                 </HBox>
-                <Panel  expandable="false" class="sapUiResponsiveMargin sapUiMediumMargin centered-panel">
-                    <VBox class="centered-panel">
+                <Panel id="_IDGenPanel"  expandable="false" class="sapUiResponsiveMargin sapUiMediumMargin centered-panel">
+                    <VBox id="_IDGenVBox7" class="centered-panel">
 
-                        <Label text="{i18n>costCenterLabel}" labelFor="costCenterInput"/>
-                        <Input id="costCenterInput" width="200px" value="{view>/KOSTL}" showValueHelp="true" valueHelpRequest="onCostCenterValueHelp"/>
-
-                        <Label text="{i18n>issuingStorageLocationLabel}" labelFor="issuingStorageLocationInput"/>
-                        <Input id="issuingStorageLocationInput" width="200px" value="{view>/LGORT}"/>
-
-                        <Label text="{i18n>internalOrderLabel}" labelFor="internalOrderInput"/>
-                        <Input id="internalOrderInput" width="200px" value="{view>/AUFNR}" showValueHelp="true" valueHelpRequest="onInternalOrderValueHelp"/>
-
-                        <Label text="{i18n>materialNumberLabel}" labelFor="materialInput"/>
+                        <Label id="_IDGenLabel4" text="{i18n>materialNumberLabel}" labelFor="materialInput"/>
                         <Input id="materialInput" width="200px" value="{view>/MATNR}"/>
 
-                        <Label text="{i18n>issueQuantityLabel}" labelFor="issueQuantityInput"/>
+                        <Label id="_IDGenLabel2" text="{i18n>issuingStorageLocationLabel}" labelFor="issuingStorageLocationInput"/>
+                        <Input id="issuingStorageLocationInput" width="200px" value="{view>/LGORT}"/>
+
+                        <Label id="_IDGenLabel3" text="{i18n>internalOrderLabel}" labelFor="internalOrderInput"/>
+                        <Input id="internalOrderInput" width="200px" value="{view>/AUFNR}" showValueHelp="true" valueHelpRequest="onInternalOrderValueHelp"/>
+
+                        <Label id="_IDGenLabel1" text="{i18n>costCenterLabel}" labelFor="costCenterInput"/>
+                        <Input id="costCenterInput" width="200px" value="{view>/KOSTL}" showValueHelp="true" valueHelpRequest="onCostCenterValueHelp"/>
+
+
+                        <Label id="_IDGenLabel5" text="{i18n>issueQuantityLabel}" labelFor="issueQuantityInput"/>
                         <Input id="issueQuantityInput" type="Number" width="200px" value="{view>/PICKING_QTY}"/>
 
-                        <Label text="{i18n>remark}" labelFor="remarkInput"/>
+                        <Label id="_IDGenLabel6" text="{i18n>remark}" labelFor="remarkInput"/>
                         <TextArea id="remarkInput"  width="200px" value="{view>/BKTXT}" liveChange="onRemarkLiveChange"/>
 
                         <!-- New disabled fields from attachment -->
-                        <Label text="{i18n>materialDescription}" labelFor="materialDescriptionInput"/>
+                        <Label id="_IDGenLabel7" text="{i18n>materialDescription}" labelFor="materialDescriptionInput"/>
                         <Input id="materialDescriptionInput" width="200px" value="{view>/MAKTX}" enabled="false"/>
 
-                        <Label text="{i18n>itemLocatorLabel}" labelFor="itemLocatorInput"/>
+                        <Label id="_IDGenLabel8" text="{i18n>itemLocatorLabel}" labelFor="itemLocatorInput"/>
                         <Input id="itemLocatorInput" width="200px" value="{view>/LGPBE}" enabled="false"/>
 
-                        <Label text="{i18n>baseUoM}" labelFor="uomInput"/>
+                        <Label id="_IDGenLabel9" text="{i18n>baseUoM}" labelFor="uomInput"/>
                         <Input id="uomInput" width="200px" value="{view>/MEINS}" enabled="false"/>
 
-                        <Label text="{i18n>quantityInStockLabel}" labelFor="quantityInStockInput"/>
+                        <Label id="_IDGenLabel10" text="{i18n>quantityInStockLabel}" labelFor="quantityInStockInput"/>
                         <Input id="quantityInStockInput" width="200px" value="{view>/LABST}" enabled="false"/>
                     </VBox>
                 </Panel>

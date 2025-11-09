@@ -1,19 +1,17 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "com/merkavim/ewm/manageprodorder/controller/BaseController",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox",
     "com/merkavim/ewm/manageprodorder/model/formatter"
-], function(Controller, JSONModel, MessageBox, formatter) {
+], function(BaseController, JSONModel, MessageBox, formatter) {
 // formatter is loaded for view binding
     "use strict";
-    return Controller.extend("com.merkavim.ewm.manageprodorder.controller.ProductionOrderContinue", {
+    return BaseController.extend("com.merkavim.ewm.manageprodorder.controller.ProductionOrderContinue", {
         formatter: formatter,
         onInit: function() {
-            // Device model for mobile/desktop detection
-            var oDeviceModel = new JSONModel({
-                isPhone: sap.ui.Device.system.phone
-            });
-            this.getView().setModel(oDeviceModel, "device");
+            // Use global device model (point 3). No local override.
+            // Ensure initial visibility for mobile cards vs table if needed
+            this.toggleMobileDesktop({ mobile: "mobileCardsContainer", desktop: "_IDGenVBox1" });
 
             // `inputFields` model is initialized at the component level; rely on that model here
 

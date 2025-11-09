@@ -1,14 +1,19 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller",
+    "com/merkavim/ewm/manageprodorder/controller/BaseController",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox"
-], function (Controller, JSONModel,MessageBox) {
+], function (BaseController, JSONModel, MessageBox) {
     "use strict";
-    return Controller.extend("com.merkavim.ewm.manageprodorder.controller.IssueItems", {
+    return BaseController.extend("com.merkavim.ewm.manageprodorder.controller.IssueItems", {
         onInit: function () {
             var oView = this.getView();
             var oRouter = this.getOwnerComponent().getRouter();
             var that = this;
+            // Point 3 responsive toggle (cards vs table) on init & after resize
+            this.toggleMobileDesktop({ mobile: "mobileCardsContainer", desktop: "_IDGenVBox2" });
+            sap.ui.Device.media.attachHandler(function(){
+                that.toggleMobileDesktop({ mobile: "mobileCardsContainer", desktop: "_IDGenVBox2" });
+            });
             var fnUpdateSummary = function() {
                 var oIssueItemsModel = that.getOwnerComponent().getModel("issueItems");
                 var aItems = (oIssueItemsModel && oIssueItemsModel.getProperty("/items")) || [];

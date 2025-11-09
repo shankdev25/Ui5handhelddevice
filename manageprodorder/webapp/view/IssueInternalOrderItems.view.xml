@@ -3,33 +3,59 @@
     xmlns="sap.m">
     <Page id="issueInternalOrderItemsPage" title="{i18n>addedItemsTitle}" showNavButton="true" navButtonPress="onNavBack">
         <content>
-            <VBox class="sapUiMediumMargin" style="max-width:1200px; margin:auto;">
+            <VBox id="_IDGenVBox4" class="sapUiMediumMargin" >
                 <Button id="continueButton" text="{i18n>continue1}" type="Unstyled" class="doubleHeightButton greenButton" press="onContinue"/>
-                <VBox height="16px" />
-                <Table id="itemsTable" items="{items>/items}" width="100%" fixedLayout="true" sort="onSort">
+                <VBox id="_IDGenVBox5" height="16px" />
+                <!-- Mobile cards (visible on phone) -->
+                <VBox id="iioMobileCardsContainer" visible="{= ${device>/isPhone} }">
+                    <List id="iioMobileCardList" items="{items>/items}" mode="None" showSeparators="All">
+                        <items>
+                            <CustomListItem id="iioMobileCardListItem">
+                                <VBox id="iioMobileCardVBox" class="sapUiSmallMarginBottom sapUiResponsiveMargin">
+                                    <Text id="iioMobileCardOrdOrCC" text="{= ${items>AUFNR} ? ${i18n>internalOrder} + ': ' + ${items>AUFNR} : ${i18n>costCenterLabel} + ': ' + ${items>KOSTL} }"/>
+                                    <Text id="iioMobileCardStorLoc" text="{i18n>storageLocation}: {items>LGORT}"/>
+                                    <Text id="iioMobileCardMatNr" text="{i18n>materialNumber}: {items>MATNR}"/>
+                                    <Text id="iioMobileCardMatDesc" text="{i18n>materialDescription}: {items>MAKTX}"/>
+                                    <Text id="iioMobileCardUom" text="{i18n>baseUoM}: {items>MEINS}"/>
+                                    <Text id="iioMobileCardStock" text="{i18n>stock}: {items>LABST}"/>
+                                    <Text id="iioMobileCardPickQty" text="{i18n>pickingQty}: {items>PICKING_QTY}"/>
+                                    <HBox id="iioMobileCardActions" justifyContent="End">
+                                        <Button id="iioMobileCardEdit" icon="sap-icon://edit" type="Transparent" press="onEditItem" tooltip="Edit"/>
+                                        <Button id="iioMobileCardDelete" icon="sap-icon://delete" type="Transparent" press="onDeleteItem" tooltip="Delete"/>
+                                    </HBox>
+                                </VBox>
+                            </CustomListItem>
+                        </items>
+                    </List>
+                </VBox>
+
+                <!-- Desktop/tablet table (hidden on phone) -->
+                <Table id="itemsTable" items="{items>/items}" width="100%" fixedLayout="true" visible="{= ${device>/isPhone} !== true }">
                     <columns>
-                         <Column minScreenWidth="Phone" demandPopin="false" sortProperty="AUFNR" sortable="true"><Text text="{i18n>internalOrder}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false" sortProperty="LGORT" sortable="true"><Text text="{i18n>storageLocation}"/></Column>
-                         <Column minScreenWidth="Phone" demandPopin="false" sortProperty="MATNR" sortable="true"><Text text="{i18n>materialNumber}"/></Column>
-                          <Column minScreenWidth="Phone" demandPopin="false" sortProperty="MAKTX" sortable="true"><Text text="{i18n>materialDescription}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false" sortProperty="MEINS" sortable="true"><Text text="{i18n>baseUoM}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false" sortProperty="LABST" sortable="true"><Text text="{i18n>stock}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false" sortProperty="PICKING_QTY" sortable="true"><Text text="{i18n>pickingQty}"/></Column>
-                        <Column minScreenWidth="Phone" demandPopin="false"><Text text="  "/></Column>
+                         <Column id="colIioAUFNR" minScreenWidth="Phone" demandPopin="false"><Text id="txtIioAUFNR" text="{i18n>internalOrder}"/></Column>
+                        <Column id="colIioLGORT" minScreenWidth="Phone" demandPopin="false"><Text id="txtIioLGORT" text="{i18n>storageLocation}"/></Column>
+                         <Column id="colIioMATNR" minScreenWidth="Phone" demandPopin="false"><Text id="txtIioMATNR" text="{i18n>materialNumber}"/></Column>
+                          <Column id="colIioMAKTX" minScreenWidth="Phone" demandPopin="false"><Text id="txtIioMAKTX" text="{i18n>materialDescription}"/></Column>
+                        <Column id="colIioMEINS" minScreenWidth="Phone" demandPopin="false"><Text id="txtIioMEINS" text="{i18n>baseUoM}"/></Column>
+                        <Column id="colIioLABST" minScreenWidth="Phone" demandPopin="false"><Text id="txtIioLABST" text="{i18n>stock}"/></Column>
+                        <Column id="colIioPICKING_QTY" minScreenWidth="Phone" demandPopin="false"><Text id="txtIioPICKING_QTY" text="{i18n>pickingQty}"/></Column>
+                        <Column id="colIioActions" minScreenWidth="Phone" demandPopin="false"><Text id="txtIioActions" text="  "/></Column>
                     </columns>
                     <items>
-                        <ColumnListItem>
-                            <Text text="{= ${items>AUFNR} ? ${items>AUFNR} : ${items>KOSTL} }"/>
-                            <Text text="{items>LGORT}"/>
-                             <Text text="{items>MATNR}"/>
-                            <Text text="{items>MAKTX}"/> 
-                            <Text text="{items>MEINS}"/>
-                            <Text text="{items>LABST}"/>
-                            <Text text="{items>PICKING_QTY}"/>
-                            <HBox>
-                                <Button icon="sap-icon://edit" type="Transparent" press="onEditItem" tooltip="Edit"/>
-                                <Button icon="sap-icon://delete" type="Transparent" press="onDeleteItem" tooltip="Delete"/>
-                            </HBox>
+                        <ColumnListItem id="iioDesktopRow">
+                            <cells>
+                                <Text id="iioCellAUFNR" text="{= ${items>AUFNR} ? ${items>AUFNR} : ${items>KOSTL} }"/>
+                                <Text id="iioCellLGORT" text="{items>LGORT}"/>
+                                <Text id="iioCellMATNR" text="{items>MATNR}"/>
+                                <Text id="iioCellMAKTX" text="{items>MAKTX}"/> 
+                                <Text id="iioCellMEINS" text="{items>MEINS}"/>
+                                <Text id="iioCellLABST" text="{items>LABST}"/>
+                                <Text id="iioCellPICKING_QTY" text="{items>PICKING_QTY}"/>
+                                <HBox id="iioCellActions">
+                                    <Button id="iioBtnEdit" icon="sap-icon://edit" type="Transparent" press="onEditItem" tooltip="Edit"/>
+                                    <Button id="iioBtnDelete" icon="sap-icon://delete" type="Transparent" press="onDeleteItem" tooltip="Delete"/>
+                                </HBox>
+                            </cells>
                         </ColumnListItem>
                     </items>
                 </Table>
