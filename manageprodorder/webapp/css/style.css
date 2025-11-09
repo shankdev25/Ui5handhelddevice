@@ -1,5 +1,12 @@
 /* Enter your custom styles here */
 
+.stickyInputFields {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: #fff;
+}
+
 .centered-panel {
 	max-width: 400px;
 	margin-left: auto;
