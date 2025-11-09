@@ -56,9 +56,9 @@
             <!-- Mobile-only footer actions (OverflowToolbar for consistency) -->
             <OverflowToolbar id="issueInternalOrderFooterToolbar" visible="{= ${device>/isPhone} }" class="mobileFooterToolbar">
                 <ToolbarSpacer id="issueInternalOrderFooterSpacer" />
-                <Button id="_IDGenButton3Footer" text="{i18n>addButton}" press="onAdd" type="Transparent" class="lightBlueButton sapUiTinyMarginEnd" />
-                <Button id="_IDGenButton2Footer" text="{i18n>clearButton}" press="onClearFields" type="Transparent" class="lightBlueButton sapUiTinyMarginEnd" />
-                <Button id="_IDGenButton4Footer" text="{i18n>showitem}" press="onContinue"  type="Emphasized" class="greenButton" />
+                    <Button id="_IDGenButton5" text="{i18n>clearButton}" press="onClearFields" type="Unstyled" class="doubleHeightButton lightBlueButton sapUiTinyMarginEnd" />
+                    <Button id="_IDGenButton6" text="{i18n>addButton}" press="onAdd" type="Unstyled" class="doubleHeightButton lightBlueButton sapUiTinyMarginEnd" />
+                    <Button id="_IDGenButton7" text="{i18n>showitem}" press="onContinue"  type="Unstyled" class="doubleHeightButton greenButton" />
             </OverflowToolbar>
         </footer>
     </Page>
