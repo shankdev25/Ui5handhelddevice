@@ -65,11 +65,11 @@
             </VBox>
         </content>
         <footer>
-            <Bar id="issueInternalOrderItemsFooterBar" visible="{= ${device>/isPhone} }">
-                <contentMiddle>
-                    <Button id="continueButton" text="{i18n>continue1}" type="Unstyled" class="doubleHeightButton greenButton" press="onContinue"/>
-                </contentMiddle>
-            </Bar>
+            <!-- Mobile-only footer actions (OverflowToolbar for consistency) -->
+            <OverflowToolbar id="issueInternalOrderFooterToolbar12" visible="{= ${device>/isPhone} }" class="mobileFooterToolbar">
+                <ToolbarSpacer id="issueInternalOrderFooterSpacer12" />
+                    <Button id="continueButtonTop1" text="{i18n>continue1}" type="Unstyled" class="doubleHeightButton greenButton" press="onContinue"/>
+            </OverflowToolbar>
         </footer>
     </Page>
 </mvc:View>
