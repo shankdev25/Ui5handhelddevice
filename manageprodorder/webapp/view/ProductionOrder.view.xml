@@ -8,7 +8,7 @@
                 <Button id="prodOrderHomeButton" icon="sap-icon://home" press="onNavHome"/>
             </headerContent>
         <VBox id="prodOrderVBox" class="sapUiSmallMargin">
-            <HBox id="prodOrderButtonsBar" class="sapUiSmallMarginBottom">
+            <HBox id="prodOrderButtonsBar" class="sapUiSmallMarginBottom" visible="{= !${device>/isPhone} }">
                     <Button id="btnInlineContinue" text="{i18n>continue}" type="Unstyled" press="onContinue" class="doubleHeightButton greenButton" />
                     <Button id="btnInlineClear" text="{i18n>clear}" type="Unstyled" class="sapUiSmallMarginBegin doubleHeightButton lightBlueButton" press="onInlineClear"/>
             </HBox>
@@ -43,5 +43,12 @@
                 </VBox>
             </Panel>
         </VBox>
+        <footer>
+            <OverflowToolbar id="prodOrderFooterToolbar" visible="{= ${device>/isPhone} }">
+                <ToolbarSpacer id="prodOrderFooterSpacer"/>
+                <Button id="btnFooterContinue" text="{i18n>continue}" type="Emphasized" press="onContinue" class="greenButton"/>
+                <Button id="btnFooterClear" text="{i18n>clear}" type="Transparent" class="sapUiSmallMarginBegin lightBlueButton" press="onInlineClear"/>
+            </OverflowToolbar>
+        </footer>
     </Page>
 </mvc:View>

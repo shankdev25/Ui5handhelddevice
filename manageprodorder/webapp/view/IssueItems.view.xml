@@ -5,7 +5,6 @@
         <VBox id="issueItemsVBox" class="sapUiSmallMargin">
             <!-- Desktop/tablet actions toolbar -->
             <Toolbar id="issueItemsTopToolbar" visible="{= ${device>/isPhone} !== true }" class="topActionToolbar">
-                <ToolbarSpacer id="issueItemsTopSpacer" />
                 <Button id="btnIssueSaveTop" text="{i18n>save}" press="onSave" type="Unstyled" class="doubleHeightButton greenButton"/>
             </Toolbar>
              <VBox id="issueItemsSummaryBox" class="sapUiSmallMarginBottom" justifyContent="Center">
@@ -76,9 +75,8 @@
         </VBox>
         <footer>
             <Bar id="issueItemsFooterBar" visible="{= ${device>/isPhone} }">
-                <contentMiddle>
-                    <Button id="btnIssueSave" text="{i18n>save}" press="onSave" type="Unstyled" class="doubleHeightButton greenButton"/>
-                </contentMiddle>
+                <ToolbarSpacer id="prodOrderFooterSpacer123"/>
+                <Button id="btnIssueSave" text="{i18n>save}" press="onSave" type="Unstyled" class="doubleHeightButton greenButton"/>
             </Bar>
         </footer>
     </Page>

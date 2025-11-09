@@ -4,6 +4,12 @@
     <Page id="prodOrderContinuePage" title="{i18n>prodOrderTileHeader}" showNavButton="true" navButtonPress="onNavBack">
 
         <VBox id="continueVBox" class="sapUiSmallMargin">
+            <!-- Desktop/tablet actions toolbar -->
+                <Toolbar id="prodOrderContinueTopToolbar" visible="{= ${device>/isPhone} !== true }" class="topActionToolbar">
+                    <ToolbarSpacer id="prodOrderContinueSpacer" />
+                    <Button id="btnClearSelectionTop" text="{i18n>clearSelection}" type="Unstyled" class="sapUiSmallMarginBegin doubleHeightButton lightBlueButton"  press="onClearSelection"/>
+                    <Button id="btnDisplayIssueTop" text="{i18n>displayItemsForIssue}"  press="onDisplayIssueItems" type="Unstyled" class="doubleHeightButton greenButton" />
+                </Toolbar>
             <!-- Input fields for table columns, aligned vertically -->
             <VBox id="inputFieldsVBox" class="sapUiSmallMarginBottom stickyInputFields">
                 <HBox id="hboxInputMaterial" class="sapUiTinyMarginBottom" >
@@ -26,12 +32,6 @@
                     <Text id="lblInputStock" text="{i18n>stock}" width="10em" textAlign="Begin" class="sapUiTinyMarginEnd"/>
                     <Input id="inputStock" value="{inputFields>/Stock}" placeholder="{i18n>stock}" width="16em" enabled="false" textAlign="Begin"/>
                 </HBox>
-                <!-- Desktop/tablet actions toolbar -->
-                <Toolbar id="prodOrderContinueTopToolbar" visible="{= ${device>/isPhone} !== true }" class="topActionToolbar">
-                    <ToolbarSpacer id="prodOrderContinueSpacer" />
-                    <Button id="btnClearSelectionTop" text="{i18n>clearSelection}" type="Unstyled" class="sapUiSmallMarginBegin doubleHeightButton lightBlueButton"  press="onClearSelection"/>
-                    <Button id="btnDisplayIssueTop" text="{i18n>displayItemsForIssue}"  press="onDisplayIssueItems" type="Unstyled" class="doubleHeightButton greenButton" />
-                </Toolbar>
             </VBox>
 
             <!-- Card-based layout for mobile mode -->

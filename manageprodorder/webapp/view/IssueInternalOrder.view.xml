@@ -8,8 +8,7 @@
         <content>
             <VBox id="_IDGenVBox6" class="sapUiMediumMargin sapUiAlignCenter">
                 <!-- Desktop/tablet actions toolbar (top, above inputs) -->
-                <Toolbar id="issueInternalOrderTopToolbar" visible="{= ${device>/isPhone} !== true }" class="topActionToolbar">
-                    <ToolbarSpacer id="issueInternalOrderTopSpacer" />
+                <Toolbar id="issueInternalOrderTopToolbar" visible="{= !${device>/isPhone} }" class="topActionToolbar">
                     <Button id="_IDGenButton2" text="{i18n>clearButton}" press="onClearFields" type="Unstyled" class="doubleHeightButton lightBlueButton sapUiTinyMarginEnd" />
                     <Button id="_IDGenButton3" text="{i18n>addButton}" press="onAdd" type="Unstyled" class="doubleHeightButton lightBlueButton sapUiTinyMarginEnd" />
                     <Button id="_IDGenButton4" text="{i18n>showitem}" press="onContinue"  type="Unstyled" class="doubleHeightButton greenButton" />
@@ -54,14 +53,13 @@
             </VBox>
         </content>
         <footer>
-            <!-- Mobile-only footer actions -->
-            <Bar id="issueInternalOrderFooterBar" visible="{= ${device>/isPhone} }">
-                <contentMiddle>
-                    <Button id="_IDGenButton2Footer" text="{i18n>clearButton}" press="onClearFields" type="Unstyled" class="doubleHeightButton lightBlueButton sapUiTinyMarginEnd" />
-                    <Button id="_IDGenButton3Footer" text="{i18n>addButton}" press="onAdd" type="Unstyled" class="doubleHeightButton lightBlueButton sapUiTinyMarginEnd" />
-                    <Button id="_IDGenButton4Footer" text="{i18n>showitem}" press="onContinue"  type="Unstyled" class="doubleHeightButton greenButton" />
-                </contentMiddle>
-            </Bar>
+            <!-- Mobile-only footer actions (OverflowToolbar for consistency) -->
+            <OverflowToolbar id="issueInternalOrderFooterToolbar" visible="{= ${device>/isPhone} }" class="mobileFooterToolbar">
+                <ToolbarSpacer id="issueInternalOrderFooterSpacer" />
+                <Button id="_IDGenButton3Footer" text="{i18n>addButton}" press="onAdd" type="Transparent" class="lightBlueButton sapUiTinyMarginEnd" />
+                <Button id="_IDGenButton2Footer" text="{i18n>clearButton}" press="onClearFields" type="Transparent" class="lightBlueButton sapUiTinyMarginEnd" />
+                <Button id="_IDGenButton4Footer" text="{i18n>showitem}" press="onContinue"  type="Emphasized" class="greenButton" />
+            </OverflowToolbar>
         </footer>
     </Page>
 </mvc:View>
