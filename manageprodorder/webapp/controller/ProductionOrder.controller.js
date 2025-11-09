@@ -133,7 +133,7 @@ sap.ui.define([
                                 for (let i = 0; i < items.length; i++) {
                                     // Map all backend fields for each item
                                     aPicking.push({
-                                        selected: true,
+                                        selected: false,
                                         VORNR: items[i].VORNR,
                                         MATNR: items[i].MATNR,
                                         MAKTX: items[i].MAKTX,
