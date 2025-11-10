@@ -50,7 +50,7 @@
                                 <Text id="mobileCardQtyInReservationText" text="{i18n>qtyInReservation}: {pickItems>RESERVED_QTY}"/>
                                 <HBox id="mobileCardQtyToPickHBox" alignItems="Center">
                                     <Text id="mobileCardQtyToPickLabel" text="{i18n>qtyToPick}: "/>
-                                    <Input id="mobileCardQtyToPickInput" value="{pickItems>PICKING_QTY}" valueLiveUpdate="true" type="Number" width="4em" liveChange="onQtyToPickLiveChange"/>
+                                    <Input id="mobileCardQtyToPickInput" class="hoverFocusInput" value="{pickItems>PICKING_QTY}" valueLiveUpdate="true" type="Number" width="4em" liveChange="onQtyToPickLiveChange"/>
                                 </HBox>
                             </VBox>
                         </CustomListItem>
@@ -85,7 +85,7 @@
                                 <Text id="rowLocation" text="{pickItems>CY_SEQNR}"/>
                                 <Text id="rowInventory" text="{path: 'pickItems>BDTER', formatter: '.formatter.bdterToDDMMYY'}"/>
                                 <Text id="rowQtyInReservation" text="{pickItems>RESERVED_QTY}" width="4em"/>
-                                <Input id="rowQtyToPick" value="{pickItems>PICKING_QTY}" valueLiveUpdate="true" type="Number" width="4em" liveChange="onQtyToPickLiveChange"/>
+                                <Input id="rowQtyToPick" class="hoverFocusInput" value="{pickItems>PICKING_QTY}" valueLiveUpdate="true" type="Number" width="4em" liveChange="onQtyToPickLiveChange"/>
                             </cells>
                         </ColumnListItem>
                     </items>

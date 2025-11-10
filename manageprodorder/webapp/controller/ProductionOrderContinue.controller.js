@@ -9,6 +9,7 @@ sap.ui.define([
     return BaseController.extend("com.merkavim.ewm.manageprodorder.controller.ProductionOrderContinue", {
         formatter: formatter,
         onInit: function() {
+            this._aHoverFocusDelegates = [];
             // Use global device model (point 3). No local override.
             // Ensure initial visibility for mobile cards vs table if needed
             this.toggleMobileDesktop({ mobile: "mobileCardsContainer", desktop: "_IDGenVBox1" });
@@ -32,6 +33,20 @@ sap.ui.define([
             } catch (e) {
                 // router may not be available in some contexts; try to ensure model anyway
                 this._ensurePickItemsModel();
+            }
+        },
+
+        onAfterRendering: function() {
+            if (BaseController.prototype.onAfterRendering) {
+                BaseController.prototype.onAfterRendering.apply(this, arguments);
+            }
+            this._attachHoverFocusDelegates();
+        },
+
+        onExit: function() {
+            this._clearHoverFocusDelegates();
+            if (BaseController.prototype.onExit) {
+                BaseController.prototype.onExit.apply(this, arguments);
             }
         },
 
@@ -331,6 +346,105 @@ sap.ui.define([
             var oBinding = oTable.getBinding("items");
             var oSorter = new sap.ui.model.Sorter(sPath, bDescending);
             oBinding.sort(oSorter);
+        },
+
+        _attachHoverFocusDelegates: function() {
+            var oView = this.getView();
+            if (!oView) { return; }
+
+            var aInputs = oView.findAggregatedObjects(true, function(oControl) {
+                return !!(oControl && oControl.isA && oControl.isA("sap.m.Input") && oControl.hasStyleClass && oControl.hasStyleClass("hoverFocusInput"));
+            }) || [];
+
+            var that = this;
+            aInputs.forEach(function(oInput) {
+                if (!oInput) { return; }
+
+                var bAlreadyTracked = that._aHoverFocusDelegates.some(function(oEntry) {
+                    return oEntry && oEntry.control === oInput;
+                });
+
+                if (!bAlreadyTracked) {
+                    var oDelegate = {
+                        onAfterRendering: function() {
+                            that._registerHoverFocus(oInput);
+                        },
+                        onBeforeRendering: function() {
+                            that._deregisterHoverFocus(oInput);
+                        }
+                    };
+
+                    oInput.addEventDelegate(oDelegate);
+                    that._aHoverFocusDelegates.push({ control: oInput, delegate: oDelegate });
+                }
+
+                that._registerHoverFocus(oInput);
+            });
+        },
+
+        _registerHoverFocus: function(oInput) {
+            if (!oInput || !oInput.getDomRef) { return; }
+
+            var fnHoverHandler = oInput.data("hoverFocusHandler");
+            if (!fnHoverHandler) {
+                fnHoverHandler = function() {
+                    try {
+                        var oDomRef = oInput.getFocusDomRef();
+                        if (oDomRef && document.activeElement === oDomRef) {
+                            return;
+                        }
+                        oInput.focus();
+                        oDomRef = oInput.getFocusDomRef();
+                        if (oDomRef && oDomRef.select) {
+                            oDomRef.select();
+                        }
+                    } catch (e) {
+                        // swallow focus errors silently
+                    }
+                };
+                oInput.data("hoverFocusHandler", fnHoverHandler);
+            }
+
+            var $Inner;
+            try { $Inner = oInput.$("inner"); } catch (e) { $Inner = null; }
+            if ($Inner && $Inner.length) {
+                $Inner.off("mouseenter.hoverFocus");
+                $Inner.on("mouseenter.hoverFocus", fnHoverHandler);
+            } else {
+                var $Root;
+                try { $Root = oInput.$(); } catch (eRoot) { $Root = null; }
+                if ($Root && $Root.length) {
+                    $Root.off("mouseenter.hoverFocus");
+                    $Root.on("mouseenter.hoverFocus", fnHoverHandler);
+                }
+            }
+        },
+
+        _deregisterHoverFocus: function(oInput) {
+            if (!oInput) { return; }
+            var $Inner;
+            try { $Inner = oInput.$("inner"); } catch (e) { $Inner = null; }
+            if ($Inner && $Inner.length) {
+                $Inner.off("mouseenter.hoverFocus");
+            }
+            var $Root;
+            try { $Root = oInput.$(); } catch (eRoot) { $Root = null; }
+            if ($Root && $Root.length) {
+                $Root.off("mouseenter.hoverFocus");
+            }
+        },
+
+        _clearHoverFocusDelegates: function() {
+            if (!this._aHoverFocusDelegates) { return; }
+            this._aHoverFocusDelegates.forEach(function(oEntry) {
+                if (!oEntry || !oEntry.control) { return; }
+                if (oEntry.delegate) {
+                    oEntry.control.removeEventDelegate(oEntry.delegate);
+                }
+                oEntry.control.data("hoverFocusHandler", null);
+                this._deregisterHoverFocus(oEntry.control);
+            }, this);
+            this._aHoverFocusDelegates = [];
         }
     });
 });
