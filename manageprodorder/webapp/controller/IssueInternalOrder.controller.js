@@ -48,7 +48,7 @@ sap.ui.define([
             $.ajax({
                 url: baseUrl + url,
                 type: "POST",
-                contentType: "application/json",
+                contentType: "application/json; charset=utf-8",
                 data: JSON.stringify(oPayload),
                 success: function (response) {
 
