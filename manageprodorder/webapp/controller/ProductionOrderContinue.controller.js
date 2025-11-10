@@ -348,6 +348,10 @@ sap.ui.define([
             oBinding.sort(oSorter);
         },
 
+        onPickTableUpdateFinished: function() {
+            this._attachHoverFocusDelegates();
+        },
+
         _attachHoverFocusDelegates: function() {
             var oView = this.getView();
             if (!oView) { return; }
@@ -388,19 +392,21 @@ sap.ui.define([
             var fnHoverHandler = oInput.data("hoverFocusHandler");
             if (!fnHoverHandler) {
                 fnHoverHandler = function() {
-                    try {
-                        var oDomRef = oInput.getFocusDomRef();
-                        if (oDomRef && document.activeElement === oDomRef) {
-                            return;
+                    window.setTimeout(function() {
+                        try {
+                            var oDomRef = oInput.getFocusDomRef();
+                            if (oDomRef && document.activeElement === oDomRef) {
+                                return;
+                            }
+                            oInput.focus();
+                            oDomRef = oInput.getFocusDomRef();
+                            if (oDomRef && oDomRef.select) {
+                                oDomRef.select();
+                            }
+                        } catch (e) {
+                            // swallow focus errors silently
                         }
-                        oInput.focus();
-                        oDomRef = oInput.getFocusDomRef();
-                        if (oDomRef && oDomRef.select) {
-                            oDomRef.select();
-                        }
-                    } catch (e) {
-                        // swallow focus errors silently
-                    }
+                    }, 0);
                 };
                 oInput.data("hoverFocusHandler", fnHoverHandler);
             }
@@ -418,6 +424,20 @@ sap.ui.define([
                     $Root.on("mouseenter.hoverFocus", fnHoverHandler);
                 }
             }
+
+            var $Cell = null;
+            try {
+                var $RootForCell = oInput.$();
+                if ($RootForCell && $RootForCell.length) {
+                    $Cell = $RootForCell.closest(".sapMListTblCell");
+                }
+            } catch (eCell) {
+                $Cell = null;
+            }
+            if ($Cell && $Cell.length) {
+                $Cell.off("mouseenter.hoverFocus");
+                $Cell.on("mouseenter.hoverFocus", fnHoverHandler);
+            }
         },
 
         _deregisterHoverFocus: function(oInput) {
@@ -431,6 +451,18 @@ sap.ui.define([
             try { $Root = oInput.$(); } catch (eRoot) { $Root = null; }
             if ($Root && $Root.length) {
                 $Root.off("mouseenter.hoverFocus");
+            }
+            var $Cell = null;
+            try {
+                var $RootForCell = oInput.$();
+                if ($RootForCell && $RootForCell.length) {
+                    $Cell = $RootForCell.closest(".sapMListTblCell");
+                }
+            } catch (eCell) {
+                $Cell = null;
+            }
+            if ($Cell && $Cell.length) {
+                $Cell.off("mouseenter.hoverFocus");
             }
         },
 
