@@ -176,7 +176,8 @@ sap.ui.define([
                 MAKTX: "",
                 LGPBE: "",
                 MEINS: "",
-                LABST: ""
+                LABST: "",
+                WERKS: oData.WERKS
             });
         },
 
@@ -193,7 +194,8 @@ sap.ui.define([
                 MAKTX: "",
                 LGPBE: "",
                 MEINS: "",
-                LABST: ""
+                LABST: "",
+                WERKS: oData.WERKS
             });
         },
 
