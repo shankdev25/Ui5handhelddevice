@@ -1,10 +1,20 @@
 sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-], (Controller) => {
+    "sap/ui/core/mvc/Controller",
+    "sap/m/MessageBox"
+], (Controller, MessageBox) => {
     "use strict";
 
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.View1", {
         onInit() {
+            // show info message box: Do not refresh during dispensing (localized)
+            try {
+                var oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+                var sMsg = oBundle.getText("dontRefreshMessage");
+                MessageBox.information(sMsg);
+            } catch (e) {
+                // fallback (shouldn't occur if i18n model is configured)
+                MessageBox.information("Do not refresh the screen during dispensing");
+            }
             // quick connectivity test: POST to /app_list
             this._testConnection();
         },
