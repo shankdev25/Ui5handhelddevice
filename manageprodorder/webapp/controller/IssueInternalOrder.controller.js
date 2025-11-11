@@ -229,7 +229,7 @@ sap.ui.define([
                         return;
                     }
                     // No error, proceed to add
-                    oViewModel.setData(response.data);
+                    oViewModel.setData(response.DATA);
 
                     var aItems = oItemsModel.getProperty("/items");
                     aItems.push(oData);
