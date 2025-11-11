@@ -229,6 +229,8 @@ sap.ui.define([
                         return;
                     }
                     // No error, proceed to add
+                    oViewModel.setData(response);
+
                     var aItems = oItemsModel.getProperty("/items");
                     aItems.push(oData);
                     oItemsModel.setProperty("/items", aItems);
