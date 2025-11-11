@@ -46,7 +46,8 @@ sap.ui.define([
                             IssuesingStorageLocation: oResponse.DATA.LGORT_T || ""
                         }
                     });
-                    that.getView().setModel(oViewModel, "view");
+                    // Use component-level model so Component._resetModelsForRoute can properly clear it
+                    that.getOwnerComponent().setModel(oViewModel, "view");
 
                 },
                 error: function (xhr, status, error) {
@@ -68,7 +69,7 @@ sap.ui.define([
          * Trigger ISSUE_PR_1_CHECK when user presses Enter, using current view input fields (newEntry)
          */
         onEnterPress: function () {
-            var oViewModel = this.getView().getModel("view");
+            var oViewModel = this.getOwnerComponent().getModel("view");
             if (!oViewModel) { return; }
             var oSelectionData = Object.assign({}, oViewModel.getProperty("/newEntry"));
 
@@ -133,14 +134,14 @@ sap.ui.define([
         },
         onContinue: function () {
             // Validate IssuesingStorageLocation is not blank
-            var oViewModel = this.getView().getModel("view");
+            var oViewModel = this.getOwnerComponent().getModel("view");
             var oSelectionData = Object.assign({}, oViewModel.getProperty("/newEntry"));
             // if (!oSelectionData.IssuesingStorageLocation || oSelectionData.IssuesingStorageLocation.trim() === "") {
             //     var oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             //     MessageBox.error(oBundle.getText("issuesingstoragelocationRequired") || "Storage Location is required.");
             //     return;
             // }
-            var oViewModel = this.getView().getModel("view");
+            var oViewModel = this.getOwnerComponent().getModel("view");
             var oSelectionData = Object.assign({}, oViewModel.getProperty("/newEntry"));
             var that = this;
             // Prepare payload for backend
@@ -259,7 +260,7 @@ sap.ui.define([
                                     console.log("[ProductionOrder] selection on component:", oComponent.getModel("selection") && oComponent.getModel("selection").getData());
                                 } catch (e) { }
                                 // Clear newEntry model before routing
-                                var oViewModel = that.getView().getModel("view");
+                                var oViewModel = that.getOwnerComponent().getModel("view");
                                 oViewModel.setProperty("/newEntry", {
                                     Material: "",
                                     ProductionOrder: "",
@@ -289,7 +290,7 @@ sap.ui.define([
         },
 
         onInlineAdd: function () {
-            var oViewModel = this.getView().getModel("view");
+            var oViewModel = this.getOwnerComponent().getModel("view");
             var oMockModel = this.getView().getModel("mock");
             var oEntry = Object.assign({}, oViewModel.getProperty("/newEntry"));
             if (!oEntry.Material && !oEntry.ProductionOrder) {
@@ -303,7 +304,7 @@ sap.ui.define([
         },
 
         onInlineClear: function () {
-            var oViewModel = this.getView().getModel("view");
+            var oViewModel = this.getOwnerComponent().getModel("view");
             oViewModel.setProperty("/newEntry", { Material: "", ProductionOrder: "", Operation: "", ReservationStorageLocation: "", LogisticsGroup: "", Remark: "" });
         }
 
