@@ -61,7 +61,39 @@ sap.ui.define([
                 }
             });
 
+            // Ensure view model is reset every time the route is entered
+            var oRouter = this.getOwnerComponent().getRouter();
+            oRouter.getRoute("ProductionOrder").attachPatternMatched(this._resetViewModel, this);
 
+
+        },
+
+        /**
+         * Reset the view-scoped model each time the ProductionOrder route is matched
+         * so we don't rely on onInit which runs only once per controller lifecycle.
+         */
+        _resetViewModel: function () {
+            var oView = this.getView();
+            var oViewModel = oView.getModel("view");
+            var oData = {
+                newEntry: {
+                    Material: "",
+                    ProductionOrder: "",
+                    OperationFrom: "",
+                    OperationTo: "",
+                    ReservationStorageLocation: "",
+                    ReservationStorageLocationTo: "",
+                    LogisticsGroup: "",
+                    Remark: "",
+                    IssuesingStorageLocation: ""
+                }
+            };
+            if (!oViewModel) {
+                oViewModel = new sap.ui.model.json.JSONModel(oData);
+                oView.setModel(oViewModel, "view");
+            } else {
+                oViewModel.setData(oData);
+            }
         },
 
         /**
