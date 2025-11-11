@@ -87,10 +87,10 @@ sap.ui.define([
         },
 
         onInit: function () {
-            // Keep router and handler references to detach on exit
-            this._oRouter = this.getOwnerComponent().getRouter();
-            this._onIssueRouteMatched = function () {
-                this.getView().setModel(new sap.ui.model.json.JSONModel({
+            var oRouter = this.getOwnerComponent().getRouter();
+            var that = this;
+            oRouter.getRoute("IssueInternalOrder").attachMatched(function () {
+                that.getView().setModel(new sap.ui.model.json.JSONModel({
                     WERKS: "",
                     LGORT: "",
                     AUFNR: "",
@@ -103,8 +103,7 @@ sap.ui.define([
                     BKTXT: "",
                     PICKING_QTY: ""
                 }), "view");
-            }.bind(this);
-            this._oRouter.getRoute("IssueInternalOrder").attachMatched(this._onIssueRouteMatched);
+            });
             // Clear all fields in the view model on initialization
             this.getView().setModel(new sap.ui.model.json.JSONModel({
                 WERKS: "",
@@ -120,18 +119,17 @@ sap.ui.define([
                 PICKING_QTY: ""
             }), "view");
 
-            // Add global keydown listener for Enter and keep reference to remove on exit
-            if (!this._onKeyDownRef) {
-                this._onKeyDownRef = function (e) {
-                    if (e.key === "Enter") {
-                        this.onEnterPress({
-                            getSource: function () { return null; },
-                            getParameter: function () { return null; }
-                        });
-                    }
-                }.bind(this);
-                document.addEventListener("keydown", this._onKeyDownRef);
-            }
+            // Add global keydown listener for Enter
+            var that = this;
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Enter") {
+                    // Create a dummy event object to pass to onEnterPress
+                    that.onEnterPress({
+                        getSource: function () { return null; },
+                        getParameter: function () { return null; }
+                    });
+                }
+            });
 
             var oPayload = {
                 "DATA": {
@@ -357,18 +355,6 @@ sap.ui.define([
                 }
             });
             oDialog.open();
-        },
-
-        // Cleanup to avoid multiple Enter handlers firing when navigating back and forth
-        onExit: function () {
-            if (this._onKeyDownRef) {
-                document.removeEventListener("keydown", this._onKeyDownRef);
-                this._onKeyDownRef = null;
-            }
-            if (this._oRouter && this._onIssueRouteMatched) {
-                this._oRouter.getRoute("IssueInternalOrder").detachMatched(this._onIssueRouteMatched);
-                this._onIssueRouteMatched = null;
-            }
         }
     });
 });
