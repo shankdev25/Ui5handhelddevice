@@ -92,7 +92,106 @@ sap.ui.define([
                 } catch (e) { /* ignore in environments without console */ }
 
             // enable routing
+            this._installRouteGuards();
             this.getRouter().initialize();
+        }
+        ,
+        /**
+         * Install a small guard on the router to reset per-app models ONLY when navigating out of home (View1).
+         * This ensures a fresh state every time a user launches an app from the home screen.
+         */
+        _installRouteGuards: function() {
+            var oRouter = this.getRouter();
+            var that = this;
+            this._lastRouteName = undefined;
+
+            // Use beforeRouteMatched so models are cleared before the new view is created/bound
+            oRouter.attachBeforeRouteMatched(function(oEvent){
+                var sNextRoute = oEvent.getParameter("name");
+                var sPrevRoute = that._lastRouteName;
+
+                // Only wipe when coming specifically from the home route
+                if (sPrevRoute === "RouteView1") {
+                    that._resetModelsForRoute(sNextRoute);
+                }
+
+                that._lastRouteName = sNextRoute;
+            });
+        },
+
+        /**
+         * Reset models for a given target route (app entry).
+         * Add a case here whenever a new app entry route is introduced.
+         * @param {string} sRouteName Matched route name
+         */
+        _resetModelsForRoute: function(sRouteName){
+            try {
+                switch (sRouteName) {
+                    case "ProductionOrder":
+                        // Clear picking items and input header for Production Order flow
+                        var oPickItems = this.getModel("pickItems");
+                        oPickItems && oPickItems.setData({ items: [] });
+
+                        var oHeader = this.getModel("inputFields");
+                        oHeader && oHeader.setData({
+                            Location: "",
+                            Stock: "",
+                            Material: "",
+                            MaterialDescription: "",
+                            UOM: ""
+                        });
+
+                        // Remove any leftover validation/result data from prior sessions
+                        if (this.getModel("validData")) {
+                            this.setModel(null, "validData");
+                        }
+                        break;
+
+                    case "IssueInternalOrder":
+                        // Reset form, items, and working view state for Issue Internal Order flow
+                        var oForm = this.getModel("form");
+                        oForm && oForm.setData({
+                            issuingStorageLocation: "",
+                            internalOrder: "",
+                            costCenter: "",
+                            material: "",
+                            issueQuantity: "",
+                            remark: ""
+                        });
+
+                        var oItems = this.getModel("items");
+                        oItems && oItems.setData({ items: [] });
+
+                        var oViewModel = this.getModel("view");
+                        oViewModel && oViewModel.setData({
+                            WERKS: "",
+                            LGORT: "",
+                            AUFNR: "",
+                            KOSTL: "",
+                            MATNR: "",
+                            MEINS: "",
+                            LGPBE: "",
+                            LABST: 0,
+                            MAKTX: "",
+                            BKTXT: "",
+                            SPRAS: sap.ui.getCore().getConfiguration().getLanguage() || "E",
+                            PICKING_QTY: 0
+                        });
+                        break;
+
+                    default:
+                        // For other routes we do nothing by default. Extend as needed.
+                        break;
+                }
+
+                // Optional diagnostics
+                try {
+                    console.log("[Component] Reset models due to navigation from home =>", sRouteName);
+                } catch(e) {}
+            } catch (e) {
+                // Never block navigation due to a reset failure
+                try { console.error("[Component] Model reset failed:", e); } catch(_) {}
+            }
         }
     });
 });
