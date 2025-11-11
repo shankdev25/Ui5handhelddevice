@@ -152,9 +152,12 @@ sap.ui.define([
                 contentType: "application/json",
                 data: JSON.stringify(oPayload),
                 success: function (oData) {
-                    
+
                     if (oData.DATA.LABST === 0) {
                         oData.DATA.LABST = "";
+                    }
+                    if (oData.DATA.PICKING_QTY === 0) {
+                        oData.DATA.PICKING_QTY = "";
                     }
                     var oIssueOrdInitModel = new sap.ui.model.json.JSONModel(oData);
                     that.getView().setModel(oIssueOrdInitModel, "issueOrdInitModel");
