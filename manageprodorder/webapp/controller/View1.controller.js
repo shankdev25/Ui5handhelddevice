@@ -6,6 +6,11 @@ sap.ui.define([
 
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.View1", {
         onInit() {
+            // quick connectivity test: POST to /app_list
+            this._testConnection();
+        },
+
+        onAfterRendering: function() {
             // show info message box: Do not refresh during dispensing (localized)
             try {
                 var oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
@@ -15,8 +20,6 @@ sap.ui.define([
                 // fallback (shouldn't occur if i18n model is configured)
                 MessageBox.information("Do not refresh the screen during dispensing");
             }
-            // quick connectivity test: POST to /app_list
-            this._testConnection();
         },
 
         /**
