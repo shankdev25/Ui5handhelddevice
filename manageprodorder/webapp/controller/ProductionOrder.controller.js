@@ -54,13 +54,13 @@ sap.ui.define([
                 }
             });
 
-            // Add global keydown listener for Enter (store ref so we can deregister in onExit)
-            this._fnKeydown = function (e) {
-                if (e.key === "Enter") {
-                    that.onEnterPress();
+            // Simple approach: bind Enter to this view only via event delegate (no global listeners)
+            this._oEnterDelegate = {
+                onsapenter: function (oEvent) {
+                    that.onEnterPress(oEvent);
                 }
             };
-            document.addEventListener("keydown", this._fnKeydown);
+            this.getView().addEventDelegate(this._oEnterDelegate);
 
             // Ensure view model is reset every time the route is entered
             var oRouter = this.getOwnerComponent().getRouter();
@@ -342,9 +342,9 @@ sap.ui.define([
 
         // Cleanup Enter key listener
         onExit: function () {
-            if (this._fnKeydown) {
-                document.removeEventListener("keydown", this._fnKeydown);
-                this._fnKeydown = null;
+            if (this._oEnterDelegate) {
+                try { this.getView().removeEventDelegate(this._oEnterDelegate); } catch (e) {}
+                this._oEnterDelegate = null;
             }
         }
 

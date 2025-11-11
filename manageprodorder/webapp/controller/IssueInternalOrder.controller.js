@@ -35,7 +35,8 @@ sap.ui.define([
 
             if (!oData.WERKS) {
                 var oGlobalWerksModel = this.getOwnerComponent().getModel("globalWerks");
-                oData.WERKS = (oGlobalWerksModel && oGlobalWerksModel.getProperty("/WERKS")) || oViewModel.getProperty("/WERKS") || "";
+                // fallback to the view model if global not available
+                oData.WERKS = (oGlobalWerksModel && oGlobalWerksModel.getProperty("/WERKS")) || oModel.getProperty("/WERKS") || "";
             }
 
             // Build payload
@@ -119,17 +120,14 @@ sap.ui.define([
                 PICKING_QTY: ""
             }), "view");
 
-            // Add global keydown listener for Enter (store reference for removal)
+            // Simple approach: bind Enter to this view only via event delegate (no global listeners)
             var that = this;
-            this._fnKeydown = function (e) {
-                if (e.key === "Enter") {
-                    that.onEnterPress({
-                        getSource: function () { return null; },
-                        getParameter: function () { return null; }
-                    });
+            this._oEnterDelegate = {
+                onsapenter: function (oEvent) {
+                    that.onEnterPress(oEvent);
                 }
             };
-            document.addEventListener("keydown", this._fnKeydown);
+            this.getView().addEventDelegate(this._oEnterDelegate);
 
             var oPayload = {
                 "DATA": {
@@ -359,9 +357,17 @@ sap.ui.define([
 
         // Cleanup Enter key listener
         onExit: function () {
-            if (this._fnKeydown) {
-                document.removeEventListener("keydown", this._fnKeydown);
-                this._fnKeydown = null;
+            console.log("[IssueInternalOrder] onExit called");
+            if (this._oEnterDelegate) {
+                try {
+                    this.getView().removeEventDelegate(this._oEnterDelegate);
+                    console.log("[IssueInternalOrder] Enter delegate removed successfully");
+                } catch (e) {
+                    console.warn("[IssueInternalOrder] Failed to remove Enter delegate", e);
+                }
+                this._oEnterDelegate = null;
+            } else {
+                console.log("[IssueInternalOrder] No Enter delegate to remove");
             }
         }
     });
