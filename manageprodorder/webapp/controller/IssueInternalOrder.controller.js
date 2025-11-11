@@ -57,6 +57,10 @@ sap.ui.define([
                 data: JSON.stringify(oPayload),
                 success: function (response) {
 
+                    if (response.DATA.PICKING_QTY === 0) {
+                        response.DATA.PICKING_QTY = "";
+                    }
+
                     // Bind response to the view model
                     oModel.setData(response.DATA || response);
 
@@ -241,6 +245,9 @@ sap.ui.define([
                     if (response && response.MSG && response.MSG.MSGTY === "E") {
                         MessageBox.error(response.MSG.MSGTX || "Error occurred");
                         return;
+                    }
+                    if (response.DATA.PICKING_QTY === 0) {
+                        response.DATA.PICKING_QTY = "";
                     }
                     // No error, proceed to add
                     oViewModel.setData(response.DATA);
