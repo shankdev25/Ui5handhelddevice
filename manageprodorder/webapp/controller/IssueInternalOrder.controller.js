@@ -33,6 +33,11 @@ sap.ui.define([
             var oModel = oView.getModel("view");
             var oData = oModel.getData();
 
+            if (!oData.WERKS) {
+                var oGlobalWerksModel = this.getOwnerComponent().getModel("globalWerks");
+                oData.WERKS = (oGlobalWerksModel && oGlobalWerksModel.getProperty("/WERKS")) || oViewModel.getProperty("/WERKS") || "";
+            }
+
             // Build payload
             var oPayload = {
                 DATA: oData,
