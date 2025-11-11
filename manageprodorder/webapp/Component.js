@@ -145,6 +145,9 @@ sap.ui.define([
                         if (this.getModel("validData")) {
                             this.setModel(null, "validData");
                         }
+                         if (this.getModel("view")) {
+                            this.setModel(null, "view");
+                        }
                         break;
 
                     case "IssueInternalOrder":
