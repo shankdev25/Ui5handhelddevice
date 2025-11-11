@@ -54,12 +54,13 @@ sap.ui.define([
                 }
             });
 
-            // Add global keydown listener for Enter to trigger validation (same pattern as IssueInternalOrder)
-            document.addEventListener("keydown", function (e) {
+            // Add global keydown listener for Enter (store ref so we can deregister in onExit)
+            this._fnKeydown = function (e) {
                 if (e.key === "Enter") {
                     that.onEnterPress();
                 }
-            });
+            };
+            document.addEventListener("keydown", this._fnKeydown);
 
             // Ensure view model is reset every time the route is entered
             var oRouter = this.getOwnerComponent().getRouter();
@@ -337,6 +338,14 @@ sap.ui.define([
         onInlineClear: function () {
             var oViewModel = this.getView().getModel("view");
             oViewModel.setProperty("/newEntry", { Material: "", ProductionOrder: "", Operation: "", ReservationStorageLocation: "", LogisticsGroup: "", Remark: "" });
+        },
+
+        // Cleanup Enter key listener
+        onExit: function () {
+            if (this._fnKeydown) {
+                document.removeEventListener("keydown", this._fnKeydown);
+                this._fnKeydown = null;
+            }
         }
 
     });

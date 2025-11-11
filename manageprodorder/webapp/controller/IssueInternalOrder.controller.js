@@ -119,17 +119,17 @@ sap.ui.define([
                 PICKING_QTY: ""
             }), "view");
 
-            // Add global keydown listener for Enter
+            // Add global keydown listener for Enter (store reference for removal)
             var that = this;
-            document.addEventListener("keydown", function (e) {
+            this._fnKeydown = function (e) {
                 if (e.key === "Enter") {
-                    // Create a dummy event object to pass to onEnterPress
                     that.onEnterPress({
                         getSource: function () { return null; },
                         getParameter: function () { return null; }
                     });
                 }
-            });
+            };
+            document.addEventListener("keydown", this._fnKeydown);
 
             var oPayload = {
                 "DATA": {
@@ -355,6 +355,14 @@ sap.ui.define([
                 }
             });
             oDialog.open();
+        },
+
+        // Cleanup Enter key listener
+        onExit: function () {
+            if (this._fnKeydown) {
+                document.removeEventListener("keydown", this._fnKeydown);
+                this._fnKeydown = null;
+            }
         }
     });
 });
