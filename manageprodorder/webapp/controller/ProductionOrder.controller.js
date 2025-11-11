@@ -55,15 +55,21 @@ sap.ui.define([
             });
 
             // Add global keydown listener for Enter to trigger validation (same pattern as IssueInternalOrder)
-            document.addEventListener("keydown", function (e) {
-                if (e.key === "Enter") {
-                    that.onEnterPress();
-                }
-            });
+            // Keep a reference so we can deregister on controller exit to avoid duplicate triggers
+            if (!this._onKeyDownRef) {
+                this._onKeyDownRef = function (e) {
+                    if (e.key === "Enter") {
+                        that.onEnterPress();
+                    }
+                };
+                document.addEventListener("keydown", this._onKeyDownRef);
+            }
 
             // Ensure view model is reset every time the route is entered
-            var oRouter = this.getOwnerComponent().getRouter();
-            oRouter.getRoute("ProductionOrder").attachPatternMatched(this._resetViewModel, this);
+            // Keep references to router and handler so we can detach when exiting
+            this._oRouter = this.getOwnerComponent().getRouter();
+            this._onProdRouteMatch = this._resetViewModel.bind(this);
+            this._oRouter.getRoute("ProductionOrder").attachPatternMatched(this._onProdRouteMatch);
 
 
         },
@@ -337,6 +343,20 @@ sap.ui.define([
         onInlineClear: function () {
             var oViewModel = this.getView().getModel("view");
             oViewModel.setProperty("/newEntry", { Material: "", ProductionOrder: "", Operation: "", ReservationStorageLocation: "", LogisticsGroup: "", Remark: "" });
+        },
+
+        /**
+         * Cleanup: remove global listeners and route handlers to prevent duplicates when navigating back and forth
+         */
+        onExit: function () {
+            if (this._onKeyDownRef) {
+                document.removeEventListener("keydown", this._onKeyDownRef);
+                this._onKeyDownRef = null;
+            }
+            if (this._oRouter && this._onProdRouteMatch) {
+                this._oRouter.getRoute("ProductionOrder").detachPatternMatched(this._onProdRouteMatch);
+                this._onProdRouteMatch = null;
+            }
         }
 
     });
