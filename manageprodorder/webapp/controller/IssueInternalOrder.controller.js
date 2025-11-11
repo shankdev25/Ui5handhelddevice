@@ -205,7 +205,8 @@ sap.ui.define([
             var oData = Object.assign({}, oViewModel.getData());
             // Ensure WERKS is present in the item being added
             if (!oData.WERKS) {
-                oData.WERKS = oViewModel.getProperty("/WERKS") || this.getOwnerComponent().getModel("view").getProperty("/WERKS") || "";
+                var oGlobalWerksModel = this.getOwnerComponent().getModel("globalWerks");
+                oData.WERKS = (oGlobalWerksModel && oGlobalWerksModel.getProperty("/WERKS")) || oViewModel.getProperty("/WERKS") || "";
             }
             var that = this;
             var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
