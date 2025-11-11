@@ -2,8 +2,9 @@
 
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
-    "sap/m/MessageBox"
-], function (Controller, MessageBox) {
+    "sap/m/MessageBox",
+    "sap/m/MessageToast"
+], function (Controller, MessageBox, MessageToast) {
     "use strict";
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.ProductionOrder", {
         onInit: function () {
@@ -53,7 +54,73 @@ sap.ui.define([
                 }
             });
 
+            // Add global keydown listener for Enter to trigger validation (same pattern as IssueInternalOrder)
+            document.addEventListener("keydown", function (e) {
+                if (e.key === "Enter") {
+                    that.onEnterPress();
+                }
+            });
 
+
+        },
+
+        /**
+         * Trigger ISSUE_PR_1_CHECK when user presses Enter, using current view input fields (newEntry)
+         */
+        onEnterPress: function () {
+            var oViewModel = this.getView().getModel("view");
+            if (!oViewModel) { return; }
+            var oSelectionData = Object.assign({}, oViewModel.getProperty("/newEntry"));
+
+            var oPayload = {
+                DATA: {
+                    MATNR: oSelectionData.Material || "",
+                    MEINS: "",
+                    MAKTX: "",
+                    AUFNR: oSelectionData.ProductionOrder || "",
+                    VORNR_F: oSelectionData.OperationFrom || "",
+                    VORNR_T: oSelectionData.OperationTo || "",
+                    LGORT_F: oSelectionData.ReservationStorageLocation || "",
+                    LGORT_FT: oSelectionData.ReservationStorageLocationTo || "",
+                    LGORT_T: oSelectionData.IssuesingStorageLocation || "",
+                    LOGGR: oSelectionData.LogisticsGroup || "",
+                    BKTXT: (oSelectionData.Remark || "").substring(0,1), // send only first letter
+                    SPRAS: sap.ui.getCore().getConfiguration().getLanguage() || "EN"
+                }
+            };
+
+            var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
+            var url = "ISSUE_PR_1_CHECK";
+            var that = this;
+            $.ajax({
+                url: baseUrl + url,
+                method: "POST",
+                contentType: "application/json",
+                data: JSON.stringify(oPayload),
+                success: function (oResponse) {
+                    if (oResponse && oResponse.MSG && oResponse.MSG.MSGTY === "E") {
+                        MessageBox.error(oResponse.MSG.MSGTX || "Error occurred");
+                        return;
+                    }
+                    // Map response back to newEntry fields for user convenience
+                    var d = oResponse && oResponse.DATA ? oResponse.DATA : {};
+                    if (d) {
+                        if (d.MATNR !== undefined) { oViewModel.setProperty("/newEntry/Material", d.MATNR); }
+                        if (d.AUFNR !== undefined) { oViewModel.setProperty("/newEntry/ProductionOrder", d.AUFNR); }
+                        if (d.VORNR_F !== undefined) { oViewModel.setProperty("/newEntry/OperationFrom", d.VORNR_F); }
+                        if (d.VORNR_T !== undefined) { oViewModel.setProperty("/newEntry/OperationTo", d.VORNR_T); }
+                        if (d.LGORT_F !== undefined) { oViewModel.setProperty("/newEntry/ReservationStorageLocation", d.LGORT_F); }
+                        if (d.LGORT_FT !== undefined) { oViewModel.setProperty("/newEntry/ReservationStorageLocationTo", d.LGORT_FT); }
+                        if (d.LGORT_T !== undefined) { oViewModel.setProperty("/newEntry/IssuesingStorageLocation", d.LGORT_T); }
+                        if (d.LOGGR !== undefined) { oViewModel.setProperty("/newEntry/LogisticsGroup", d.LOGGR); }
+                        if (d.BKTXT !== undefined) { oViewModel.setProperty("/newEntry/Remark", d.BKTXT); }
+                    }
+                    MessageToast.show("Validated");
+                },
+                error: function (xhr, status, error) {
+                    MessageBox.error("Backend call failed: " + (xhr.responseText || status));
+                }
+            });
         },
 
         onNavBack: function () {
@@ -68,11 +135,11 @@ sap.ui.define([
             // Validate IssuesingStorageLocation is not blank
             var oViewModel = this.getView().getModel("view");
             var oSelectionData = Object.assign({}, oViewModel.getProperty("/newEntry"));
-            if (!oSelectionData.IssuesingStorageLocation || oSelectionData.IssuesingStorageLocation.trim() === "") {
-                var oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-                MessageBox.error(oBundle.getText("issuesingstoragelocationRequired") || "Storage Location is required.");
-                return;
-            }
+            // if (!oSelectionData.IssuesingStorageLocation || oSelectionData.IssuesingStorageLocation.trim() === "") {
+            //     var oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+            //     MessageBox.error(oBundle.getText("issuesingstoragelocationRequired") || "Storage Location is required.");
+            //     return;
+            // }
             var oViewModel = this.getView().getModel("view");
             var oSelectionData = Object.assign({}, oViewModel.getProperty("/newEntry"));
             var that = this;
