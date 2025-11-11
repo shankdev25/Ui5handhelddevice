@@ -232,7 +232,7 @@ sap.ui.define([
                     oViewModel.setData(response.DATA);
 
                     var aItems = oItemsModel.getProperty("/items");
-                    aItems.push(oData);
+                    aItems.push(response.DATA);
                     oItemsModel.setProperty("/items", aItems);
                     MessageToast.show(that.getView().getModel("i18n").getResourceBundle().getText("itemAddedSuccess"));
                     that.onClearFieldsAdd();
