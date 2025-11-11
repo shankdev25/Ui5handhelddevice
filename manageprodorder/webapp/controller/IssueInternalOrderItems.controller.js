@@ -101,6 +101,9 @@ sap.ui.define([
             if (oGlobalWerksModel && oGlobalWerksModel.getProperty("/WERKS")) {
                 oData.WERKS = oGlobalWerksModel.getProperty("/WERKS");
             }
+
+            oData.BKTXT = oItemsModel.getProperty("/items")[0].BKTXT;
+            
             var oPayload = {
                 DATA: oData,
                 ITEM: oItemsModel ? oItemsModel.getProperty("/items") : [],
