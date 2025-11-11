@@ -7,7 +7,7 @@ sap.ui.define([
     "use strict";
 
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.IssueInternalOrder", {
-        onBeforeRendering: function() {
+        onBeforeRendering: function () {
             // Clear all fields in the view model every time the page is shown
             this.getView().setModel(new sap.ui.model.json.JSONModel({
                 WERKS: "",
@@ -85,7 +85,7 @@ sap.ui.define([
         onInit: function () {
             var oRouter = this.getOwnerComponent().getRouter();
             var that = this;
-            oRouter.getRoute("IssueInternalOrder").attachMatched(function() {
+            oRouter.getRoute("IssueInternalOrder").attachMatched(function () {
                 that.getView().setModel(new sap.ui.model.json.JSONModel({
                     WERKS: "",
                     LGORT: "",
@@ -152,12 +152,14 @@ sap.ui.define([
                 contentType: "application/json",
                 data: JSON.stringify(oPayload),
                 success: function (oData) {
+                    
+                    if (oData.DATA.LABST === 0) {
+                        oData.DATA.LABST = "";
+                    }
                     var oIssueOrdInitModel = new sap.ui.model.json.JSONModel(oData);
                     that.getView().setModel(oIssueOrdInitModel, "issueOrdInitModel");
                     let oModel = that.getView().getModel("view");
-                    if ( oData.DATA.LABST === 0 ){
-                        oData.DATA.LABST = "";
-                    }
+
                     oModel.setData(oData.DATA || response);
                     // Save WERKS globally on the component for later use
                     if (oData.DATA && oData.DATA.WERKS) {
@@ -189,7 +191,7 @@ sap.ui.define([
             });
         },
 
-         onClearFieldsAdd: function () {
+        onClearFieldsAdd: function () {
             var oModel = this.getView().getModel("view");
             var oData = oModel.getData();
             oModel.setData({
@@ -252,7 +254,7 @@ sap.ui.define([
             });
         },
 
-        onRemarkLiveChange: function(oEvent) {
+        onRemarkLiveChange: function (oEvent) {
             var sValue = oEvent.getParameter("value");
             this.getView().getModel("view").setProperty("/BKTXT", sValue);
         },
