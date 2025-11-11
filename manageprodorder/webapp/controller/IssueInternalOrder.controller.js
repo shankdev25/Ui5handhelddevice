@@ -155,6 +155,9 @@ sap.ui.define([
                     var oIssueOrdInitModel = new sap.ui.model.json.JSONModel(oData);
                     that.getView().setModel(oIssueOrdInitModel, "issueOrdInitModel");
                     let oModel = that.getView().getModel("view");
+                    if ( oData.DATA.LABST === 0 ){
+                        oData.DATA.LABST = "";
+                    }
                     oModel.setData(oData.DATA || response);
                     // Save WERKS globally on the component for later use
                     if (oData.DATA && oData.DATA.WERKS) {
