@@ -47,7 +47,9 @@ sap.ui.define([
             var oIssueItemsModel = this.getOwnerComponent().getModel("issueItems");
             var aItems = (oIssueItemsModel && oIssueItemsModel.getProperty("/items")) || [];
             var header = this.getOwnerComponent().getModel("inputFields").getData();
-            let aHeader = {
+            var that = this;
+
+            var aHeader = {
                 LGPBE: header.Location,
                 LABST: header.Stock,
                 MATNR: header.Material,
@@ -58,57 +60,115 @@ sap.ui.define([
             var oValidDataModel = this.getOwnerComponent().getModel("validData");
             var validData = oValidDataModel ? oValidDataModel.getData() : {};
 
-            let finalPayload = {
-                HEAD: aHeader,
-                ITEM: aItems,
-                DATA: validData,
-                DOC: {
-                    MBLNR: "",
-                    MJAHR: ""
-                },
-                "MSG": {
-                    MSGTX: "",
-                    MSGTY: ""
-                }
-
-            }
-
-            // Simulate successful save operation and prepare data for confirmation screen  
             var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
             var url = "ISSUE_PR_3_SAVE";
-            var that = this;
-            $.ajax({
-                url: baseUrl + url,
-                method: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(finalPayload),
-                success: function (oResponse) {
-                    if (oResponse.MSG.MSGTY === "S") {
 
-                        // Map issue items into the shape expected by DocumentCreated view: { Material, SerialNumber }
-                        var aCreated = [
-                            { DocumentNumber: oResponse.DOC.MBLNR }
-                        ];
-
-                        // Create / overwrite 'created' model at component level for DocumentCreated view
-                        var oCreatedModel = new JSONModel({ items: aCreated });
-                        that.getOwnerComponent().setModel(oCreatedModel, "created");
-
-                        // Navigate to confirmation screen
-                        var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
-                        oRouter.navTo("DocumentCreated");
-
-                    } else {
-                        MessageBox.error(oResponse.MSG.MSGTX);
+            // Build the common payload structure
+            var buildPayload = function (sCheckFlag) {
+                return {
+                    HEAD: aHeader,
+                    ITEM: aItems,
+                    DATA: validData,
+                    CHECK: sCheckFlag || "",
+                    DOC: {
+                        MBLNR: "",
+                        MJAHR: ""
+                    },
+                    MSG: {
+                        MSGTX: "",
+                        MSGTY: ""
                     }
-                },
-                error: function (oError) {
-                    MessageBox.error("Error occurred while saving issue items.");
+                };
+            };
+
+            // Generic caller for the save endpoint
+            var callSave = function (sCheckFlag) {
+                return new Promise(function (resolve, reject) {
+                    $.ajax({
+                        url: baseUrl + url,
+                        method: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify(buildPayload(sCheckFlag)),
+                        success: function (oResponse) { resolve(oResponse); },
+                        error: function () { reject(new Error("REQUEST_FAILED")); }
+                    });
+                });
+            };
+
+            // UI busy on during processing
+            this.getView().setBusy(true);
+
+            // Step 1: validation-only call with CHECK='X'
+            callSave("X").then(function (oResponse) {
+                var sMsg = (oResponse && oResponse.MSG && oResponse.MSG.MSGTX) || "";
+                var sType = (oResponse && oResponse.MSG && oResponse.MSG.MSGTY) || "";
+
+                // If no message returned -> proceed to actual save
+                if (!sMsg) {
+                    return callSave("");
                 }
+
+                // If error -> show and stop
+                if (sType === "E") {
+                    that.getView().setBusy(false);
+                    MessageBox.error(sMsg);
+                    // Stop chain by throwing
+                    throw new Error("VALIDATION_ERROR");
+                }
+
+                // Warning or Information -> ask user
+                return new Promise(function (resolve, reject) {
+                    var fnProceed = function () { resolve(callSave("")); };
+                    var fnCancel = function () { reject(new Error("USER_CANCELLED")); };
+
+                    // Prefer matching box to the type
+                    var oOptions = {
+                        actions: ["Save", "Cancel"],
+                        emphasizedAction: "Save",
+                        onClose: function (sAction) {
+                            if (sAction === "Save") {
+                                fnProceed();
+                            } else {
+                                fnCancel();
+                            }
+                        }
+                    };
+
+                    if (sType === "W") {
+                        MessageBox.warning(sMsg, oOptions);
+                    } else {
+                        // Treat others (e.g., I) as information
+                        MessageBox.information(sMsg, oOptions);
+                    }
+                });
+            }).then(function (oFinalResponse) {
+                // Handle final save response
+                // If previous branch resolved with a Promise from callSave, unwrap it
+                if (oFinalResponse && typeof oFinalResponse.then === "function") {
+                    return oFinalResponse.then(function (oResolved) { return oResolved; });
+                }
+                return oFinalResponse;
+            }).then(function (oResolvedResponse) {
+                // Success step after actual save
+                that.getView().setBusy(false);
+                if (oResolvedResponse && oResolvedResponse.MSG && oResolvedResponse.MSG.MSGTY === "S") {
+                    var aCreated = [ { DocumentNumber: oResolvedResponse.DOC && oResolvedResponse.DOC.MBLNR } ];
+                    var oCreatedModel = new JSONModel({ items: aCreated });
+                    that.getOwnerComponent().setModel(oCreatedModel, "created");
+                    var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
+                    oRouter.navTo("DocumentCreated");
+                } else {
+                    var sErr = (oResolvedResponse && oResolvedResponse.MSG && oResolvedResponse.MSG.MSGTX) || "Error occurred while saving issue items.";
+                    MessageBox.error(sErr);
+                }
+            }).catch(function (err) {
+                // Catch any failure except the intentionally thrown VALIDATION_ERROR or USER_CANCELLED
+                if (err && (err.message === "VALIDATION_ERROR" || err.message === "USER_CANCELLED")) {
+                    return; // already handled
+                }
+                that.getView().setBusy(false);
+                MessageBox.error("Error occurred while saving issue items.");
             });
-
-
-
         }
     });
 });
