@@ -75,6 +75,22 @@ sap.ui.define([
             oViewModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
             this.setModel(oViewModel, "view");
 
+            // --- User model (placeholder data; can be replaced with backend or auth provider) ---
+            try {
+                var sStoredUser = window.localStorage && window.localStorage.getItem("appUserProfile");
+                var oUserData = sStoredUser ? JSON.parse(sStoredUser) : {
+                    name: "Demo User",
+                    email: "demo.user@example.com",
+                    loggedIn: true
+                };
+                var oUserModel = new sap.ui.model.json.JSONModel(oUserData);
+                oUserModel.setDefaultBindingMode(sap.ui.model.BindingMode.TwoWay);
+                this.setModel(oUserModel, "user");
+            } catch (e) {
+                var oFallbackUserModel = new sap.ui.model.json.JSONModel({ name: "User", email: "user@example.com", loggedIn: true });
+                this.setModel(oFallbackUserModel, "user");
+            }
+
             // diagnostic log to verify component-level models are present at startup
             try {
                 console.log("[Component] initialized models:", {

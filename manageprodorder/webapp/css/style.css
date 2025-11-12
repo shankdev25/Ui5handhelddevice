@@ -74,6 +74,12 @@
 	font-weight: bold;
 }
 
+/* Position the tile icon below the header and center it horizontally */
+.homeTileIcon {
+	display: block;           /* allow centering via margins */
+	margin: 0.5rem auto 0;    /* space under header; center horizontally */
+}
+
 
 
 

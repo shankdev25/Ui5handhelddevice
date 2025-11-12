@@ -18,16 +18,28 @@
                 <HBox id="tilesRow" renderType="Bare">
                     <GenericTile id="ProductionOrder"
                         header="{i18n>prodOrderTileHeader}"
-                        headerImage="sap-icon://factory"
                         press="onProductionOrderPress"
                         class="sapUiTinyMargin">
+                        <tileContent>
+                            <TileContent id="prodOrderTileContent">
+                                <content>
+                                    <core:Icon id="prodOrderTileIcon" src="sap-icon://factory" size="2rem" class="homeTileIcon"/>
+                                </content>
+                            </TileContent>
+                        </tileContent>
                     </GenericTile>
-                        <GenericTile id="IssueInternalOrder"
-                            header="{i18n>issueInternalOrderTileHeader}"
-                            headerImage="sap-icon://order-status"
-                            press="onIssueInternalOrderPress"
-                            class="sapUiTinyMargin">
-                        </GenericTile>
+                    <GenericTile id="IssueInternalOrder"
+                        header="{i18n>issueInternalOrderTileHeader}"
+                        press="onIssueInternalOrderPress"
+                        class="sapUiTinyMargin">
+                        <tileContent>
+                            <TileContent id="issueIntOrderTileContent">
+                                <content>
+                                    <core:Icon id="issueIntOrderTileIcon" src="sap-icon://order-status" size="2rem" class="homeTileIcon"/>
+                                </content>
+                            </TileContent>
+                        </tileContent>
+                    </GenericTile>
                 </HBox>
             </VBox>
         </content>
