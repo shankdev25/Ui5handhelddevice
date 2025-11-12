@@ -237,6 +237,55 @@ sap.ui.define([
         },
 
         /**
+         * Open the sort dialog (ViewSettingsDialog)
+         */
+        onOpenSortDialog: function() {
+            var oDlg = this.byId("sortDialog");
+            if (oDlg) {
+                oDlg.open();
+            }
+        },
+
+        /**
+         * Apply sorting chosen in ViewSettingsDialog to both table (desktop) and list (mobile)
+         * @param {sap.ui.base.Event} oEvent confirm event from ViewSettingsDialog
+         */
+        onSortConfirm: function(oEvent) {
+            var mParams = oEvent.getParameters();
+            var sPath = mParams.sortItem && mParams.sortItem.getKey();
+            var bDescending = !!mParams.sortDescending;
+
+            if (!sPath) { return; }
+
+            try {
+                var oSorter = new sap.ui.model.Sorter(sPath, bDescending);
+
+                // Desktop/tablet table
+                var oTable = this.byId("pickTable");
+                if (oTable) {
+                    var oTableBinding = oTable.getBinding("items");
+                    if (oTableBinding && oTableBinding.sort) {
+                        oTableBinding.sort(oSorter);
+                    }
+                }
+
+                // Mobile list
+                var oList = this.byId("mobileCardList");
+                if (oList) {
+                    var oListBinding = oList.getBinding("items");
+                    if (oListBinding && oListBinding.sort) {
+                        // use a new sorter instance to avoid shared state
+                        oListBinding.sort(new sap.ui.model.Sorter(sPath, bDescending));
+                    }
+                }
+            } catch (e) {
+                // no-op; sorting errors should not break UX
+                /* eslint no-console: 0 */
+                console.warn("Sort apply failed", e);
+            }
+        },
+
+        /**
          * Header checkbox handler: toggle selected flag for all pick items
          */
         onSelectAll: function(oEvent) {

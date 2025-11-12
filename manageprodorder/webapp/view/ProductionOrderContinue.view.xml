@@ -8,6 +8,8 @@
                 <Toolbar id="prodOrderContinueTopToolbar" visible="{= ${device>/isPhone} !== true }" class="topActionToolbar">
                     <Button id="btnClearSelectionTop" text="{i18n>clearSelection}" type="Unstyled" class="sapUiSmallMarginBegin doubleHeightButton lightBlueButton"  press="onClearSelection"/>
                     <Button id="btnDisplayIssueTop" text="{i18n>displayItemsForIssue}"  press="onDisplayIssueItems" type="Unstyled" class="doubleHeightButton greenButton" />
+                    <ToolbarSpacer id="topToolbarSpacer"/>
+                    <Button id="btnSortTop" icon="sap-icon://sort" text="{i18n>sort}" press="onOpenSortDialog"/>
                 </Toolbar>
             <!-- Input fields for table columns, aligned vertically -->
             <VBox id="inputFieldsVBox" class="sapUiSmallMarginBottom stickyInputFields">
@@ -94,11 +96,26 @@
         </VBox>
         <footer>
             <Bar id="prodOrderContinueFooterBar" visible="{= ${device>/isPhone} }">
+                <contentLeft>
+                    <Button id="btnSortMobile" icon="sap-icon://sort" text="{i18n>sort}" press="onOpenSortDialog"/>
+                </contentLeft>
                 <contentMiddle>
                     <Button id="btnClearSelection" text="{i18n>clearSelection}" type="Unstyled" class="sapUiSmallMarginBegin doubleHeightButton lightBlueButton"  press="onClearSelection"/>
                     <Button id="btnDisplayIssue" text="{i18n>displayItemsForIssue}"  press="onDisplayIssueItems" type="Unstyled" class="doubleHeightButton greenButton" />
                 </contentMiddle>
             </Bar>
         </footer>
+        <dependents>
+            <ViewSettingsDialog id="sortDialog" confirm="onSortConfirm" title="{i18n>sort}">
+                <sortItems>
+                    <ViewSettingsItem id="sortItemAction" text="{i18n>action}" key="VORNR"/>
+                    <ViewSettingsItem id="sortItemModel" text="{i18n>model}" key="MODEL"/>
+                    <ViewSettingsItem id="sortItemModelDesc" text="{i18n>modelDesc}" key="MODEL_DESC"/>
+                    <ViewSettingsItem id="sortItemShortBus" text="{i18n>shortbusnum}" key="CY_SEQNR"/>
+                    <ViewSettingsItem id="sortItemDate" text="{i18n>date}" key="BDTER"/>
+                    <ViewSettingsItem id="sortItemQtyReserved" text="{i18n>qtyInReservation}" key="RESERVED_QTY"/>
+                </sortItems>
+            </ViewSettingsDialog>
+        </dependents>
     </Page>
 </mvc:View>
