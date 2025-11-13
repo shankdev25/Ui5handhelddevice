@@ -122,13 +122,18 @@ sap.ui.define([
                     var fnCancel = function () { reject(new Error("USER_CANCELLED")); };
 
                     // Prefer matching box to the type
+                    var oBundle = that.getOwnerComponent().getModel("i18n").getResourceBundle();
+                    var sSaveTxt = oBundle.getText("saveLabel");
+                    var sCancelTxt = oBundle.getText("cancelLabel");
                     var oOptions = {
-                        actions: [MessageBox.Action.SAVE, MessageBox.Action.CANCEL],
-                        emphasizedAction: MessageBox.Action.SAVE,
+                        actions: [sSaveTxt, sCancelTxt],
+                        emphasizedAction: sSaveTxt,
                         onClose: function (sAction) {
-                            if (sAction === MessageBox.Action.SAVE) {
+                            if (sAction === sSaveTxt) {
                                 fnProceed();
                             } else {
+                                // ensure busy is cleared on cancel
+                                that.getView().setBusy(false);
                                 fnCancel();
                             }
                         }

@@ -160,13 +160,18 @@ sap.ui.define([
 
                 // Warning or Information -> let user decide
                 return new Promise(function (resolve, reject) {
+                    var oBundle = that.getOwnerComponent().getModel("i18n").getResourceBundle();
+                    var sSaveTxt = oBundle.getText("saveLabel");
+                    var sCancelTxt = oBundle.getText("cancelLabel");
                     var options = {
-                        actions: [MessageBox.Action.SAVE, MessageBox.Action.CANCEL],
-                        emphasizedAction: MessageBox.Action.SAVE,
+                        actions: [sSaveTxt, sCancelTxt],
+                        emphasizedAction: sSaveTxt,
                         onClose: function (sAction) {
-                            if (sAction === MessageBox.Action.SAVE) {
+                            if (sAction === sSaveTxt) {
                                 resolve(callSave(""));
                             } else {
+                                // ensure busy is cleared when user cancels
+                                that.getView().setBusy(false);
                                 reject(new Error("USER_CANCELLED"));
                             }
                         }
