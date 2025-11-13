@@ -40,6 +40,10 @@ sap.ui.define([
             }
 
             oData.LGORT = "";
+            oData.MAKTX = "";
+            oData.LGPBE = "";
+            oData.MEINS = "";
+            oData.LABST = "";
 
             // Build payload
             var oPayload = {
