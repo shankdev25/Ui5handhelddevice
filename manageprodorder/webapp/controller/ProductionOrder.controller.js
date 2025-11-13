@@ -113,9 +113,9 @@ sap.ui.define([
                     AUFNR: oSelectionData.ProductionOrder || "",
                     VORNR_F: oSelectionData.OperationFrom || "",
                     VORNR_T: oSelectionData.OperationTo || "",
-                    LGORT_F: oSelectionData.ReservationStorageLocation || "",
-                    LGORT_FT: oSelectionData.ReservationStorageLocationTo || "",
-                    LGORT_T: oSelectionData.IssuesingStorageLocation || "",
+                    LGORT_F: "",
+                    LGORT_FT: "",
+                    LGORT_T: "",
                     LOGGR: oSelectionData.LogisticsGroup || "",
                     BKTXT: (oSelectionData.Remark || "").substring(0,1), // send only first letter
                     SPRAS: sap.ui.getCore().getConfiguration().getLanguage() || "EN"
