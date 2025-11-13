@@ -123,10 +123,10 @@ sap.ui.define([
 
                     // Prefer matching box to the type
                     var oOptions = {
-                        actions: ["Save", "Cancel"],
-                        emphasizedAction: "Save",
+                        actions: [MessageBox.Action.SAVE, MessageBox.Action.CANCEL],
+                        emphasizedAction: MessageBox.Action.SAVE,
                         onClose: function (sAction) {
-                            if (sAction === "Save") {
+                            if (sAction === MessageBox.Action.SAVE) {
                                 fnProceed();
                             } else {
                                 fnCancel();
@@ -158,7 +158,7 @@ sap.ui.define([
                     var oRouter = sap.ui.core.UIComponent.getRouterFor(that);
                     oRouter.navTo("DocumentCreated");
                 } else {
-                    var sErr = (oResolvedResponse && oResolvedResponse.MSG && oResolvedResponse.MSG.MSGTX) || "Error occurred while saving issue items.";
+                    var sErr = (oResolvedResponse && oResolvedResponse.MSG && oResolvedResponse.MSG.MSGTX) || that.getOwnerComponent().getModel("i18n").getResourceBundle().getText("failedToSaveIssueItems");
                     MessageBox.error(sErr);
                 }
             }).catch(function (err) {
@@ -167,7 +167,7 @@ sap.ui.define([
                     return; // already handled
                 }
                 that.getView().setBusy(false);
-                MessageBox.error("Error occurred while saving issue items.");
+                MessageBox.error(that.getOwnerComponent().getModel("i18n").getResourceBundle().getText("failedToSaveIssueItems"));
             });
         }
     });

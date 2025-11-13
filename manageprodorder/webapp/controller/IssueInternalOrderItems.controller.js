@@ -161,10 +161,10 @@ sap.ui.define([
                 // Warning or Information -> let user decide
                 return new Promise(function (resolve, reject) {
                     var options = {
-                        actions: ["Save", "Cancel"],
-                        emphasizedAction: "Save",
+                        actions: [MessageBox.Action.SAVE, MessageBox.Action.CANCEL],
+                        emphasizedAction: MessageBox.Action.SAVE,
                         onClose: function (sAction) {
-                            if (sAction === "Save") {
+                            if (sAction === MessageBox.Action.SAVE) {
                                 resolve(callSave(""));
                             } else {
                                 reject(new Error("USER_CANCELLED"));
@@ -192,10 +192,10 @@ sap.ui.define([
                         MJAHR: oSaved.DOC && oSaved.DOC.MJAHR
                     });
                 } else if (oSaved && oSaved.MSG && oSaved.MSG.MSGTY === "E") {
-                    MessageBox.error(oSaved.MSG.MSGTX || "Failed to save issue order");
+                    MessageBox.error(oSaved.MSG.MSGTX || that.getOwnerComponent().getModel("i18n").getResourceBundle().getText("failedToSaveIssueOrder"));
                 } else {
                     // Non-success non-error message (if any)
-                    var sText = (oSaved && oSaved.MSG && oSaved.MSG.MSGTX) || "Failed to save issue order";
+                    var sText = (oSaved && oSaved.MSG && oSaved.MSG.MSGTX) || that.getOwnerComponent().getModel("i18n").getResourceBundle().getText("failedToSaveIssueOrder");
                     MessageBox.information(sText);
                 }
             }).catch(function (err) {
@@ -203,7 +203,7 @@ sap.ui.define([
                     return; // already handled
                 }
                 that.getView().setBusy(false);
-                MessageBox.error("Failed to save issue order");
+                MessageBox.error(that.getOwnerComponent().getModel("i18n").getResourceBundle().getText("failedToSaveIssueOrder"));
             });
         }
     });
