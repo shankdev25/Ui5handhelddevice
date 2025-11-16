@@ -26,12 +26,6 @@ sap.ui.define([
      */
     _logout: function() {
       try {
-        if (this._isInFLP()) {
-          // Let the Launchpad perform a proper platform logout (incl. IdP)
-          try { sap.ushell.Container.logout(); return; } catch (eFLP) { /* fall through */ }
-        }
-
-        // Not in FLP (standalone) or FLP logout failed: perform ABAP logoff
         var that = this;
         this._logoutViaAbap()
           .catch(function(){ /* ignore network errors; continue */ })
@@ -117,10 +111,6 @@ sap.ui.define([
       try {
         MessageToast.show(this._getI18nText("logoutHeading") || "You have been signed out.");
       } catch (_) {}
-    },
-
-    _isInFLP: function() {
-      try { return !!(sap && sap.ushell && sap.ushell.Container && typeof sap.ushell.Container.logout === "function"); } catch (_) { return false; }
     },
 
     /**
