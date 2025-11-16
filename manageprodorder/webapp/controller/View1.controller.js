@@ -12,14 +12,14 @@ sap.ui.define([
 
         onAfterRendering: function() {
             // show info message box: Do not refresh during dispensing (localized)
-            try {
-                var oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
-                var sMsg = oBundle.getText("dontRefreshMessage");
-                MessageBox.information(sMsg);
-            } catch (e) {
-                // fallback (shouldn't occur if i18n model is configured)
-                MessageBox.information("Do not refresh the screen during dispensing");
-            }
+            // try {
+            //     var oBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
+            //     var sMsg = oBundle.getText("dontRefreshMessage");
+            //     MessageBox.information(sMsg);
+            // } catch (e) {
+            //     // fallback (shouldn't occur if i18n model is configured)
+            //     MessageBox.information("Do not refresh the screen during dispensing");
+            // }
         },
 
         /**
