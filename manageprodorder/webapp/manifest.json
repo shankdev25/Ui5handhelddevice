@@ -93,13 +93,6 @@
           ]
         },
         {
-          "name": "Logout",
-          "pattern": "Logout",
-          "target": [
-            "TargetLogout"
-          ]
-        },
-        {
           "name": "ProductionOrder",
           "pattern": "ProductionOrder",
           "target": [
@@ -154,10 +147,7 @@
           "id": "View1",
           "name": "View1"
         },
-        "TargetLogout": {
-          "id": "Logout",
-          "name": "Logout"
-        },
+        
         "TargetProductionOrder": {
           "id": "ProductionOrder",
           "name": "ProductionOrder"

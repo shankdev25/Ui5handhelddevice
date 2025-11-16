@@ -145,36 +145,32 @@ sap.ui.define([
     },
 
     onLogoutPress: function() {
+      // Prevent double-triggering while popover animates/closes
+      if (this._bLoggingOut) { return; }
+      this._bLoggingOut = true;
+
+      var redirectToIcflogoff = function() {
+        // Replace history so back won't return to the app
+        try { window.location.replace("/sap/public/bc/icf/logoff"); }
+        catch (e) { try { window.location.href = "/sap/public/bc/icf/logoff"; } catch (_) {} }
+      };
+
       try {
-        // Close popover if open
+        // Close user popover first, then redirect
         if (this._oUserPopover && this._oUserPopover.isOpen && this._oUserPopover.isOpen()) {
+          var that = this;
+          var fnAfterClose = function() {
+            try { that._oUserPopover.detachAfterClose(fnAfterClose); } catch (_) {}
+            redirectToIcflogoff();
+          };
+          try { this._oUserPopover.attachAfterClose(fnAfterClose); } catch (_) {}
           this._oUserPopover.close();
+        } else {
+          redirectToIcflogoff();
         }
-
-        var oUserModel = this.getOwnerComponent().getModel("user");
-        // mark as logged out client-side
-        if (oUserModel) {
-          oUserModel.setProperty("/loggedIn", false);
-          oUserModel.setProperty("/username", "");
-          oUserModel.setProperty("/name", "");
-          oUserModel.setProperty("/email", "");
-        }
-        // clear any stored profile
-        try {
-          window.localStorage && window.localStorage.removeItem("appUserProfile");
-        } catch (e) {}
-
-        // Navigate to dedicated Logout page inside the app
-        try {
-          var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
-          oRouter.navTo("Logout", {}, true);
-          return;
-        } catch (e3) { /* fall through */ }
-
-        // As a last resort, reset hash
-        try { sap.ui.core.routing.HashChanger.getInstance().setHash("Logout"); } catch (e4) {}
-      } catch (e) {
-        try { sap.ui.core.routing.HashChanger.getInstance().setHash("Logout"); } catch (e5) {}
+      } finally {
+        // Allow retry if something blocks navigation
+        setTimeout(function(){ this._bLoggingOut = false; }.bind(this), 1000);
       }
     }
   });
