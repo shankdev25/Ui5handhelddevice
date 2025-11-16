@@ -12,7 +12,90 @@ sap.ui.define([
 
   return BaseController.extend("com.merkavim.ewm.manageprodorder.controller.App", {
     onInit() {
-      // nothing yet
+      // Load user details from backend (APP_INIT)
+      this._loadUser();
+    },
+
+    _getLoggedInUserInfo: function() {
+      var o = { uname: "", cname: "", email: "" };
+      try {
+        // 1) Fiori Launchpad user if available
+        if (sap && sap.ushell && sap.ushell.Container && sap.ushell.Container.getUser) {
+          var u = sap.ushell.Container.getUser();
+          if (u) {
+            o.uname = (u.getId && u.getId()) || o.uname;
+            o.cname = (u.getFullName && u.getFullName()) || o.cname;
+            o.email = (u.getEmail && u.getEmail()) || o.email;
+          }
+        }
+      } catch (e1) { /* ignore */ }
+      try {
+        // 2) Local storage profile if present
+        if ((!o.uname || !o.cname || !o.email) && window.localStorage) {
+          var s = window.localStorage.getItem("appUserProfile");
+          if (s) {
+            var p = JSON.parse(s);
+            o.uname = o.uname || p.username || p.user || p.UNAME || "";
+            o.cname = o.cname || p.name || p.CNAME || "";
+            o.email = o.email || p.email || p.E_MAIL || "";
+          }
+        }
+      } catch (e2) { /* ignore */ }
+      try {
+        // 3) Component 'user' model as fallback
+        if (!o.uname || !o.cname || !o.email) {
+          var m = this.getOwnerComponent().getModel("user");
+          if (m) {
+            var d = m.getData && m.getData();
+            if (d) {
+              o.uname = o.uname || d.username || d.user || d.UNAME || "";
+              o.cname = o.cname || d.name || d.CNAME || "";
+              o.email = o.email || d.email || d.E_MAIL || "";
+            }
+          }
+        }
+      } catch (e3) { /* ignore */ }
+      return o;
+    },
+
+    _loadUser: function() {
+      try {
+        var that = this;
+        var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
+        var url = "APP_INIT";
+        // Build payload with current user info as required by service
+        var u = this._getLoggedInUserInfo();
+        var payload = { UNAME: u.uname || "", CNAME: u.cname || "", E_MAIL: u.email || "" };
+        jQuery.ajax({
+          url: baseUrl + url,
+          method: "POST",
+          contentType: "application/json",
+          data: JSON.stringify(payload),
+          success: function(oResp) {
+            try {
+              var oUserModel = that.getOwnerComponent().getModel("user");
+              if (!oUserModel) {
+                oUserModel = new sap.ui.model.json.JSONModel({});
+                that.getOwnerComponent().setModel(oUserModel, "user");
+              }
+              var r = oResp && (oResp.DATA || oResp.data || oResp) || {};
+              var sUser = (r.UNAME || r.User || r.user) || "";
+              var sName = (r.CNAME || r.NAME || r.name) || sUser || "";
+              var sEmail = (r.E_MAIL || r.EMAIL || r.email) || "";
+              oUserModel.setProperty("/username", sUser);
+              oUserModel.setProperty("/name", sName);
+              oUserModel.setProperty("/email", sEmail);
+              oUserModel.setProperty("/loggedIn", true);
+              try { window.localStorage && window.localStorage.setItem("appUserProfile", JSON.stringify(oUserModel.getData())); } catch(e) {}
+            } catch (e) { /* swallow mapping errors */ }
+          },
+          error: function() {
+            // Keep existing placeholder user; no hard failure here
+          }
+        });
+      } catch (e) {
+        // ignore init errors
+      }
     },
 
     _getUserPopover: function() {
