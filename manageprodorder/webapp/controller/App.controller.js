@@ -15,6 +15,19 @@ sap.ui.define([
       // Load user details from backend (APP_INIT)
       this._loadUser();
     },
+    
+    onLogoPress: function() {
+      try {
+        var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+        if (oRouter && oRouter.navTo) {
+          // Navigate to home route and replace history to avoid stacking
+          oRouter.navTo("RouteView1", {}, true);
+          return;
+        }
+      } catch (e) { /* ignore and fallback */ }
+      // Fallback: set hash to root
+      try { sap.ui.core.routing.HashChanger.getInstance().setHash(""); } catch (e2) {}
+    },
 
     _getLoggedInUserInfo: function() {
       var o = { uname: "", cname: "", email: "" };
@@ -133,28 +146,35 @@ sap.ui.define([
 
     onLogoutPress: function() {
       try {
+        // Close popover if open
+        if (this._oUserPopover && this._oUserPopover.isOpen && this._oUserPopover.isOpen()) {
+          this._oUserPopover.close();
+        }
+
         var oUserModel = this.getOwnerComponent().getModel("user");
         // mark as logged out client-side
         if (oUserModel) {
           oUserModel.setProperty("/loggedIn", false);
+          oUserModel.setProperty("/username", "");
+          oUserModel.setProperty("/name", "");
+          oUserModel.setProperty("/email", "");
         }
         // clear any stored profile
         try {
           window.localStorage && window.localStorage.removeItem("appUserProfile");
         } catch (e) {}
 
-        // Attempt to call a conventional logout endpoint then redirect
-        var sBase = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri || "/";
-        jQuery.ajax({
-          url: sBase + "logout",
-          method: "POST",
-          complete: function() {
-            window.location.href = "/";
-          }
-        });
+        // Navigate to dedicated Logout page inside the app
+        try {
+          var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+          oRouter.navTo("Logout", {}, true);
+          return;
+        } catch (e3) { /* fall through */ }
+
+        // As a last resort, reset hash
+        try { sap.ui.core.routing.HashChanger.getInstance().setHash("Logout"); } catch (e4) {}
       } catch (e) {
-        // Fallback redirect
-        window.location.href = "/";
+        try { sap.ui.core.routing.HashChanger.getInstance().setHash("Logout"); } catch (e5) {}
       }
     }
   });

@@ -81,6 +81,15 @@
 }
 
 
+/* App header logo: keep rectangular aspect, fit in toolbar */
+.appHeaderLogo {
+	height: 2rem;
+	width: auto;        /* avoid stretching a rectangular logo */
+	object-fit: contain;
+	display: block;
+}
+
+
 
 
 

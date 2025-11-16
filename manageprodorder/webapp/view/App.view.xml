@@ -6,6 +6,13 @@
     <!-- Global header toolbar and routed app content -->
     <VBox id="rootVBox" height="100%">
         <OverflowToolbar id="globalHeaderToolbar" design="Transparent">
+                         <Image id="appLogo"
+                             src="logo/image.png"
+                             height="2rem"
+                             decorative="false"
+                             tooltip="Home"
+                             press="onLogoPress"
+                             class="appHeaderLogo"/>
             <ToolbarSpacer id="globalHdrSpacer"/>
             <Button id="userMenuButton"
                     icon="sap-icon://account"
