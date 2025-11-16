@@ -6,12 +6,8 @@ sap.ui.define([
 
   return Controller.extend("com.merkavim.ewm.manageprodorder.controller.Logout", {
     onInit: function() {
-      // Perform client-side logout immediately when this view is entered
-      try {
-        this._logoutClientSide();
-      } catch (e) {
-        // Non-blocking
-      }
+      // Trigger standard logout flow immediately on entering this view
+      this._logout();
     },
 
     onNavHome: function() {
@@ -21,6 +17,39 @@ sap.ui.define([
         oRouter.navTo("RouteView1", {}, true);
       } catch (e) {
         try { sap.ui.core.routing.HashChanger.getInstance().setHash(""); } catch (e2) {}
+      }
+    },
+
+    /**
+     * Standardized logout orchestrator. Prefers FLP logout when available,
+     * otherwise performs ABAP ICF logoff and client-side cleanup as fallback.
+     */
+    _logout: function() {
+      try {
+        if (this._isInFLP()) {
+          // Let the Launchpad perform a proper platform logout (incl. IdP)
+          try { sap.ushell.Container.logout(); return; } catch (eFLP) { /* fall through */ }
+        }
+
+        // Not in FLP (standalone) or FLP logout failed: perform ABAP logoff
+        var that = this;
+        this._logoutViaAbap()
+          .catch(function(){ /* ignore network errors; continue */ })
+          .finally(function(){
+            // Always clear app state client-side
+            try { that._logoutClientSide(); } catch (_) {}
+            // Hard reload without hash to ensure a new session challenge
+            try {
+              var sNoHashUrl = window.location.href.split('#')[0];
+              // Replace to avoid back-navigation into protected pages
+              window.location.replace(sNoHashUrl);
+            } catch (eNav) {
+              try { window.location.reload(); } catch(_) {}
+            }
+          });
+      } catch (e) {
+        // Last-resort cleanup
+        try { this._logoutClientSide(); } catch (_) {}
       }
     },
 
@@ -90,6 +119,45 @@ sap.ui.define([
       } catch (_) {}
     },
 
+    _isInFLP: function() {
+      try { return !!(sap && sap.ushell && sap.ushell.Container && typeof sap.ushell.Container.logout === "function"); } catch (_) { return false; }
+    },
+
+    /**
+     * Performs ABAP ICF logoff to invalidate backend session cookies.
+     * Returns a Promise that resolves when the attempt completes (success or fail).
+     */
+    _logoutViaAbap: function() {
+      return new Promise(function(resolve) {
+        try {
+          var sLogoffUrl = "/sap/public/bc/icf/logoff";
+
+          // Fire a GET to the logoff endpoint
+          var oXHR = new XMLHttpRequest();
+          oXHR.open("GET", sLogoffUrl, true);
+          oXHR.onreadystatechange = function() {
+            if (oXHR.readyState === 4) {
+              // Also attach a hidden iframe to ensure cookies are cleared in some browsers
+              try {
+                var oIframe = document.createElement("iframe");
+                oIframe.style.display = "none";
+                oIframe.src = sLogoffUrl;
+                document.body.appendChild(oIframe);
+                setTimeout(function(){
+                  try { document.body.removeChild(oIframe); } catch(_) {}
+                  resolve();
+                }, 300);
+              } catch (_) { resolve(); }
+            }
+          };
+          oXHR.send(null);
+        } catch (e) {
+          // Even if network fails, resolve to continue the flow
+          resolve();
+        }
+      });
+    },
+
     _getI18nText: function(sKey){
       try {
         return this.getOwnerComponent().getModel("i18n").getResourceBundle().getText(sKey);
@@ -113,7 +181,18 @@ sap.ui.define([
 
       // b) Make a request with wrong credentials to the same realm
       try {
-        var sBaseUri = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri || "/";
+        var sBaseUri = "/";
+        try {
+          var oApp = this.getOwnerComponent().getManifestEntry("sap.app");
+          if (oApp && oApp.dataSources) {
+            // Heuristic: pick the first dataSource with a uri
+            var aKeys = Object.keys(oApp.dataSources);
+            for (var i = 0; i < aKeys.length; i++) {
+              var oDS = oApp.dataSources[aKeys[i]];
+              if (oDS && oDS.uri) { sBaseUri = oDS.uri; break; }
+            }
+          }
+        } catch(_) {}
         // Use jQuery ajax with explicit username/password to override cached creds
         if (window.jQuery && jQuery.ajax) {
           jQuery.ajax({
