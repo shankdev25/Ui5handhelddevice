@@ -39,6 +39,12 @@ sap.ui.define([
                 oData.WERKS = (oGlobalWerksModel && oGlobalWerksModel.getProperty("/WERKS")) || oModel.getProperty("/WERKS") || "";
             }
 
+            oData.LGORT = "";
+            oData.MAKTX = "";
+            oData.LGPBE = "";
+            oData.MEINS = "";
+            oData.LABST = "";
+
             // Build payload
             var oPayload = {
                 DATA: oData,

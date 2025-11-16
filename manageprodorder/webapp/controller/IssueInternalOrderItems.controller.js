@@ -91,48 +91,124 @@ sap.ui.define([
             var oItemsModel = this.getView().getModel("items");
             var oGlobalWerksModel = this.getOwnerComponent().getModel("globalWerks");
             var oData = oViewModel ? oViewModel.getData() : {};
+            var that = this;
+
             // Use WERKS from global model if available
             if (oGlobalWerksModel && oGlobalWerksModel.getProperty("/WERKS")) {
                 oData.WERKS = oGlobalWerksModel.getProperty("/WERKS");
             }
 
-            oData.BKTXT = oItemsModel.getProperty("/items")[0].BKTXT;
-            
-            var oPayload = {
-                DATA: oData,
-                ITEM: oItemsModel ? oItemsModel.getProperty("/items") : [],
-                DOC: {
-                    MBLNR: "",
-                    MJAHR: ""
-                },
-                MSG: {
-                    MSGTX: "",
-                    MSGTY: ""
-                }
-            };
+            // Header text from first item
+            var aCurrentItems = oItemsModel ? (oItemsModel.getProperty("/items") || []) : [];
+            if (aCurrentItems.length > 0) {
+                oData.BKTXT = aCurrentItems[0].BKTXT;
+            }
 
             var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
             var url = "ISSUE_ORD_2_SAVE";
-            var that = this;
-            $.ajax({
-                url: baseUrl + url,
-                type: "POST",
-                contentType: "application/json",
-                data: JSON.stringify(oPayload),
-                success: function (oData) {
-                    if (oData && oData.MSG && oData.MSG.MSGTY === "E") {
-                        MessageBox.error(oData.MSG.MSGTX );
-                    } else {
-                            // Navigate to DocumentCreated view and pass document data
-                            that.getOwnerComponent().getRouter().navTo("InternalOrderCreated", {
-                                MBLNR: oData.DOC.MBLNR,
-                                MJAHR: oData.DOC.MJAHR
-                            });
+
+            // Build payload with dynamic CHECK flag
+            var buildPayload = function (sCheckFlag) {
+                return {
+                    DATA: oData,
+                    ITEM: aCurrentItems,
+                    CHECK: sCheckFlag || "",
+                    DOC: {
+                        MBLNR: "",
+                        MJAHR: ""
+                    },
+                    MSG: {
+                        MSGTX: "",
+                        MSGTY: ""
                     }
-                },
-                error: function (xhr, status, error) {
-                    MessageBox.error("Failed to save issue order");
+                };
+            };
+
+            // Ajax wrapper returning a Promise
+            var callSave = function (sCheckFlag) {
+                return new Promise(function (resolve, reject) {
+                    $.ajax({
+                        url: baseUrl + url,
+                        type: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify(buildPayload(sCheckFlag)),
+                        success: function (oResp) { resolve(oResp); },
+                        error: function () { reject(new Error("REQUEST_FAILED")); }
+                    });
+                });
+            };
+
+            // Busy on while processing
+            this.getView().setBusy(true);
+
+            // Step 1: Validation call with CHECK='X'
+            callSave("X").then(function (oResp) {
+                var sMsg = (oResp && oResp.MSG && oResp.MSG.MSGTX) || "";
+                var sType = (oResp && oResp.MSG && oResp.MSG.MSGTY) || "";
+
+                if (!sMsg) {
+                    // No message -> proceed with actual save
+                    return callSave("");
                 }
+
+                if (sType === "E") {
+                    // Error -> show and stop
+                    that.getView().setBusy(false);
+                    MessageBox.error(sMsg);
+                    throw new Error("VALIDATION_ERROR");
+                }
+
+                // Warning or Information -> let user decide
+                return new Promise(function (resolve, reject) {
+                    var oBundle = that.getOwnerComponent().getModel("i18n").getResourceBundle();
+                    var sSaveTxt = oBundle.getText("saveLabel");
+                    var sCancelTxt = oBundle.getText("cancelLabel");
+                    var options = {
+                        actions: [sSaveTxt, sCancelTxt],
+                        emphasizedAction: sSaveTxt,
+                        onClose: function (sAction) {
+                            if (sAction === sSaveTxt) {
+                                resolve(callSave(""));
+                            } else {
+                                // ensure busy is cleared when user cancels
+                                that.getView().setBusy(false);
+                                reject(new Error("USER_CANCELLED"));
+                            }
+                        }
+                    };
+                    if (sType === "W") {
+                        MessageBox.warning(sMsg, options);
+                    } else {
+                        MessageBox.information(sMsg, options);
+                    }
+                });
+            }).then(function (oFinal) {
+                // If previous step resolved with a Promise (callSave), unwrap it
+                if (oFinal && typeof oFinal.then === "function") {
+                    return oFinal.then(function (r) { return r; });
+                }
+                return oFinal;
+            }).then(function (oSaved) {
+                that.getView().setBusy(false);
+                if (oSaved && oSaved.MSG && oSaved.MSG.MSGTY === "S") {
+                    // Navigate to DocumentCreated view and pass document data
+                    that.getOwnerComponent().getRouter().navTo("InternalOrderCreated", {
+                        MBLNR: oSaved.DOC && oSaved.DOC.MBLNR,
+                        MJAHR: oSaved.DOC && oSaved.DOC.MJAHR
+                    });
+                } else if (oSaved && oSaved.MSG && oSaved.MSG.MSGTY === "E") {
+                    MessageBox.error(oSaved.MSG.MSGTX || that.getOwnerComponent().getModel("i18n").getResourceBundle().getText("failedToSaveIssueOrder"));
+                } else {
+                    // Non-success non-error message (if any)
+                    var sText = (oSaved && oSaved.MSG && oSaved.MSG.MSGTX) || that.getOwnerComponent().getModel("i18n").getResourceBundle().getText("failedToSaveIssueOrder");
+                    MessageBox.information(sText);
+                }
+            }).catch(function (err) {
+                if (err && (err.message === "VALIDATION_ERROR" || err.message === "USER_CANCELLED")) {
+                    return; // already handled
+                }
+                that.getView().setBusy(false);
+                MessageBox.error(that.getOwnerComponent().getModel("i18n").getResourceBundle().getText("failedToSaveIssueOrder"));
             });
         }
     });
