@@ -10,6 +10,8 @@ sap.ui.define([
         formatter: formatter,
         onInit: function() {
             this._aHoverFocusDelegates = [];
+            // Disable custom hover-to-focus behavior
+            // this._hoverFocusDisabled = true; // commented per request: only comments, no deletions
             // Use global device model (point 3). No local override.
             // Ensure initial visibility for mobile cards vs table if needed
             this.toggleMobileDesktop({ mobile: "mobileCardsContainer", desktop: "_IDGenVBox1" });
@@ -40,7 +42,7 @@ sap.ui.define([
             if (BaseController.prototype.onAfterRendering) {
                 BaseController.prototype.onAfterRendering.apply(this, arguments);
             }
-            this._attachHoverFocusDelegates();
+            // this._attachHoverFocusDelegates(); // disabled
         },
 
         onExit: function() {
@@ -398,10 +400,11 @@ sap.ui.define([
         },
 
         onPickTableUpdateFinished: function() {
-            this._attachHoverFocusDelegates();
+            // this._attachHoverFocusDelegates(); // disabled
         },
 
         _attachHoverFocusDelegates: function() {
+            /*
             var oView = this.getView();
             if (!oView) { return; }
 
@@ -433,9 +436,11 @@ sap.ui.define([
 
                 that._registerHoverFocus(oInput);
             });
+            */
         },
 
         _registerHoverFocus: function(oInput) {
+            /*
             if (!oInput || !oInput.getDomRef) { return; }
 
             var fnHoverHandler = oInput.data("hoverFocusHandler");
@@ -487,9 +492,11 @@ sap.ui.define([
                 $Cell.off("mouseenter.hoverFocus");
                 $Cell.on("mouseenter.hoverFocus", fnHoverHandler);
             }
+            */
         },
 
         _deregisterHoverFocus: function(oInput) {
+            /*
             if (!oInput) { return; }
             var $Inner;
             try { $Inner = oInput.$("inner"); } catch (e) { $Inner = null; }
@@ -513,9 +520,11 @@ sap.ui.define([
             if ($Cell && $Cell.length) {
                 $Cell.off("mouseenter.hoverFocus");
             }
+            */
         },
 
         _clearHoverFocusDelegates: function() {
+            /*
             if (!this._aHoverFocusDelegates) { return; }
             this._aHoverFocusDelegates.forEach(function(oEntry) {
                 if (!oEntry || !oEntry.control) { return; }
@@ -526,6 +535,7 @@ sap.ui.define([
                 this._deregisterHoverFocus(oEntry.control);
             }, this);
             this._aHoverFocusDelegates = [];
+            */
         }
     });
 });
