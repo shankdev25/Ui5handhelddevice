@@ -7,6 +7,8 @@ sap.ui.define([
     "use strict";
 
     return Controller.extend("com.merkavim.ewm.manageprodorder.controller.IssueInternalOrder", {
+        // Track last material to decide when to clear LGORT on next Enter
+        _lastMaterialEntered: null,
         onBeforeRendering: function () {
             // Clear all fields in the view model every time the page is shown
             this.getView().setModel(new sap.ui.model.json.JSONModel({
@@ -39,11 +41,15 @@ sap.ui.define([
                 oData.WERKS = (oGlobalWerksModel && oGlobalWerksModel.getProperty("/WERKS")) || oModel.getProperty("/WERKS") || "";
             }
 
-            oData.LGORT = "";
-            oData.MAKTX = "";
-            oData.LGPBE = "";
-            oData.MEINS = "";
-            oData.LABST = "";
+            // Only clear fields if material changed since last Enter
+            var sCurrentMat = (oData.MATNR || "").trim();
+            var sLastMat = (this._lastMaterialEntered || "").trim();
+            var bMaterialChanged = sCurrentMat !== sLastMat;
+            oData.LGORT = bMaterialChanged ? "" : (oData.LGORT || "");
+            oData.MAKTX = bMaterialChanged ? "" : (oData.MAKTX || "");
+            oData.LGPBE = bMaterialChanged ? "" : (oData.LGPBE || "");
+            oData.MEINS = bMaterialChanged ? "" : (oData.MEINS || "");
+            oData.LABST = bMaterialChanged ? "" : (oData.LABST || "");
 
             // Build payload
             var oPayload = {
@@ -76,6 +82,9 @@ sap.ui.define([
                         MessageBox.error(response.MSG.MSGTX || "Error occurred");
                         return;
                     }
+
+                    // Update last material after successful check
+                    that._lastMaterialEntered = (oModel.getProperty("/MATNR") || sCurrentMat || null);
 
                     sap.m.MessageToast.show("Data updated from server.");
                 },

@@ -12,6 +12,9 @@ sap.ui.define([
             var baseUrl = this.getOwnerComponent().getManifestEntry("sap.app").dataSources.mainService.uri;
             var url = "ISSUE_PR_INIT";
 
+            // Track last material to decide when to clear LGORT on next Enter
+            this._lastMaterialEntered = null;
+
             let payload = {
                 Material: "",
                 ProductionOrder: "",
@@ -105,6 +108,11 @@ sap.ui.define([
             if (!oViewModel) { return; }
             var oSelectionData = Object.assign({}, oViewModel.getProperty("/newEntry"));
 
+            // Only clear LGORT fields if material changed since last Enter
+            var sCurrentMat = (oSelectionData.Material || "").trim();
+            var sLastMat = (this._lastMaterialEntered || "").trim();
+            var bMaterialChanged = sCurrentMat !== sLastMat;
+
             var oPayload = {
                 DATA: {
                     MATNR: oSelectionData.Material || "",
@@ -113,9 +121,9 @@ sap.ui.define([
                     AUFNR: oSelectionData.ProductionOrder || "",
                     VORNR_F: oSelectionData.OperationFrom || "",
                     VORNR_T: oSelectionData.OperationTo || "",
-                    LGORT_F: "",
-                    LGORT_FT: "",
-                    LGORT_T: "",
+                    LGORT_F: bMaterialChanged ? "" : (oSelectionData.ReservationStorageLocation || ""),
+                    LGORT_FT: bMaterialChanged ? "" : (oSelectionData.ReservationStorageLocationTo || ""),
+                    LGORT_T: bMaterialChanged ? "" : (oSelectionData.IssuesingStorageLocation || ""),
                     LOGGR: oSelectionData.LogisticsGroup || "",
                     BKTXT: (oSelectionData.Remark || "").substring(0,1), // send only first letter
                     SPRAS: sap.ui.getCore().getConfiguration().getLanguage() || "EN"
@@ -148,6 +156,8 @@ sap.ui.define([
                         if (d.LOGGR !== undefined) { oViewModel.setProperty("/newEntry/LogisticsGroup", d.LOGGR); }
                         if (d.BKTXT !== undefined) { oViewModel.setProperty("/newEntry/Remark", d.BKTXT); }
                     }
+                    // Update last material after successful check
+                    that._lastMaterialEntered = oViewModel.getProperty("/newEntry/Material") || sCurrentMat || null;
                     MessageToast.show("Validated");
                 },
                 error: function (xhr, status, error) {
